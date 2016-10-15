@@ -20,7 +20,7 @@ public class Main extends Application {
 	Collection <Shape> formas = new HashSet<Shape>();
 	
 	public void pruebaDeConcepto(){
-		Recinto recinto = new Recinto();
+		Recinto recinto = new Recinto(0,0,100,100);
 		Shape forma = recinto.crearRecinto(0,0,100,100);
 		Shape forma2 = recinto.crearRecinto(100,0,100,100);
 		Shape forma3 = recinto.crearRecinto(200,0,100,100);
