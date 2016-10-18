@@ -25,7 +25,7 @@ public class Mapa {
 		this.tamanioY = tamanioY;
 		vb = new VBox();
 		canvas = new Pane();
-	    canvas.setStyle("-fx-background-color: blue;");
+	    canvas.setStyle("-fx-background-color: white;");
 	    canvas.setPrefSize(tamanioCanvasX,tamanioCanvasY);
 	    this.escalaX = this.tamanioX / this.tamanioCanvasX;
 	    this.escalaY = this.tamanioY / this.tamanioCanvasY;
@@ -37,15 +37,6 @@ public class Mapa {
 
 	public float getEscalaY() {
 		return escalaY;
-	}
-
-	Mapa(){
-		
-		vb = new VBox();
-		canvas = new Pane();
-	    canvas.setStyle("-fx-background-color: blue;");
-	    canvas.setPrefSize(this.tamanioCanvasX,this.tamanioCanvasY);
-	   
 	}
 	
 	public void agregarForma(Shape forma){
@@ -89,9 +80,5 @@ public class Mapa {
 	public Collection<Recinto> getRecintos() {
 		return recintos;
 	}
-	
-	
-	
-	
 	
 }

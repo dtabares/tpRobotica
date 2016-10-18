@@ -14,7 +14,8 @@ public class Recinto {
 	private float posicionY;
 	private float ancho;
 	private float alto;
-	private Shape recinto;
+	public Shape recinto;
+	private Grilla grilla;
 	
 	public Recinto(int x, int y, int ancho, int alto){
 		recinto = new Rectangle(x,y,ancho,alto);
@@ -60,6 +61,31 @@ public class Recinto {
 	public Coordenada getBordeInferiorDerecho() {
 		return bordeInferiorDerecho;
 	}
+
+	public float getAncho() {
+		return ancho;
+	}
+
+	public float getAlto() {
+		return alto;
+	}
+
+	public Grilla getGrilla() {
+		return grilla;
+	}
+	
+	public void setGrilla(Grilla grilla) {
+		this.grilla = grilla;
+	}
+
+	public float getPosicionX() {
+		return posicionX;
+	}
+
+	public float getPosicionY() {
+		return posicionY;
+	}	
+	
 	
 	
 
