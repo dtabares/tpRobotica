@@ -60,7 +60,7 @@ public class Main extends Application {
 	        
         //Usa la clase FXMLLoader para cargar desde un XML la interfaz de usuario
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("Sample.fxml"));
+        loader.setLocation(Main.class.getResource("Interfaz.fxml"));
         rootLayout = loader.load();
         
         //Crea algunas formas usando la clase recinto y se las agrega al mapa
@@ -72,6 +72,7 @@ public class Main extends Application {
 
         // Muestra el Scene que contiene al RootLayout.
         Scene scene = new Scene(rootLayout);
+        primaryStage.setTitle("TP Robotica");
         primaryStage.setScene(scene);
         primaryStage.show();
 			
