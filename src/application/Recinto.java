@@ -1,5 +1,8 @@
 package application;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -9,7 +12,16 @@ public class Recinto extends FormaPosicionableEnMapa{
 
 	private Shape recinto;
 	private Grilla grilla;
+	Collection <Obstaculo> obstaculos = new HashSet<Obstaculo>();
 	
+	public Collection<Obstaculo> getObstaculos() {
+		return obstaculos;
+	}
+
+	public void setObstaculos(Collection<Obstaculo> obstaculos) {
+		this.obstaculos = obstaculos;
+	}
+
 	public Recinto(int x, int y, int ancho, int alto){
 		setRecinto(new Rectangle(x,y,ancho,alto));
 		getRecinto().setStroke(Color.BLACK);
