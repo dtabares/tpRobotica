@@ -20,4 +20,12 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 		this.calcularPosicionBordes();
 	}
 
+	public Shape getObstaculo() {
+		return obstaculo;
+	}
+
+	public void setObstaculo(Shape obstaculo) {
+		this.obstaculo = obstaculo;
+	}
+
 }
