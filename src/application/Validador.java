@@ -19,7 +19,7 @@ public class Validador {
 		}
 		
 		while(iterador.hasNext() && entra == true){
-			if(seSuperponenLosRecintos(iterador.next(), recinto)){
+			if(seSuperponenLasFormas(iterador.next(), recinto)){
 				entra = false;
 			}
 		}
@@ -27,7 +27,7 @@ public class Validador {
 	}
 	
 	//Devuelve true si se superponen
-	private static boolean seSuperponenLosRecintos(Recinto a, Recinto b){
+	private static boolean seSuperponenLasFormas(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean seSuperponen = true;
 		if (!sonIgualesYTienenLaMismaPosicion(a, b)){
 			seSuperponen = (sePisanEnX(a, b) && sePisanEnY(a, b));
@@ -37,7 +37,7 @@ public class Validador {
 		return seSuperponen;
 	}
 	
-	private static boolean sonIgualesYTienenLaMismaPosicion(Recinto a, Recinto b){
+	private static boolean sonIgualesYTienenLaMismaPosicion(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean iguales = false;
 		
 		if(a.getBordeInferiorDerecho().equals(b.getBordeInferiorDerecho())  &&
@@ -50,7 +50,7 @@ public class Validador {
 		return iguales;
 	}
 	
-	private static boolean sePisanEnX(Recinto a, Recinto b){
+	private static boolean sePisanEnX(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean sePisan = false;
 		
 		if((b.getBordeSuperiorDerecho().getX() >= a.getBordeSuperiorDerecho().getX() && 
@@ -78,7 +78,7 @@ public class Validador {
 		return sePisan;
 	}
 	
-	private static boolean sePisanEnY(Recinto a, Recinto b){
+	private static boolean sePisanEnY(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean sePisan = false;
 		
 		if((b.getBordeSuperiorDerecho().getY() <= a.getBordeSuperiorDerecho().getY() && 
