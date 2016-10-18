@@ -26,6 +26,26 @@ public class Validador {
 		return entra;
 	}
 	
+	public static boolean validarSiElObstaculoEntraEnElRecinto(Recinto recinto, Obstaculo obstaculo){
+		boolean entra = false;
+		Collection<Obstaculo> obstaculos = recinto.getObstaculos();
+		Iterator<Obstaculo> iterador = obstaculos.iterator();
+		
+//		if(recinto.getBordeSuperiorIzquierdo().getX() >= 0 && 
+//			recinto.getBordeSuperiorDerecho().getX() <= mapa.getTamanioX() &&
+//			recinto.getBordeSuperiorIzquierdo().getY() >= 0 &&
+//			recinto.getBordeInferiorDerecho().getY() <= mapa.getTamanioY()){
+//			entra = true;
+//		}
+		
+		while(iterador.hasNext() && entra == true){
+			if(seSuperponenLasFormas(iterador.next(), recinto)){
+				entra = false;
+			}
+		}
+		return entra;
+	}
+	
 	//Devuelve true si se superponen
 	private static boolean seSuperponenLasFormas(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean seSuperponen = true;
