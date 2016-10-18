@@ -40,13 +40,13 @@ public class Main extends Application {
 		
 		//Tuve que comentar las formas que contienen grillas porque se superponen las renderizaciones entre si
 		//formas.add(recinto.recinto);
-	    formas.add(recinto1.recinto);   
+	    formas.add(recinto1.getRecinto());   
 	    //formas.add(recinto2.recinto);
 	    //formas.add(recinto3.recinto);
-	    formas.add(recinto4.recinto);
-	    formas.add(recinto5.recinto);
-	    formas.add(recinto6.recinto);
-	    formas.add(recinto7.recinto);
+	    formas.add(recinto4.getRecinto());
+	    formas.add(recinto5.getRecinto());
+	    formas.add(recinto6.getRecinto());
+	    formas.add(recinto7.getRecinto());
 	    
 	    //Agrega a la collection actual de formas los componentes de cada grilla, lo ideal es que esto lo pueda hacer la propia grilla en el metodo mostrar()
 	    formas.addAll(recinto.getGrilla().getColleccionDeRectangulos());
