@@ -58,5 +58,13 @@ public class Recinto extends FormaPosicionableEnMapa{
 	public void setRecinto(Shape recinto) {
 		this.recinto = recinto;
 	}
+	
+	public boolean agregarObstaculo(Obstaculo obstaculo){
+		boolean posicionValida = Validador.validarSiElObstaculoEntraEnElRecinto(this, obstaculo);
+		if(posicionValida){
+			this.obstaculos.add(obstaculo);
+		}
+		return posicionValida;
+	}
 
 }
