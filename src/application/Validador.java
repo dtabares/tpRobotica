@@ -31,15 +31,15 @@ public class Validador {
 		Collection<Obstaculo> obstaculos = recinto.getObstaculos();
 		Iterator<Obstaculo> iterador = obstaculos.iterator();
 		
-//		if(recinto.getBordeSuperiorIzquierdo().getX() >= 0 && 
-//			recinto.getBordeSuperiorDerecho().getX() <= mapa.getTamanioX() &&
-//			recinto.getBordeSuperiorIzquierdo().getY() >= 0 &&
-//			recinto.getBordeInferiorDerecho().getY() <= mapa.getTamanioY()){
-//			entra = true;
-//		}
+		if(obstaculo.getBordeSuperiorIzquierdo().getX() >= recinto.getBordeSuperiorIzquierdo().getX() && 
+			obstaculo.getBordeSuperiorDerecho().getX() <= recinto.getBordeSuperiorDerecho().getX() &&
+			obstaculo.getBordeSuperiorIzquierdo().getY() >= recinto.getBordeSuperiorIzquierdo().getY() &&
+			obstaculo.getBordeSuperiorDerecho().getY() <= recinto.getBordeInferiorDerecho().getY()){
+			entra = true;
+		}
 		
 		while(iterador.hasNext() && entra == true){
-			if(seSuperponenLasFormas(iterador.next(), recinto)){
+			if(seSuperponenLasFormas(iterador.next(), obstaculo)){
 				entra = false;
 			}
 		}
