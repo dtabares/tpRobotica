@@ -31,17 +31,24 @@ public class Main extends Application {
 		Recinto recinto6 = new Recinto(200,200,100,100);
 		Recinto recinto7 = new Recinto(300,0,100,100);
 		
-		Grilla grillaRecinto3 = new Grilla(recinto3,50);
-		grillaRecinto3.prepararGrillaParaDibujo();
+
+		recinto3.agregarObstaculo(new Obstaculo(150,30,40,50));
+		
+		Grilla grillaRecinto3 = new Grilla(recinto3,30);
 		recinto3.setGrilla(grillaRecinto3);
+		recinto3.verificarDisponibilidadDeLaGrilla();
+		grillaRecinto3.prepararGrillaParaDibujo();
 		
 		Grilla grillaRecinto = new Grilla(recinto,10);
 		grillaRecinto.prepararGrillaParaDibujo();
-		recinto.setGrilla(grillaRecinto);
-	    
+		recinto.setGrilla(grillaRecinto);		
+		
 		Grilla grillaRecinto2 = new Grilla(recinto2,20);
 		grillaRecinto2.prepararGrillaParaDibujo();
-		recinto2.setGrilla(grillaRecinto2);
+		recinto2.setGrilla(grillaRecinto2);	
+
+		
+		
 		
 		//Tuve que comentar las formas que contienen grillas porque se superponen las renderizaciones entre si
 		formas.add(recinto.getRecinto());
