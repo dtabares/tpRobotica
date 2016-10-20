@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -17,7 +19,7 @@ public class Main extends Application {
 	private BorderPane rootLayout;
 	Group root = new Group();
 	private Mapa mapa = new Mapa(1024,768);
-	Collection <Shape> formas = new HashSet<Shape>();
+	Collection <Shape> formas = new LinkedList<Shape>();
 	
 	public void pruebaDeConcepto(){
 		Recinto recinto = new Recinto(0,0,100,100);
@@ -30,23 +32,27 @@ public class Main extends Application {
 		Recinto recinto7 = new Recinto(300,0,100,100);
 		
 		Grilla grillaRecinto3 = new Grilla(recinto3,50);
-		recinto3.setGrilla(grillaRecinto3);	
+		recinto3.setGrilla(grillaRecinto3);
+		grillaRecinto3.prepararGrillaParaDibujo();
 		
 		Grilla grillaRecinto = new Grilla(recinto,10);
-		recinto.setGrilla(grillaRecinto);		
+		recinto.setGrilla(grillaRecinto);	
+		grillaRecinto.prepararGrillaParaDibujo();
 	    
 		Grilla grillaRecinto2 = new Grilla(recinto2,20);
-		recinto2.setGrilla(grillaRecinto2);	
+		recinto2.setGrilla(grillaRecinto2);
+		grillaRecinto2.prepararGrillaParaDibujo();
 		
 		//Tuve que comentar las formas que contienen grillas porque se superponen las renderizaciones entre si
-		//formas.add(recinto.recinto);
+		formas.add(recinto.getRecinto());
 	    formas.add(recinto1.getRecinto());   
-	    //formas.add(recinto2.recinto);
-	    //formas.add(recinto3.recinto);
+	    formas.add(recinto2.getRecinto());
+	    formas.add(recinto3.getRecinto());
 	    formas.add(recinto4.getRecinto());
 	    formas.add(recinto5.getRecinto());
 	    formas.add(recinto6.getRecinto());
 	    formas.add(recinto7.getRecinto());
+	    
 	    
 	    //Agrega a la collection actual de formas los componentes de cada grilla, lo ideal es que esto lo pueda hacer la propia grilla en el metodo mostrar()
 	    formas.addAll(recinto.getGrilla().getColeccionDeRectangulos());
