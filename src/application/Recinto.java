@@ -66,5 +66,15 @@ public class Recinto extends FormaPosicionableEnMapa{
 		}
 		return posicionValida;
 	}
+	
+	public void verificarDisponibilidadDeLaGrilla(){
+		for (Cuadrante cuadrante : this.grilla.getColeccionDeCuadrantes()) {
+			for (Obstaculo obstaculo : obstaculos) {
+				if (Validador.validarSiElCuadranteEsOcupadoPorUnObstaculo(cuadrante,obstaculo)){
+					cuadrante.marcarComoNoDisponible();
+				}
+			}
+		}
+	}
 
 }
