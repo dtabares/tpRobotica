@@ -46,6 +46,14 @@ public class Validador {
 		return entra;
 	}
 	
+	public static boolean validarSiElCuadranteEsOcupadoPorUnObstaculo(Cuadrante cuadrante, Obstaculo obstaculo){
+		boolean ocupado = false;
+		if(seSuperponenLasFormas(cuadrante, obstaculo)){
+			ocupado = true;
+		}
+		return ocupado;
+	}
+	
 	//Devuelve true si se superponen
 	private static boolean seSuperponenLasFormas(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean seSuperponen = true;
