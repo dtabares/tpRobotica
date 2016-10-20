@@ -49,9 +49,9 @@ public class Main extends Application {
 	    formas.add(recinto7.getRecinto());
 	    
 	    //Agrega a la collection actual de formas los componentes de cada grilla, lo ideal es que esto lo pueda hacer la propia grilla en el metodo mostrar()
-	    formas.addAll(recinto.getGrilla().getColleccionDeRectangulos());
-	    formas.addAll(recinto2.getGrilla().getColleccionDeRectangulos());
-	    formas.addAll(recinto3.getGrilla().getColleccionDeRectangulos());
+	    formas.addAll(recinto.getGrilla().getColeccionDeRectangulos());
+	    formas.addAll(recinto2.getGrilla().getColeccionDeRectangulos());
+	    formas.addAll(recinto3.getGrilla().getColeccionDeRectangulos());
 
 	}
 
