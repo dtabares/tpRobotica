@@ -8,18 +8,17 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Ellipse?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane prefHeight="450.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.CInterfaz">
+<BorderPane prefHeight="450.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Crear Nuevo Mapa" />
+              <MenuItem fx:id="botonNuevoMapa" mnemonicParsing="false" onAction="#crearNuevoMapa" text="Crear Nuevo Mapa" />
                   <MenuItem mnemonicParsing="false" text="Guardar" />
                   <MenuItem mnemonicParsing="false" text="Cargar" />
               <MenuItem mnemonicParsing="false" text="Close" />
@@ -38,9 +37,6 @@
         </menus>
       </MenuBar>
    </top>
-   <center>
-      <Pane prefHeight="400.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
-   </center>
    <left>
       <Accordion BorderPane.alignment="CENTER">
         <panes>
@@ -67,11 +63,18 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="myButton" layoutX="62.0" layoutY="14.0" mnemonicParsing="false" text="Test Button" />
+                        <Button fx:id="myButton" layoutX="62.0" layoutY="14.0" mnemonicParsing="false" onAction="#ejecutar" text="Test Button" />
                      </children></AnchorPane>
             </content>
           </TitledPane>
         </panes>
       </Accordion>
    </left>
+   <center>
+      <TitledPane animated="false" prefHeight="474.0" prefWidth="822.0" text="untitled" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane fx:id="panelCentral" prefHeight="200.0" prefWidth="200.0" />
+         </content>
+      </TitledPane>
+   </center>
 </BorderPane>

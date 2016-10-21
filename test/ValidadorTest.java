@@ -3,10 +3,10 @@ import static org.junit.Assert.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import application.Mapa;
-import application.Obstaculo;
-import application.Recinto;
-import application.Validador;
+import clases.Mapa;
+import clases.Obstaculo;
+import clases.Recinto;
+import clases.Validador;
 
 public class ValidadorTest {
 

@@ -1,4 +1,4 @@
-package application;
+package clases;
 
 public class Coordenada {
 	private float x;
