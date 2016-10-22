@@ -38,7 +38,7 @@ public class MainController extends BorderPane {
 	    		System.out.println("Creando Recinto.... " + "Ancho: " + nuevoRecintoControlador.getFormularioRecintoAncho() +  ",Alto: " + nuevoRecintoControlador.getFormularioRecintoAlto() + ",Posicion X: " + nuevoRecintoControlador.getFormularioRecintoPosicionX() + ",Posicion Y: " + nuevoRecintoControlador.getFormularioRecintoPosicionY());
 	    		mapa.agregarRecinto(new Recinto(Float.valueOf(nuevoRecintoControlador.getFormularioRecintoAncho()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoAlto()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoPosicionX()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoPosicionY())));
 	    		nuevoRecintoControlador.ocultarFormulario();
-	    		panelCentral.getChildren().setAll(mapa.getCanvas().getChildren());
+	    		panelCentral.getChildren().setAll(mapa.getChildren());
             }
     		else{
     			System.out.println("No existe el mapa!");
@@ -63,7 +63,7 @@ public class MainController extends BorderPane {
 //    	pc.ejecutarPruebas();
     	mapa = new Mapa(800,400);
 //    	mapa.agregarForma(new Recinto(0,0,100,100).getFormaRecinto());
-    	panelCentral.getChildren().setAll(mapa.getCanvas().getChildren());
+    	panelCentral.getChildren().setAll(mapa.getChildren());
     	
     }
     

@@ -25,12 +25,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		
 		System.out.println("Iniciando aplicacion...");
-		BorderPane borderPane = (BorderPane) FXMLLoader.load(getClass().getResource("MainInterfaz.fxml"));
-        
-//		PruebaDeConceptoTest pc = new PruebaDeConceptoTest();
-//		pc.ejecutarPruebas();
-//		borderPane.setCenter(pc.mapa.getCanvas());
-		
+		BorderPane borderPane = (BorderPane) FXMLLoader.load(getClass().getResource("MainInterfaz.fxml"));		
 		Scene scene = new Scene(borderPane);
         primaryStage.setTitle("TP Robotica");
       	primaryStage.setScene(scene);
