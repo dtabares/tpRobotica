@@ -20,8 +20,15 @@ public class Mapa extends AnchorPane{
 	public Mapa(float tamanioX, float tamanioY) {
 		this.tamanioX = tamanioX;
 		this.tamanioY = tamanioY;
+		//this.setStyle("-fx-background-color: black;");
+		this.ajustarEscala();
 	}
 	
+	private void ajustarEscala() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void agregarForma(Shape forma){
 		
 		System.out.println(this.getChildren().size());
@@ -34,14 +41,27 @@ public class Mapa extends AnchorPane{
 		System.out.println(this.getChildren().size());
 	}
 	
+//	//Este metodo no deberia validar sino agregar todo al momento de dibujar
+//	public void agregarColeccionDeRecintos(Collection <Recinto> recintos){
+//		
+//		Iterator <Recinto> iterador = recintos.iterator();
+//		while (iterador.hasNext()){
+//			Recinto r = iterador.next(); 
+//			agregarForma(r.getFormaRecinto());
+//			}
+//	
+//	}
+	
 	//Este metodo no deberia validar sino agregar todo al momento de dibujar
-	public void agregarColleccionDeRecintos(Collection <Recinto> recintos){
+	public void mostrarGrillas(Collection <Grilla> grillas){
 		
-		Iterator <Recinto> iterador = recintos.iterator();
-		
-		while (iterador.hasNext()){
-			Recinto r = iterador.next(); 
-			agregarForma(r.getFormaRecinto());
+		Iterator<Grilla> iGrillas = grillas.iterator();
+		while (iGrillas.hasNext()){
+			Grilla g = iGrillas.next();
+			Iterator<Shape> iFormas = g.getColeccionDeRectangulos().iterator();
+				while (iFormas.hasNext()){
+					agregarForma(iFormas.next());
+				}
 			}
 	
 	}

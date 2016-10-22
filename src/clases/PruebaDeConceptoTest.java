@@ -24,7 +24,6 @@ public class PruebaDeConceptoTest {
 		Recinto recinto5 = new Recinto(100,100,100,100);
 		Recinto recinto6 = new Recinto(200,200,100,100);
 		Recinto recinto7 = new Recinto(300,0,100,100);
-		
 
 		recinto3.agregarObstaculo(new Obstaculo(150,30,40,50));
 		
@@ -41,23 +40,7 @@ public class PruebaDeConceptoTest {
 		grillaRecinto2.prepararGrillaParaDibujo();
 		recinto2.setGrilla(grillaRecinto2);	
 
-		formas.add(recinto);
-	    formas.add(recinto1);   
-	    formas.add(recinto2);
-	    formas.add(recinto3);
-	    formas.add(recinto4);
-	    formas.add(recinto5);
-	    formas.add(recinto6);
-	    formas.add(recinto7);
-	    
-	    
-	    //Agrega a la collection actual de formas los componentes de cada grilla, lo ideal es que esto lo pueda hacer la propia grilla en el metodo mostrar()
-	//    formas.addAll(recinto.getGrilla().getColeccionDeRectangulos());
-	 //   formas.addAll(recinto2.getGrilla().getColeccionDeRectangulos());
-	  //  formas.addAll(recinto3.getGrilla().getColeccionDeRectangulos());
-	    
-	    
-	    mapa.agregarColleccionDeRecintos(formas);
+		mapa.agregarForma(recinto.getFormaRecinto());
 
 	}
 	
