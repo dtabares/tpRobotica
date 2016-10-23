@@ -1,16 +1,12 @@
 package clases;
 
-import java.io.IOException;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import com.sun.media.sound.SoftSynthesizer;
+//import com.sun.media.sound.SoftSynthesizer;
 
-import formularios.NuevoRecintoControlador;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TitledPane;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Shape;
@@ -62,17 +58,48 @@ public class Mapa {
 		
 	}
 	
+	public void dibujarMapa(){
+		System.out.println("Entre a dibujar mapa");
+		Collection<Shape> formasPosicionablesEnMapa = new LinkedList<Shape>();
+		Collection<Shape> recintosParaSerAgregados = new LinkedList<Shape>();
+		Collection<Shape> grillasParaSerAgregadas = new LinkedList<Shape>();
+		Collection<Shape> obstaculosParaSerAgregados = new LinkedList<Shape>();
+		
+		for (Recinto recinto : this.recintos) {
+			recintosParaSerAgregados.add(recinto.getFormaRecinto());
+			if(recinto.getGrilla() != null){
+				grillasParaSerAgregadas.addAll(recinto.getGrilla().getColeccionDeRectangulos());
+			}
+			for (Obstaculo obstaculo : recinto.getObstaculos()) {
+				obstaculosParaSerAgregados.add(obstaculo.getObstaculo());
+			}
+		}
+		
+		//Primero se agregan los recintos en orden
+		formasPosicionablesEnMapa.addAll(recintosParaSerAgregados);
+		//Luego se agregan las grillas en orden
+		formasPosicionablesEnMapa.addAll(grillasParaSerAgregadas);
+		//Finalmente los obstaculos en orden
+		formasPosicionablesEnMapa.addAll(obstaculosParaSerAgregados);
+		
+		canvas.getChildren().clear();
+		canvas.getChildren().addAll(formasPosicionablesEnMapa);
+		vb.getChildren().clear();
+		vb.getChildren().add(canvas);
+	}
+	
 	public boolean agregarRecinto(Recinto recinto){
 		
-		Collection <Shape> formas = new LinkedList<Shape>();		
+		//Collection <Shape> formas = new LinkedList<Shape>();		
 		
 		boolean posicionValida = Validador.validarSiElRecintoEntraEnElMapa(this, recinto);
-		if(posicionValida && !formas.contains(recinto.getFormaRecinto())){
-			formas.add(recinto.getFormaRecinto());
+		//if(posicionValida && !formas.contains(recinto.getFormaRecinto())){
+		if(posicionValida){
+			this.recintos.add(recinto);
 		}
 
-		canvas.getChildren().addAll(formas);
-		vb.getChildren().add(canvas);
+		//canvas.getChildren().addAll(formas);
+		//vb.getChildren().add(canvas);
 		return posicionValida;
 	}
 	
