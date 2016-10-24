@@ -38,17 +38,6 @@ public class Mapa extends AnchorPane{
 		System.out.println(this.getChildren().size());
 	}
 	
-//	//Este metodo no deberia validar sino agregar todo al momento de dibujar
-//	public void agregarColeccionDeRecintos(Collection <Recinto> recintos){
-//		
-//		Iterator <Recinto> iterador = recintos.iterator();
-//		while (iterador.hasNext()){
-//			Recinto r = iterador.next(); 
-//			agregarForma(r.getFormaRecinto());
-//			}
-//	
-//	}
-	
 	//Este metodo no deberia validar sino agregar todo al momento de dibujar
 	public void mostrarGrillas(Collection <Grilla> grillas){
 		
@@ -64,11 +53,40 @@ public class Mapa extends AnchorPane{
 	}
 
 	
+	public void dibujarMapa(){
+		System.out.println("Entre a dibujar mapa");
+		Collection<Shape> formasPosicionablesEnMapa = new LinkedList<Shape>();
+		Collection<Shape> recintosParaSerAgregados = new LinkedList<Shape>();
+		Collection<Shape> grillasParaSerAgregadas = new LinkedList<Shape>();
+		Collection<Shape> obstaculosParaSerAgregados = new LinkedList<Shape>();
+		
+		for (Recinto recinto : this.recintos) {
+			recintosParaSerAgregados.add(recinto.getFormaRecinto());
+			if(recinto.getGrilla() != null){
+				grillasParaSerAgregadas.addAll(recinto.getGrilla().getColeccionDeRectangulos());
+			}
+			for (Obstaculo obstaculo : recinto.getObstaculos()) {
+				obstaculosParaSerAgregados.add(obstaculo.getObstaculo());
+			}
+		}
+		
+		//Primero se agregan los recintos en orden
+		formasPosicionablesEnMapa.addAll(recintosParaSerAgregados);
+		//Luego se agregan las grillas en orden
+		formasPosicionablesEnMapa.addAll(grillasParaSerAgregadas);
+		//Finalmente los obstaculos en orden
+		formasPosicionablesEnMapa.addAll(obstaculosParaSerAgregados);
+		
+		this.getChildren().clear();
+		this.getChildren().addAll(formasPosicionablesEnMapa);
+
+	}
+	
 	public boolean agregarRecinto(Recinto recinto){
-				
+			
 		boolean posicionValida = Validador.validarSiElRecintoEntraEnElMapa(this, recinto);
 		if(posicionValida){
-			this.agregarForma(recinto.getFormaRecinto());
+			this.recintos.add(recinto);
 		}
 
 		return posicionValida;

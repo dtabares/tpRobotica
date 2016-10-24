@@ -33,9 +33,19 @@ public class MainController extends BorderPane {
     	@Override public void nuevoRecintoControladorListenerOK (ActionEvent e) {
     		if (mapa != null){
 	    		System.out.println("Creando Recinto.... " + "Ancho: " + nuevoRecintoControlador.getFormularioRecintoAncho() +  ",Alto: " + nuevoRecintoControlador.getFormularioRecintoAlto() + ",Posicion X: " + nuevoRecintoControlador.getFormularioRecintoPosicionX() + ",Posicion Y: " + nuevoRecintoControlador.getFormularioRecintoPosicionY());
-	    		mapa.agregarRecinto(new Recinto(Float.valueOf(nuevoRecintoControlador.getFormularioRecintoAncho()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoAlto()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoPosicionX()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoPosicionY())));
-	    		nuevoRecintoControlador.ocultarFormulario();
-	    		panelCentral.getChildren().setAll(mapa.getChildren());
+
+	    		boolean recintoValido = mapa.agregarRecinto(new Recinto(Float.valueOf(nuevoRecintoControlador.getFormularioRecintoAncho()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoAlto()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoPosicionX()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoPosicionY())));
+	    		if(recintoValido){
+	    			nuevoRecintoControlador.ocultarFormulario();
+		    		panelCentral.getChildren().setAll(mapa.getChildren());
+		    		//Redibujar mapa
+		    		mapa.dibujarMapa();
+	    		}
+	    		else{
+	    			
+	    			System.out.println("Recinto invalido  " + recintoValido);
+	    		}
+	    		
             }
     		else{
     			System.out.println("No existe el mapa!");

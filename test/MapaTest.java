@@ -19,6 +19,7 @@ public class MapaTest {
 	public void crearUnMapaConRecintosGrillasYObstaculos() throws IOException, InterruptedException{
 		
 		Stage primaryStage = new Stage();
+		
 		Mapa mapa = new Mapa(800,600);
 		Scene scene = new Scene(mapa);
       	
