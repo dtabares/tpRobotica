@@ -72,7 +72,6 @@ public class MainController extends BorderPane {
     	
     	//cambiarlo a dinamico
     	mapa = new Mapa(790,390);
-    	mapa.setStroke(Color.BLACK);
     	panelCentral.getChildren().setAll(mapa.getChildren());
     	
     }
