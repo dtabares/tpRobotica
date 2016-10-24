@@ -28,13 +28,14 @@ public class MapaTest {
 		Grilla g1 = new Grilla (r1,30);
 		g1.prepararGrillaParaDibujo();
 		r1.setGrilla(g1);
-		
+		      	
 		mapa.agregarRecinto(r1);
-      	mapa.agregarRecinto(r2);
-//      	Collection <Grilla> grillas = new LinkedList<Grilla>();
-//      	grillas.add(g1);
-//      	mapa.mostrarGrillas(grillas);
+      	mapa.agregarRecinto(r2);    	
+      	mapa.dibujarMapa();
       	
+      	//Agrega un recinto a partir de un mapa ya dibujado
+      	Recinto r3 = new Recinto(600,0,200,200);
+      	mapa.agregarRecinto(r3);
       	mapa.dibujarMapa();
       	
 		primaryStage.setScene(scene);
