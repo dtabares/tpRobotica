@@ -22,7 +22,7 @@ public class Recinto extends FormaPosicionableEnMapa{
 		this.posicionX = x;
 		this.posicionY = y;
 		this.ancho = ancho;
-		this.alto = alto;
+		this.largo = alto;
 		this.calcularPosicionBordes();
 	}
 	

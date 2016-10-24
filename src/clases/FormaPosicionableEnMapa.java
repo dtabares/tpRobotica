@@ -9,14 +9,14 @@ public abstract class FormaPosicionableEnMapa {
 	protected float posicionX;
 	protected float posicionY;
 	protected float ancho;
-	protected float alto;
+	protected float largo;
 	
 	
 	protected void calcularPosicionBordes(){
 		this.bordeSuperiorIzquierdo = new Coordenada(this.posicionX,this.posicionY);
 		this.bordeSuperiorDerecho = new Coordenada(this.posicionX + this.ancho, this.posicionY);
-		this.bordeInferiorIzquierdo = new Coordenada(this.posicionX, this.posicionY + this.alto);
-		this.bordeInferiorDerecho = new Coordenada(this.posicionX + this.ancho, this.posicionY + this.alto);
+		this.bordeInferiorIzquierdo = new Coordenada(this.posicionX, this.posicionY + this.largo);
+		this.bordeInferiorDerecho = new Coordenada(this.posicionX + this.ancho, this.posicionY + this.largo);
 	}
 	
 	public Coordenada getBordeSuperiorIzquierdo() {
@@ -40,7 +40,7 @@ public abstract class FormaPosicionableEnMapa {
 	}
 
 	public float getAlto() {
-		return alto;
+		return largo;
 	}
 	
 	public float getPosicionX() {
