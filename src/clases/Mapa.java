@@ -3,10 +3,7 @@ package clases;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Shape;
 
 public class Mapa extends AnchorPane{

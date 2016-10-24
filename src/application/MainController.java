@@ -4,18 +4,15 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 import clases.Mapa;
-import clases.PruebaDeConceptoTest;
 import clases.Recinto;
 import formularios.NuevoRecintoControlador;
 import formularios.NuevoRecintoControlador.NuevoRecintoControladorListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
 public class MainController extends BorderPane {
@@ -59,10 +56,7 @@ public class MainController extends BorderPane {
     @FXML public void crearNuevoMapa(){
     	
     	//cambiarlo a dinamico
-//    	PruebaDeConceptoTest pc = new PruebaDeConceptoTest();
-//    	pc.ejecutarPruebas();
     	mapa = new Mapa(800,400);
-//    	mapa.agregarForma(new Recinto(0,0,100,100).getFormaRecinto());
     	panelCentral.getChildren().setAll(mapa.getChildren());
     	
     }

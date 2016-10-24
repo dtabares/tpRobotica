@@ -71,10 +71,6 @@
       </Accordion>
    </left>
    <center>
-      <TitledPane animated="false" prefHeight="474.0" prefWidth="822.0" text="untitled" BorderPane.alignment="CENTER">
-         <content>
-            <AnchorPane fx:id="panelCentral" prefHeight="200.0" prefWidth="200.0" />
-         </content>
-      </TitledPane>
+      <AnchorPane fx:id="panelCentral" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
