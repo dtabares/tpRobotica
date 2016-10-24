@@ -14,7 +14,7 @@ public class Recinto extends FormaPosicionableEnMapa{
 	private String nombre;
 	
 	public Recinto(float x, float y, float ancho, float alto, String nombre){
-		this.nombre = nombre;
+		this.setNombre(nombre);
 		setFormaRecinto(new Rectangle(x,y,ancho,alto));
 		getFormaRecinto().setStroke(Color.BLACK);
 		getFormaRecinto().setFill(Color.WHITE);
@@ -68,6 +68,14 @@ public class Recinto extends FormaPosicionableEnMapa{
 
 	public void setObstaculos(Collection<Obstaculo> obstaculos) {
 		this.obstaculos = obstaculos;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }
