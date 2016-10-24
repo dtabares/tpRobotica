@@ -16,7 +16,7 @@ public class ValidadorTest {
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
 		//O sea, fuera del mapa
-		Recinto nuevoRecinto = new Recinto(30, 10, 10, 10);
+		Recinto nuevoRecinto = new Recinto(30, 10, 10, 10, "Nuevo Recinto");
 		
 		Assert.assertFalse(Validador.validarSiElRecintoEntraEnElMapa(mapa, nuevoRecinto));
 	}
@@ -29,7 +29,7 @@ public class ValidadorTest {
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
 		//O sea, dentro del mapa
-		Recinto nuevoRecinto = new Recinto(30, 10, 10, 10);
+		Recinto nuevoRecinto = new Recinto(30, 10, 10, 10, "Nuevo Recinto");
 		
 		Assert.assertTrue(Validador.validarSiElRecintoEntraEnElMapa(mapa, nuevoRecinto));
 	}
@@ -41,7 +41,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recintoUno = new Recinto(30, 10, 10, 10);
+		Recinto recintoUno = new Recinto(30, 10, 10, 10, "Recinto 1");
 		
 		//Agrego el recinto 1 al mapa
 		mapa.agregarRecinto(recintoUno);
@@ -49,7 +49,7 @@ public class ValidadorTest {
 		Assert.assertFalse(mapa.getRecintos().isEmpty());
 		
 		//Creo un recinto igual al primero y lo posiciono en exactamente la misma pos
-		Recinto recintoDos = new Recinto(30, 10, 10, 10);
+		Recinto recintoDos = new Recinto(30, 10, 10, 10, "Recinto 2");
 		
 		Assert.assertFalse(Validador.validarSiElRecintoEntraEnElMapa(mapa, recintoDos));
 	}
@@ -61,7 +61,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recintoUno = new Recinto(10, 10, 10, 10);
+		Recinto recintoUno = new Recinto(10, 10, 10, 10,"Recinto 1");
 		
 		//Agrego el recinto 1 al mapa
 		mapa.agregarRecinto(recintoUno);
@@ -69,7 +69,7 @@ public class ValidadorTest {
 		Assert.assertFalse(mapa.getRecintos().isEmpty());
 		
 		//Creo un nuevo recinto y lo posiciono dentro del primero
-		Recinto recintoDos = new Recinto(12, 12, 5, 5);
+		Recinto recintoDos = new Recinto(12, 12, 5, 5,"Recinto 2");
 		
 		Assert.assertFalse(Validador.validarSiElRecintoEntraEnElMapa(mapa, recintoDos));
 	}
@@ -81,7 +81,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recintoUno = new Recinto(30, 10, 10, 10);
+		Recinto recintoUno = new Recinto(30, 10, 10, 10,"Recinto 1");
 		
 		//Agrego el recinto 1 al mapa
 		mapa.agregarRecinto(recintoUno);
@@ -89,7 +89,7 @@ public class ValidadorTest {
 		Assert.assertFalse(mapa.getRecintos().isEmpty());
 		
 		//Creo un nuevo recinto y lo posiciono dentro del primero
-		Recinto recintoDos = new Recinto(12, 12, 5, 5);
+		Recinto recintoDos = new Recinto(12, 12, 5, 5,"Recinto 2");
 		
 		Assert.assertTrue(Validador.validarSiElRecintoEntraEnElMapa(mapa, recintoDos));
 	}
@@ -101,7 +101,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recinto = new Recinto(30, 10, 10, 10);
+		Recinto recinto = new Recinto(30, 10, 10, 10,"Recinto 1");
 		
 		//Agrego el recinto al mapa
 		mapa.agregarRecinto(recinto);
@@ -121,7 +121,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recinto = new Recinto(30, 10, 10, 10);
+		Recinto recinto = new Recinto(30, 10, 10, 10,"Recinto 1");
 		
 		//Agrego el recinto al mapa
 		mapa.agregarRecinto(recinto);
@@ -141,7 +141,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recinto = new Recinto(30, 10, 10, 10);
+		Recinto recinto = new Recinto(30, 10, 10, 10,"Recinto 1");
 		
 		//Agrego el recinto al mapa
 		mapa.agregarRecinto(recinto);
@@ -161,7 +161,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recinto = new Recinto(30, 10, 10, 10);
+		Recinto recinto = new Recinto(30, 10, 10, 10,"Recinto 1");
 		
 		//Agrego el recinto al mapa
 		mapa.agregarRecinto(recinto);
@@ -192,7 +192,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recinto = new Recinto(30, 10, 10, 10);
+		Recinto recinto = new Recinto(30, 10, 10, 10,"Recinto 1");
 		
 		//Agrego el recinto al mapa
 		mapa.agregarRecinto(recinto);

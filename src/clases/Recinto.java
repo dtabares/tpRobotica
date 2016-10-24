@@ -11,8 +11,10 @@ public class Recinto extends FormaPosicionableEnMapa{
 	private Shape formaRecinto;
 	private Grilla grilla;
 	Collection <Obstaculo> obstaculos = new HashSet<Obstaculo>();
+	private String nombre;
 	
-	public Recinto(float x, float y, float ancho, float alto){
+	public Recinto(float x, float y, float ancho, float alto, String nombre){
+		this.nombre = nombre;
 		setFormaRecinto(new Rectangle(x,y,ancho,alto));
 		getFormaRecinto().setStroke(Color.BLACK);
 		getFormaRecinto().setFill(Color.WHITE);

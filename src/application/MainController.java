@@ -29,7 +29,8 @@ public class MainController extends BorderPane {
 	@FXML private TextField inAlto;
 	@FXML private TextField inTamanioGrilla;
 	@FXML private CheckBox inCheckboxGrilla;
-	@FXML private Button btnRecintoOK;	
+	@FXML private Button btnRecintoOK;
+	@FXML private TextField nombreRecinto;
 	
     public void initialize() {
     	
@@ -47,7 +48,7 @@ public class MainController extends BorderPane {
     @FXML public void ejecutar(){
     	System.out.println("Ancho: " + (inAncho.getText()) + " Alto: " + Float.valueOf(inAlto.getText()) + " PosX: " + Float.valueOf(inPosicionX.getText()) + " PosY: " + Float.valueOf(inPosicionY.getText()));
     	if (mapa != null){
-    		Recinto recinto = new Recinto(Float.valueOf(inPosicionX.getText()),Float.valueOf(inPosicionY.getText()),Float.valueOf(inAncho.getText()),Float.valueOf(inAlto.getText()));
+    		Recinto recinto = new Recinto(Float.valueOf(inPosicionX.getText()),Float.valueOf(inPosicionY.getText()),Float.valueOf(inAncho.getText()),Float.valueOf(inAlto.getText()), nombreRecinto.getText());
     		boolean recintoValido = mapa.agregarRecinto(recinto);
     		if(recintoValido){
 		    	if(inCheckboxGrilla.isSelected()){

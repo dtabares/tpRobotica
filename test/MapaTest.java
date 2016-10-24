@@ -23,8 +23,8 @@ public class MapaTest {
 		Mapa mapa = new Mapa(1024,768);
 		Scene scene = new Scene(mapa);
       	
-		Recinto r1 = new Recinto(0,0,100,100);
-		Recinto r2 = new Recinto(200,200,200,200);
+		Recinto r1 = new Recinto(0,0,100,100, "r1");
+		Recinto r2 = new Recinto(200,200,200,200,"r2");
 		Grilla g1 = new Grilla (r1,30);
 		g1.prepararGrillaParaDibujo();
 		r1.setGrilla(g1);
@@ -34,7 +34,7 @@ public class MapaTest {
       	mapa.dibujarMapa();
       	
       	//Agrega un recinto a partir de un mapa ya dibujado
-      	Recinto r3 = new Recinto(600,0,200,200);
+      	Recinto r3 = new Recinto(600,0,200,200,"r3");
       	mapa.agregarRecinto(r3);
       	mapa.dibujarMapa();
       	
