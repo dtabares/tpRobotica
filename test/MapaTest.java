@@ -41,7 +41,7 @@ public class MapaTest {
 		primaryStage.setScene(scene);
       	primaryStage.setResizable(false);
       	primaryStage.show();
-      	Thread.sleep(5000);
+      	Thread.sleep(3000);
 		
 	}
 	

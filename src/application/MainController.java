@@ -1,19 +1,14 @@
 package application;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
-
 import clases.Grilla;
 import clases.Mapa;
 import clases.Recinto;
 import formularios.NuevoRecintoControlador;
-import formularios.NuevoRecintoControlador.NuevoRecintoControladorListener;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -22,21 +17,18 @@ import javafx.scene.shape.Shape;
 public class MainController extends BorderPane {
 	
 	private static Mapa mapa;
-	private NuevoRecintoControlador nuevoRecintoControlador;
+//	private NuevoRecintoControlador nuevoRecintoControlador;
 	Collection <Shape> formas = new LinkedList<Shape>();
 
-	@FXML private Button myButton;
-	@FXML private MenuItem botonNuevoMapa;
 	@FXML private AnchorPane panelCentral;
+	
 	@FXML private TextField inPosicionX;
 	@FXML private TextField inPosicionY;
 	@FXML private TextField inAncho;
 	@FXML private TextField inAlto;
 	@FXML private TextField inTamanioGrilla;
 	@FXML private CheckBox inCheckboxGrilla;
-	@FXML private Button btnRecintoOK;
-	
-	
+	@FXML private Button btnRecintoOK;	
 	
     public void initialize() {
     	
