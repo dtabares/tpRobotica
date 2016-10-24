@@ -40,7 +40,7 @@ public class MainController extends BorderPane {
 		    		panelCentral.getChildren().setAll(mapa.getChildren());
 	    		}
 	    		else{
-	    			
+	    			nuevoRecintoControlador.ocultarFormulario();
 	    			System.out.println("Recinto invalido  " + recintoValido);
 	    		}
 	    		
