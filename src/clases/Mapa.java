@@ -15,6 +15,7 @@ public class Mapa extends AnchorPane{
 	Collection <Recinto> recintos = new LinkedList<Recinto>();
 		
 	public Mapa(float tamanioX, float tamanioY) {
+		this.setPrefSize(tamanioX, tamanioY);
 		this.tamanioX = tamanioX;
 		this.tamanioY = tamanioY;
 		//this.setStyle("-fx-background-color: black;");
@@ -33,12 +34,11 @@ public class Mapa extends AnchorPane{
 			System.out.println("La forma: " + forma + "ya existe");
 		}
 		else{
-		this.getChildren().add(forma);
+			this.getChildren().add(forma);
 		}
 		System.out.println(this.getChildren().size());
 	}
 	
-	//Este metodo no deberia validar sino agregar todo al momento de dibujar
 	public void mostrarGrillas(Collection <Grilla> grillas){
 		
 		Iterator<Grilla> iGrillas = grillas.iterator();
@@ -54,7 +54,6 @@ public class Mapa extends AnchorPane{
 
 	
 	public void dibujarMapa(){
-		System.out.println("Entre a dibujar mapa");
 		Collection<Shape> formasPosicionablesEnMapa = new LinkedList<Shape>();
 		Collection<Shape> recintosParaSerAgregados = new LinkedList<Shape>();
 		Collection<Shape> grillasParaSerAgregadas = new LinkedList<Shape>();

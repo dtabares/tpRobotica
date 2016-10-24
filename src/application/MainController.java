@@ -37,9 +37,10 @@ public class MainController extends BorderPane {
 	    		boolean recintoValido = mapa.agregarRecinto(new Recinto(Float.valueOf(nuevoRecintoControlador.getFormularioRecintoAncho()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoAlto()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoPosicionX()),Float.valueOf(nuevoRecintoControlador.getFormularioRecintoPosicionY())));
 	    		if(recintoValido){
 	    			nuevoRecintoControlador.ocultarFormulario();
-		    		panelCentral.getChildren().setAll(mapa.getChildren());
+		    		
 		    		//Redibujar mapa
 		    		mapa.dibujarMapa();
+		    		panelCentral.getChildren().setAll(mapa.getChildren());
 	    		}
 	    		else{
 	    			

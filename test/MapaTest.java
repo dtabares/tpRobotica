@@ -20,7 +20,7 @@ public class MapaTest {
 		
 		Stage primaryStage = new Stage();
 		
-		Mapa mapa = new Mapa(800,600);
+		Mapa mapa = new Mapa(1024,768);
 		Scene scene = new Scene(mapa);
       	
 		Recinto r1 = new Recinto(0,0,100,100);
@@ -31,9 +31,11 @@ public class MapaTest {
 		
 		mapa.agregarRecinto(r1);
       	mapa.agregarRecinto(r2);
-      	Collection <Grilla> grillas = new LinkedList<Grilla>();
-      	grillas.add(g1);
-      	mapa.mostrarGrillas(grillas);
+//      	Collection <Grilla> grillas = new LinkedList<Grilla>();
+//      	grillas.add(g1);
+//      	mapa.mostrarGrillas(grillas);
+      	
+      	mapa.dibujarMapa();
       	
 		primaryStage.setScene(scene);
       	primaryStage.setResizable(false);
