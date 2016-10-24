@@ -57,8 +57,6 @@
                         <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
@@ -70,42 +68,42 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="inPosicionX" prefHeight="25.0" prefWidth="60.0" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                        <TextField fx:id="inPosicionX" prefHeight="25.0" prefWidth="60.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="inPosicionY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                        <TextField fx:id="inPosicionY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="inAncho" GridPane.rowIndex="10">
+                        <TextField fx:id="inAncho" GridPane.rowIndex="8">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="inAlto" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                        <TextField fx:id="inAlto" GridPane.columnIndex="1" GridPane.rowIndex="8">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <CheckBox fx:id="inCheckboxGrilla" mnemonicParsing="false" text="Grilla" GridPane.halignment="CENTER" GridPane.rowIndex="13" GridPane.valignment="CENTER" />
-                        <TextField fx:id="inTamanioGrilla" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                        <CheckBox fx:id="inCheckboxGrilla" mnemonicParsing="false" text="Grilla" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER" />
+                        <TextField fx:id="inTamanioGrilla" GridPane.columnIndex="1" GridPane.rowIndex="11">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button fx:id="btnRecintoOK" mnemonicParsing="false" onAction="#ejecutar" prefHeight="25.0" prefWidth="188.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="14" GridPane.valignment="TOP">
+                        <Button fx:id="btnRecintoOK" mnemonicParsing="false" onAction="#ejecutar" prefHeight="25.0" prefWidth="188.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" top="20.0" />
                            </GridPane.margin>
                         </Button>
-                        <Label text="Posicion en X" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
-                        <Label text="Posicion en Y" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
-                        <Label text="Ancho" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
-                        <Label text="Alto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
-                        <Label text="Tamaño Grilla" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="CENTER" />
+                        <Label text="Posicion en X" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Label text="Posicion en Y" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Label text="Ancho" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <Label text="Alto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <Label text="Tamaño Grilla" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
                         <ComboBox prefHeight="25.0" prefWidth="217.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets />
@@ -116,12 +114,6 @@
                               <Insets />
                            </GridPane.margin>
                         </Label>
-                        <TextField fx:id="nombreRecinto" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <GridPane.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </GridPane.margin>
-                        </TextField>
-                        <Label text="Nombre" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </content>
@@ -129,19 +121,63 @@
           <TitledPane animated="false" text="Obstaculos">
                <content>
                   <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.0" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="103.0" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                     </rowConstraints>
                      <children>
-                        <ComboBox prefWidth="150.0" GridPane.rowIndex="1" />
+                        <TextField fx:id="inPosicionX1" prefHeight="25.0" prefWidth="60.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="inPosicionY1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="inAncho1" GridPane.rowIndex="8">
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="inAlto1" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Button fx:id="btnRecintoOK1" mnemonicParsing="false" onAction="#ejecutar" prefHeight="25.0" prefWidth="188.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" top="20.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Label text="Posicion en X" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Label text="Posicion en Y" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Label text="Ancho" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <Label text="Alto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <ComboBox prefHeight="25.0" prefWidth="217.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <Label text="Seleccionar obstaculo" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
                      </children>
                   </GridPane>
                </content>

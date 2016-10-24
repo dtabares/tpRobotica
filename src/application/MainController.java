@@ -1,28 +1,29 @@
 package application;
 
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.LinkedList;
 import clases.Grilla;
 import clases.Mapa;
+import clases.Obstaculos;
 import clases.Recinto;
-import formularios.NuevoRecintoControlador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
 public class MainController extends BorderPane {
 	
 	private static Mapa mapa;
-//	private NuevoRecintoControlador nuevoRecintoControlador;
 	Collection <Shape> formas = new LinkedList<Shape>();
 
 	@FXML private AnchorPane panelCentral;
 	
+	//Items menu Recintos
 	@FXML private TextField inPosicionX;
 	@FXML private TextField inPosicionY;
 	@FXML private TextField inAncho;
@@ -32,7 +33,13 @@ public class MainController extends BorderPane {
 	@FXML private Button btnRecintoOK;
 	@FXML private TextField nombreRecinto;
 	
+	//Items menu Obstaculos
+	@FXML private ComboBox<String> inObstaculosComboBox;
+	
     public void initialize() {
+//    	
+//    	inObstaculosComboBox = new ComboBox<String>();
+//    	inObstaculosComboBox.setId(EnumSet.allOf(Obstaculos.class).toString());
     	
 //        nuevoRecintoControlador = new NuevoRecintoControlador();
 //        nuevoRecintoControlador.setListener(new NuevoRecintoControladorListener() {
