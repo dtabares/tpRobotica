@@ -58,7 +58,8 @@ public class Grilla {
 				//To Fix ancho/alto
 				//Cuadrante cuadrante = new Cuadrante((posicionX+(int)fila*longitudNormal),(posicionY+(int)columna*longitudNormal),tamanioY,tamanioX);
 				//Cuadrante cuadrante = new Cuadrante((posicionY+(int)columna*longitudNormal),(posicionX+(int)fila*longitudNormal),tamanioY,tamanioX);
-				Cuadrante cuadrante = new Cuadrante((posicionX+(int)columna*longitudNormal),(posicionY+(int)fila*longitudNormal),tamanioY,tamanioX);
+				//Cuadrante cuadrante = new Cuadrante((posicionX+(int)columna*longitudNormal),(posicionY+(int)fila*longitudNormal),tamanioY,tamanioX);
+				Cuadrante cuadrante = new Cuadrante((posicionX+(int)columna*longitudNormal),(posicionY+(int)fila*longitudNormal),tamanioX,tamanioY);
 				coleccionDeCuadrantes.add(cuadrante);
 				
 			}
