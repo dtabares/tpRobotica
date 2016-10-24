@@ -12,6 +12,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
 public class MainController extends BorderPane {
@@ -70,7 +71,8 @@ public class MainController extends BorderPane {
     @FXML public void crearNuevoMapa(){
     	
     	//cambiarlo a dinamico
-    	mapa = new Mapa(800,400);
+    	mapa = new Mapa(790,390);
+    	mapa.setStroke(Color.BLACK);
     	panelCentral.getChildren().setAll(mapa.getChildren());
     	
     }
