@@ -8,7 +8,7 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 	
 	private Shape obstaculo;
 	
-	public Obstaculo(int x, int y, Obstaculos tipo){
+	public Obstaculo(Float x, Float y, Obstaculos tipo){
 		setearCaracteristicasDelObstaculo(tipo);
 		obstaculo = new Rectangle(x,y,this.ancho,this.largo);
 		obstaculo.setStroke(Color.BLACK);
@@ -31,12 +31,12 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 	private void setearCaracteristicasDelObstaculo(Obstaculos tipo){
 		switch (tipo) {
 		case Silla:
-			this.ancho = (float) 0.4;
-			this.largo = (float) 0.4;
+			this.ancho = (float) 10;
+			this.largo = (float) 10;
 			break;
 		case Mesa:
-			this.ancho = (float) 0.8;
-			this.largo = (float) 2;
+			this.ancho = (float) 30;
+			this.largo = (float) 20;
 			break;
 			
 		case Pizarron:
@@ -46,7 +46,7 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 			
 		case Armario:
 			this.ancho = (float) 0.6;
-			this.largo = (float) 1;
+			this.largo = (float) 10;
 			break;
 
 		default:
