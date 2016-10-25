@@ -110,7 +110,7 @@ public class ValidadorTest {
 		Assert.assertFalse(mapa.getRecintos().isEmpty());
 		
 		//Creo un obstaculo y lo posiciono fuera del recinto
-		Obstaculo obstaculo = new Obstaculo(40, 50,Obstaculos.Armario);
+		Obstaculo obstaculo = new Obstaculo((float)40, (float)50,Obstaculos.Armario);
 		
 		Assert.assertFalse(Validador.validarSiElObstaculoEntraEnElRecinto(recinto, obstaculo));
 	}
@@ -130,7 +130,7 @@ public class ValidadorTest {
 		Assert.assertFalse(mapa.getRecintos().isEmpty());
 		
 		//Creo un obstaculo y lo posiciono fuera del recinto
-		Obstaculo obstaculo = new Obstaculo(-50, -30, Obstaculos.Armario);
+		Obstaculo obstaculo = new Obstaculo((float)-50, (float)-30, Obstaculos.Armario);
 		
 		Assert.assertFalse(Validador.validarSiElObstaculoEntraEnElRecinto(recinto, obstaculo));
 	}
@@ -142,7 +142,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recinto = new Recinto(30, 10, 10, 10,"Recinto 1");
+		Recinto recinto = new Recinto(30, 10, 100, 100,"Recinto 1");
 		
 		//Agrego el recinto al mapa
 		mapa.agregarRecinto(recinto);
@@ -150,7 +150,7 @@ public class ValidadorTest {
 		Assert.assertFalse(mapa.getRecintos().isEmpty());
 		
 		//Creo un obstaculo y lo posiciono dentro del recinto
-		Obstaculo obstaculo = new Obstaculo(35, 10, Obstaculos.Mesa);
+		Obstaculo obstaculo = new Obstaculo((float)35, (float)10, Obstaculos.Mesa);
 		
 		Assert.assertTrue(Validador.validarSiElObstaculoEntraEnElRecinto(recinto, obstaculo));
 	}
@@ -162,7 +162,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recinto = new Recinto(30, 10, 10, 10,"Recinto 1");
+		Recinto recinto = new Recinto(30, 10, 100, 100,"Recinto 1");
 		
 		//Agrego el recinto al mapa
 		mapa.agregarRecinto(recinto);
@@ -170,7 +170,7 @@ public class ValidadorTest {
 		Assert.assertFalse(mapa.getRecintos().isEmpty());
 		
 		//Creo un obstaculo y lo posiciono dentro del recinto
-		Obstaculo obstaculo1 = new Obstaculo(35, 10,Obstaculos.Mesa);
+		Obstaculo obstaculo1 = new Obstaculo((float)35, (float)10,Obstaculos.Mesa);
 		
 		Assert.assertTrue(Validador.validarSiElObstaculoEntraEnElRecinto(recinto, obstaculo1));
 		
@@ -179,7 +179,7 @@ public class ValidadorTest {
 		Assert.assertFalse(recinto.getObstaculos().isEmpty());
 		
 		//Creo un segundo obstaculo y lo posiciono dentro del recinto pisando al primero
-		Obstaculo obstaculo2 = new Obstaculo(35, 10, Obstaculos.Armario);
+		Obstaculo obstaculo2 = new Obstaculo((float)35, (float)10, Obstaculos.Armario);
 		
 		Assert.assertFalse(Validador.validarSiElObstaculoEntraEnElRecinto(recinto, obstaculo2));
 		
@@ -193,7 +193,7 @@ public class ValidadorTest {
 		Mapa mapa = new Mapa(200,200);
 		
 		//Creo un recinto de 10 por 10 y lo ubico en la posicion (30,10)
-		Recinto recinto = new Recinto(30, 10, 10, 10,"Recinto 1");
+		Recinto recinto = new Recinto(30, 10, 100, 100,"Recinto 1");
 		
 		//Agrego el recinto al mapa
 		mapa.agregarRecinto(recinto);
@@ -201,7 +201,7 @@ public class ValidadorTest {
 		Assert.assertFalse(mapa.getRecintos().isEmpty());
 		
 		//Creo un obstaculo y lo posiciono dentro del recinto
-		Obstaculo obstaculo1 = new Obstaculo(35, 10, Obstaculos.Mesa);
+		Obstaculo obstaculo1 = new Obstaculo((float)35, (float)10, Obstaculos.Mesa);
 		
 		Assert.assertTrue(Validador.validarSiElObstaculoEntraEnElRecinto(recinto, obstaculo1));
 		
@@ -210,7 +210,7 @@ public class ValidadorTest {
 		Assert.assertFalse(recinto.getObstaculos().isEmpty());
 		
 		//Creo un segundo obstaculo y lo posiciono dentro del recinto pisando al primero
-		Obstaculo obstaculo2 = new Obstaculo(31, 10, Obstaculos.Silla);
+		Obstaculo obstaculo2 = new Obstaculo((float)70, (float)10, Obstaculos.Silla);
 		
 		Assert.assertTrue(Validador.validarSiElObstaculoEntraEnElRecinto(recinto, obstaculo2));
 		
