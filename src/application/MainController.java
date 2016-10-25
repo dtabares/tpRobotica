@@ -30,7 +30,7 @@ public class MainController extends BorderPane {
 	ObservableList<Obstaculos> obstaculos = FXCollections.observableArrayList(Arrays.asList(Obstaculos.values()));
 	
 	//Items menu Recintos
-	@FXML private ComboBox<Recinto> inRecintosComboBox;
+	@FXML private ComboBox<String> inRecintosComboBox;
 	@FXML private TextField inPosicionX;
 	@FXML private TextField inPosicionY;
 	@FXML private TextField inAncho;
@@ -50,17 +50,18 @@ public class MainController extends BorderPane {
 		inObstaculosComboBox.setValue(Obstaculos.Mesa);
 		inObstaculosComboBox.setItems(obstaculos);
 		inRecintosComboBox.getSelectionModel().selectFirst();
+		inRecintosComboBox.getItems().add("Nuevo Recinto");
     	
     }
     
     @FXML public void ejecutar(){
     	
-    	if(inRecintosComboBox.getValue()==null){
+    	if(inRecintosComboBox.getValue()==null || inRecintosComboBox.getValue()== "Nuevo Recinto"){
 	    	if (mapa != null){
 	    		Recinto recinto = new Recinto(Float.valueOf(inPosicionX.getText()),Float.valueOf(inPosicionY.getText()),Float.valueOf(inAncho.getText()),Float.valueOf(inAlto.getText()), nombreRecinto.getText());
 	    		boolean recintoValido = mapa.agregarRecinto(recinto);
 	    		if(recintoValido){
-	    			inRecintosComboBox.getItems().add(recinto);
+	    			inRecintosComboBox.getItems().add(recinto.getNombre());
 			    	if(inCheckboxGrilla.isSelected()){
 			    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()));
 			    		grilla.prepararGrillaParaDibujo();
@@ -80,7 +81,7 @@ public class MainController extends BorderPane {
     	}
     	else {
     		System.out.println("Modificacion");
-    		Recinto recinto = inRecintosComboBox.getValue();
+    		Recinto recinto = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
 	    	if(inCheckboxGrilla.isSelected()){
 	    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()));
 	    		grilla.prepararGrillaParaDibujo();
@@ -93,15 +94,27 @@ public class MainController extends BorderPane {
     }
     
     @FXML public void agregarObstaculo(){
-    	
+    	boolean obstaculoValido;
+    	Recinto recinto;
     	if (mapa != null){
     		if(inObstaculosComboBox.getValue()!=null){
     			if(inRecintosComboBox.getValue()!=null){
     				Obstaculo obstaculo = new Obstaculo(Float.valueOf(inObstaculosPosicionX.getText()),Float.valueOf(inObstaculosPosicionY.getText()),inObstaculosComboBox.getValue());
-    				inRecintosComboBox.getValue().agregarObstaculo(obstaculo);
-    				mapa.dibujarMapa();
-    	    		panelCentral.getChildren().setAll(mapa.getChildren());
-    	    		System.out.println("Obstaculo agregado!");
+    				recinto = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
+    				if (recinto != null){
+    					obstaculoValido = recinto.agregarObstaculo(obstaculo);
+    					if(obstaculoValido){
+    						mapa.dibujarMapa();
+    						panelCentral.getChildren().setAll(mapa.getChildren());
+    						System.out.println("Obstaculo agregado!");
+    					}
+    					else{
+    						System.out.println("El Obstaculo no se agrego ya que estaba en una posicion invalida!");
+    					}
+    				}
+    				else{
+    					System.out.println("El recinto seleccionado es invalido");
+    				}
     			}
     			else{
     				System.out.println("Debe seleccionar un recinto!");
