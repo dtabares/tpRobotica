@@ -62,6 +62,7 @@ public class Mapa extends AnchorPane{
 		for (Recinto recinto : this.recintos) {
 			recintosParaSerAgregados.add(recinto.getFormaRecinto());
 			if(recinto.getGrilla() != null){
+				recinto.verificarDisponibilidadDeLaGrilla();
 				grillasParaSerAgregadas.addAll(recinto.getGrilla().getColeccionDeRectangulos());
 			}
 			for (Obstaculo obstaculo : recinto.getObstaculos()) {
