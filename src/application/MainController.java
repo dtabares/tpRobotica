@@ -101,6 +101,7 @@ public class MainController extends BorderPane {
     				inRecintosComboBox.getValue().agregarObstaculo(obstaculo);
     				mapa.dibujarMapa();
     	    		panelCentral.getChildren().setAll(mapa.getChildren());
+    	    		System.out.println("Obstaculo agregado!");
     			}
     			else{
     				System.out.println("Debe seleccionar un recinto!");
