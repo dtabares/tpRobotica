@@ -121,4 +121,20 @@ public class Mapa extends AnchorPane{
 		return recintos;
 	}
 
+	public Recinto buscarRecintoPorNombre(String nombreBuscado) {
+		boolean encontro = false;
+		Recinto recintoBuscado = null;
+		for (Recinto recinto : recintos) {
+			if (encontro == true){
+				break;
+			}
+			else{
+				if(recinto.getNombre().equals(nombreBuscado)){
+					recintoBuscado = recinto;
+				}
+			}
+		}
+		return recintoBuscado;
+	}
+
 }
