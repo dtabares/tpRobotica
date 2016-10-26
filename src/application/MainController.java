@@ -171,5 +171,16 @@ public class MainController extends BorderPane {
     		
     	}
     }
+    
+    @FXML public void borrarMapa(){
+    	if(mapa!=null){
+    	mapa.getChildren().removeAll(mapa.getChildren());
+    	panelCentral.getChildren().setAll(mapa.getChildren());
+    	mapa = null;
+    	}
+    	else{
+    		System.out.println("No existe el mapa!");
+    	}
+    }
 
 }

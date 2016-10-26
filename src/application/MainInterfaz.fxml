@@ -32,7 +32,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" onAction="#borrarMapa" text="Borrar Mapa" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
