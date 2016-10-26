@@ -124,13 +124,14 @@ public class Validador {
 			}
 			else {
 				if((b.getBordeSuperiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY() && 
-					b.getBordeInferiorIzquierdo().getY() <= a.getBordeInferiorIzquierdo().getY()) ||
+					b.getBordeSuperiorIzquierdo().getY() <= a.getBordeInferiorIzquierdo().getY()) ||
 					(b.getBordeSuperiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY() && 
-					b.getBordeInferiorDerecho().getY() <= a.getBordeInferiorDerecho().getY())){
+					b.getBordeSuperiorDerecho().getY() <= a.getBordeInferiorDerecho().getY())){
 					sePisan = true;
 				}
 			}
 		}
+		//System.out.println("Se pisan en Y: " + sePisan);
 		return sePisan;
 	}
 
