@@ -20,14 +20,8 @@ public class Mapa extends AnchorPane{
 		this.setPrefSize(tamanioX, tamanioY);
 		this.tamanioX = tamanioX;
 		this.tamanioY = tamanioY;
-		this.ajustarEscala();
 	}
 	
-	private void ajustarEscala() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void agregarForma(Shape forma){
 		
 		System.out.println(this.getChildren().size());
@@ -86,6 +80,18 @@ public class Mapa extends AnchorPane{
 		this.getChildren().clear();
 		this.getChildren().addAll(formasPosicionablesEnMapa);
 
+	}
+	
+	public void ajustarEscala(double escala) {
+
+		this.tamanioX = (float) (this.tamanioX*escala);
+		this.tamanioY = (float) (this.tamanioY*escala);
+		
+		for (Recinto recinto : this.recintos) {
+			recinto.ajustarEscala(escala);
+		}
+		
+		this.dibujarMapa();
 	}
 	
 	public boolean agregarRecinto(Recinto recinto){
