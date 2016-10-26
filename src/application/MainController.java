@@ -8,8 +8,11 @@ import clases.Mapa;
 import clases.Obstaculo;
 import clases.Obstaculos;
 import clases.Recinto;
+import formularios.NuevoMapaControlador;
+import formularios.NuevoMapaControlador.NuevoMapaControladorListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -23,6 +26,7 @@ public class MainController extends BorderPane {
 	
 	private static Mapa mapa;
 	Collection <Shape> formas = new LinkedList<Shape>();
+	NuevoMapaControlador nuevoMapaControlador;
 
 	@FXML private AnchorPane panelCentral;
 	
@@ -52,6 +56,20 @@ public class MainController extends BorderPane {
 		inRecintosComboBox.getSelectionModel().selectFirst();
 		inRecintosComboBox.getItems().add("Nuevo Recinto");
     	
+		nuevoMapaControlador = new NuevoMapaControlador();
+ 		nuevoMapaControlador.setListener(new NuevoMapaControladorListener() {	
+    	@Override public void nuevoMapaControladorListenerOK (ActionEvent e) {
+    		System.out.println("Creando nuevo mapa...");
+        	mapa = new Mapa(Float.parseFloat(nuevoMapaControlador.getInAncho()),Float.parseFloat(nuevoMapaControlador.getInAlto()));
+        	mapa.setStyle("-fx-background-color: black;");    	
+        	mapa.dibujarMapa();
+        	panelCentral.getChildren().setAll(mapa.getChildren());
+        	nuevoMapaControlador.ocultarFormulario();
+    	}
+    	@Override
+    	public void nuevoMapaControladorListenerCancel(ActionEvent e) {}
+        });
+		
     }
     
     @FXML public void ejecutar(){
@@ -132,21 +150,8 @@ public class MainController extends BorderPane {
     
     @FXML public void crearNuevoMapa(){
     	
-    	//cambiarlo a dinamico
-    	mapa = new Mapa(790,390);
-    	panelCentral.getChildren().setAll(mapa.getChildren());
+    	nuevoMapaControlador.mostrarFormulario();
     	
     }
-    
-    /* Ejemplo listener, debe ir dentro de initialize
-		nuevoRecintoControlador = new NuevoRecintoControlador();
- 		nuevoRecintoControlador.setListener(new NuevoRecintoControladorListener() {	
-    	@Override public void nuevoRecintoControladorListenerOK (ActionEvent e) {
-    		
-    	}
-    	public void nuevoRecintoControladorListenerCancel(ActionEvent e) {}
-        });
- 
-     * */  
 
 }

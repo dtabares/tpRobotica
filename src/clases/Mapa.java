@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Mapa extends AnchorPane{
@@ -18,7 +20,6 @@ public class Mapa extends AnchorPane{
 		this.setPrefSize(tamanioX, tamanioY);
 		this.tamanioX = tamanioX;
 		this.tamanioY = tamanioY;
-		//this.setStyle("-fx-background-color: black;");
 		this.ajustarEscala();
 	}
 	
@@ -58,6 +59,9 @@ public class Mapa extends AnchorPane{
 		Collection<Shape> recintosParaSerAgregados = new LinkedList<Shape>();
 		Collection<Shape> grillasParaSerAgregadas = new LinkedList<Shape>();
 		Collection<Shape> obstaculosParaSerAgregados = new LinkedList<Shape>();
+		Rectangle background = new Rectangle (tamanioX,tamanioY);
+		background.setStroke(Color.BLACK);
+		background.setFill(Color.WHITE);
 		
 		for (Recinto recinto : this.recintos) {
 			recintosParaSerAgregados.add(recinto.getFormaRecinto());
@@ -70,7 +74,9 @@ public class Mapa extends AnchorPane{
 			}
 		}
 		
-		//Primero se agregan los recintos en orden
+		//Primero se agrega el fondo
+		formasPosicionablesEnMapa.add(background);
+		//Luego se agregan los recintos en orden
 		formasPosicionablesEnMapa.addAll(recintosParaSerAgregados);
 		//Luego se agregan las grillas en orden
 		formasPosicionablesEnMapa.addAll(grillasParaSerAgregadas);
