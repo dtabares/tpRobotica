@@ -117,9 +117,9 @@ public class Validador {
 		}
 		else{
 			if((b.getBordeSuperiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY() && 
-				b.getBordeInferiorIzquierdo().getY() >= a.getBordeInferiorIzquierdo().getY()) ||
+				b.getBordeInferiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY()) ||
 				(b.getBordeSuperiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY() && 
-				b.getBordeInferiorDerecho().getY() >= a.getBordeInferiorDerecho().getY())){
+				b.getBordeInferiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY())){
 				sePisan = true;
 			}
 			else {
