@@ -30,14 +30,15 @@ public class Validador {
 		boolean entra = false;
 		Collection<Obstaculo> obstaculos = recinto.getObstaculos();
 		Iterator<Obstaculo> iterador = obstaculos.iterator();
-		
+		//System.out.println("entro a validarSiElObstaculoEntraEnElRecinto");
 		if(obstaculo.getBordeSuperiorIzquierdo().getX() >= recinto.getBordeSuperiorIzquierdo().getX() && 
 			obstaculo.getBordeSuperiorDerecho().getX() <= recinto.getBordeSuperiorDerecho().getX() &&
 			obstaculo.getBordeSuperiorIzquierdo().getY() >= recinto.getBordeSuperiorIzquierdo().getY() &&
-			obstaculo.getBordeSuperiorDerecho().getY() <= recinto.getBordeInferiorDerecho().getY()){
+			obstaculo.getBordeInferiorDerecho().getY() <= recinto.getBordeInferiorDerecho().getY()){
 			entra = true;
 		}
-		
+//		System.out.println("valor de entra: " + entra);
+//		System.out.println("valor de iterador has next: " + iterador.hasNext());
 		while(iterador.hasNext() && entra == true){
 			if(seSuperponenLasFormas(iterador.next(), obstaculo)){
 				entra = false;
@@ -60,6 +61,8 @@ public class Validador {
 		if (!sonIgualesYTienenLaMismaPosicion(a, b)){
 			seSuperponen = (sePisanEnX(a, b) && sePisanEnY(a, b));
 		}
+		
+		//System.out.println("entro  a seSuperponenLasFormas");
 		
 		
 		return seSuperponen;
@@ -108,30 +111,39 @@ public class Validador {
 	
 	private static boolean sePisanEnY(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean sePisan = false;
-		
+		//arranca arriba y termina abajo de donde empieza el otro
 		if((b.getBordeSuperiorDerecho().getY() <= a.getBordeSuperiorDerecho().getY() && 
 			b.getBordeInferiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY()) ||
 			(b.getBordeSuperiorIzquierdo().getY() <= a.getBordeSuperiorIzquierdo().getY() && 
 			b.getBordeInferiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY())){
 			sePisan = true;
+			//System.out.println("entro 1");
 		}
 		else{
+			//arranca abajo (adentro) y termina abajo (afuera)
 			if((b.getBordeSuperiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY() && 
-				b.getBordeInferiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY()) ||
+				b.getBordeInferiorIzquierdo().getY() <= a.getBordeInferiorIzquierdo().getY()) ||
 				(b.getBordeSuperiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY() && 
-				b.getBordeInferiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY())){
+				b.getBordeInferiorDerecho().getY() <= a.getBordeInferiorDerecho().getY())){
 				sePisan = true;
+				//System.out.println("entro 2");
 			}
 			else {
+				//arranca abajo (adentro) y termina arriba (adentro)
 				if((b.getBordeSuperiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY() && 
 					b.getBordeSuperiorIzquierdo().getY() <= a.getBordeInferiorIzquierdo().getY()) ||
 					(b.getBordeSuperiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY() && 
 					b.getBordeSuperiorDerecho().getY() <= a.getBordeInferiorDerecho().getY())){
 					sePisan = true;
+					//System.out.println("entro 3");
 				}
 			}
 		}
 		//System.out.println("Se pisan en Y: " + sePisan);
+		//System.out.println("Obstaculo Borde Superior Izquierdo Y: " + b.getBordeSuperiorIzquierdo().getY());
+		//System.out.println("Obstaculo Borde Inferior Izquierdo Y: " + b.getBordeInferiorIzquierdo().getY());
+		//System.out.println("Recinto Borde Superior Izquierdo Y: " + a.getBordeSuperiorIzquierdo().getY());
+		//System.out.println("Recinto Borde Inferior Izquierdo Y: " + a.getBordeInferiorIzquierdo().getY());
 		return sePisan;
 	}
 
