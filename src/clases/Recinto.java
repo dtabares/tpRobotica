@@ -44,6 +44,21 @@ public class Recinto extends FormaPosicionableEnMapa{
 		}
 	}
 	
+	public void ajustarEscala(double escala){
+		float nuevaPosicionX=posicionX; 
+		float nuevaPosicionY=posicionY;
+		if (posicionX!=0){ nuevaPosicionX = (float) (this.getPosicionX()-(this.getAncho()*escala)); System.out.println("Posicion X ajustada:" + nuevaPosicionX );}
+		if (posicionY!=0){ nuevaPosicionY = (float) (this.getPosicionY()-(this.getAlto()*escala)); System.out.println("Posicion Y ajustada:" + nuevaPosicionY );}
+		 		
+		float nuevoAncho = (float) (this.getAncho()*escala);
+		float nuevoAlto = (float) (this.getAlto()*escala);
+		
+		this.setFormaRecinto(new Rectangle(nuevaPosicionX,nuevaPosicionY,nuevoAncho,nuevoAlto));
+		this.getFormaRecinto().setStroke(Color.BLACK);
+		this.getFormaRecinto().setFill(Color.WHITE);
+		this.getFormaRecinto().setStrokeWidth(2);		
+	}
+	
 	//Getters & Setters
 
 	public Shape getFormaRecinto() {

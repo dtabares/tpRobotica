@@ -48,6 +48,9 @@ public class MainController extends BorderPane {
 	@FXML private ComboBox<Obstaculos> inObstaculosComboBox;
 	@FXML private TextField inObstaculosPosicionX;
 	@FXML private TextField inObstaculosPosicionY;
+	
+	//Items menu Otros
+	@FXML private TextField inOtrosEscala;
 
 	public void initialize() {
         
@@ -152,6 +155,32 @@ public class MainController extends BorderPane {
     	
     	nuevoMapaControlador.mostrarFormulario();
     	
+    }
+    
+    @FXML public void ajustarEscalaMapa(){
+    	
+    	if (inOtrosEscala.getText().contains(",")){
+    		System.out.println("Caracter Invalido...");
+    	}
+    	else{
+    		System.out.println("Ajustando Escala...");
+    		System.out.println("No esta implementado aun...");
+//	    	mapa.ajustarEscala(Double.valueOf(inOtrosEscala.getText()));
+//    		mapa.dibujarMapa();
+//    		panelCentral.getChildren().setAll(mapa.getChildren());
+    		
+    	}
+    }
+    
+    @FXML public void borrarMapa(){
+    	if(mapa!=null){
+    	mapa.getChildren().removeAll(mapa.getChildren());
+    	panelCentral.getChildren().setAll(mapa.getChildren());
+    	mapa = null;
+    	}
+    	else{
+    		System.out.println("No existe el mapa!");
+    	}
     }
 
 }
