@@ -60,9 +60,9 @@
                         <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <CheckBox mnemonicParsing="false" text="Grilla" GridPane.rowIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="inMenuCheckboxGrilla" mnemonicParsing="false" text="Grilla" GridPane.rowIndex="1" />
+                        <TextField fx:id="inMenuTamanioGrilla" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#agregarGrillaEnMapa" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Tamaño Grilla" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>

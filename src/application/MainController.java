@@ -33,6 +33,11 @@ public class MainController extends BorderPane {
 	//Listas Observables
 	ObservableList<Obstaculos> obstaculos = FXCollections.observableArrayList(Arrays.asList(Obstaculos.values()));
 	
+	//Items menu Mapa
+	@FXML private CheckBox inMenuCheckboxGrilla;
+	@FXML private TextField inMenuTamanioGrilla;
+	
+	
 	//Items menu Recintos
 	@FXML private ComboBox<String> inRecintosComboBox;
 	@FXML private TextField inPosicionX;
@@ -64,6 +69,7 @@ public class MainController extends BorderPane {
     	@Override public void nuevoMapaControladorListenerOK (ActionEvent e) {
     		System.out.println("Creando nuevo mapa...");
         	mapa = new Mapa(Float.parseFloat(nuevoMapaControlador.getInAncho()),Float.parseFloat(nuevoMapaControlador.getInAlto()));
+        	mapa.setRecintoMapa(new Recinto(0,0,Float.parseFloat(nuevoMapaControlador.getInAncho()),Float.parseFloat(nuevoMapaControlador.getInAlto()),"Recinto Mapa"));
         	mapa.setStyle("-fx-background-color: black;");    	
         	mapa.dibujarMapa();
         	panelCentral.getChildren().setAll(mapa.getChildren());
@@ -157,21 +163,17 @@ public class MainController extends BorderPane {
     	
     }
     
-    @FXML public void ajustarEscalaMapa(){
+    @FXML public void agregarGrillaEnMapa(){
     	
-    	if (inOtrosEscala.getText().contains(",")){
-    		System.out.println("Caracter Invalido...");
+    	if (inMenuCheckboxGrilla.isSelected()){
+    		mapa.setGrilla(new Grilla(mapa.getRecintoMapa(),Float.valueOf(inMenuTamanioGrilla.getText())));
+    		mapa.getGrilla().prepararGrillaParaDibujo();
+    		mapa.dibujarMapa();
+			panelCentral.getChildren().setAll(mapa.getChildren());
     	}
-    	else{
-    		System.out.println("Ajustando Escala...");
-    		System.out.println("No esta implementado aun...");
-//	    	mapa.ajustarEscala(Double.valueOf(inOtrosEscala.getText()));
-//    		mapa.dibujarMapa();
-//    		panelCentral.getChildren().setAll(mapa.getChildren());
-    		
-    	}
+    	
     }
-    
+
     @FXML public void borrarMapa(){
     	if(mapa!=null){
     	mapa.getChildren().removeAll(mapa.getChildren());

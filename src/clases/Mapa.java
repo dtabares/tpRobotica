@@ -15,6 +15,7 @@ public class Mapa extends AnchorPane{
 	private float escalaX;
 	private float escalaY;
 	private Grilla grilla;
+	private Recinto recintoMapa;
 	Collection <Recinto> recintos = new LinkedList<Recinto>();
 		
 	public Mapa(float tamanioX, float tamanioY) {
@@ -34,21 +35,7 @@ public class Mapa extends AnchorPane{
 		}
 		System.out.println(this.getChildren().size());
 	}
-	
-	public void mostrarGrillas(Collection <Grilla> grillas){
 		
-		Iterator<Grilla> iGrillas = grillas.iterator();
-		while (iGrillas.hasNext()){
-			Grilla g = iGrillas.next();
-			Iterator<Shape> iFormas = g.getColeccionDeRectangulos().iterator();
-				while (iFormas.hasNext()){
-					agregarForma(iFormas.next());
-				}
-			}
-	
-	}
-
-	
 	public void dibujarMapa(){
 		Collection<Shape> formasPosicionablesEnMapa = new LinkedList<Shape>();
 		Collection<Shape> recintosParaSerAgregados = new LinkedList<Shape>();
@@ -84,18 +71,6 @@ public class Mapa extends AnchorPane{
 
 	}
 	
-	public void ajustarEscala(double escala) {
-
-		this.tamanioX = (float) (this.tamanioX*escala);
-		this.tamanioY = (float) (this.tamanioY*escala);
-		
-		for (Recinto recinto : this.recintos) {
-			recinto.ajustarEscala(escala);
-		}
-		
-		this.dibujarMapa();
-	}
-	
 	public boolean agregarRecinto(Recinto recinto){
 			
 		boolean posicionValida = Validador.validarSiElRecintoEntraEnElMapa(this, recinto);
@@ -104,6 +79,22 @@ public class Mapa extends AnchorPane{
 		}
 
 		return posicionValida;
+	}
+	
+	public Recinto buscarRecintoPorNombre(String nombreBuscado) {
+		boolean encontro = false;
+		Recinto recintoBuscado = null;
+		for (Recinto recinto : recintos) {
+			if (encontro == true){
+				break;
+			}
+			else{
+				if(recinto.getNombre().equals(nombreBuscado)){
+					recintoBuscado = recinto;
+				}
+			}
+		}
+		return recintoBuscado;
 	}
 		
 	//Getters & Setters
@@ -135,20 +126,22 @@ public class Mapa extends AnchorPane{
 		return recintos;
 	}
 
-	public Recinto buscarRecintoPorNombre(String nombreBuscado) {
-		boolean encontro = false;
-		Recinto recintoBuscado = null;
-		for (Recinto recinto : recintos) {
-			if (encontro == true){
-				break;
-			}
-			else{
-				if(recinto.getNombre().equals(nombreBuscado)){
-					recintoBuscado = recinto;
-				}
-			}
-		}
-		return recintoBuscado;
+	public Grilla getGrilla() {
+		return grilla;
 	}
+
+	public void setGrilla(Grilla grilla) {
+		this.grilla = grilla;
+	}
+
+	public Recinto getRecintoMapa() {
+		return recintoMapa;
+	}
+
+	public void setRecintoMapa(Recinto recintoMapa) {
+		this.recintoMapa = recintoMapa;
+	}
+
+
 
 }
