@@ -14,6 +14,7 @@ public class Mapa extends AnchorPane{
 	private float tamanioY;
 	private float escalaX;
 	private float escalaY;
+	private Grilla grilla;
 	Collection <Recinto> recintos = new LinkedList<Recinto>();
 		
 	public Mapa(float tamanioX, float tamanioY) {
@@ -70,6 +71,7 @@ public class Mapa extends AnchorPane{
 		
 		//Primero se agrega el fondo
 		formasPosicionablesEnMapa.add(background);
+		if(grilla!=null){formasPosicionablesEnMapa.addAll(grilla.getColeccionDeRectangulos());}
 		//Luego se agregan los recintos en orden
 		formasPosicionablesEnMapa.addAll(recintosParaSerAgregados);
 		//Luego se agregan las grillas en orden
@@ -103,7 +105,7 @@ public class Mapa extends AnchorPane{
 
 		return posicionValida;
 	}
-	
+		
 	//Getters & Setters
 	public float getEscalaX() {
 		return escalaX;
