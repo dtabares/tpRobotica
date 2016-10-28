@@ -1,8 +1,12 @@
 package application;
 
+import java.awt.Component;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+
+import javax.swing.JOptionPane;
+
 import clases.Grilla;
 import clases.Mapa;
 import clases.Obstaculo;
@@ -27,6 +31,8 @@ public class MainController extends BorderPane {
 	private static Mapa mapa;
 	Collection <Shape> formas = new LinkedList<Shape>();
 	NuevoMapaControlador nuevoMapaControlador;
+	//Objeto para instanciar mensajes 
+	Component frame = null;
 
 	@FXML private AnchorPane panelCentral;
 	
@@ -54,8 +60,10 @@ public class MainController extends BorderPane {
 	@FXML private TextField inObstaculosPosicionX;
 	@FXML private TextField inObstaculosPosicionY;
 	
-	//Items menu Otros
-	@FXML private TextField inOtrosEscala;
+	//Items menu Puertas
+	@FXML private ComboBox inPuertasComboBox;
+	@FXML private TextField inPuertasPosicionX;
+	@FXML private TextField inPuertasPosicionY;
 
 	public void initialize() {
         
@@ -98,12 +106,12 @@ public class MainController extends BorderPane {
 		    		panelCentral.getChildren().setAll(mapa.getChildren());
 	    		}
 	    		else{
-	    			System.out.println("Recinto invalido  " + recintoValido);
+	    			this.mostrarMensajeDeError("Recinto invalido");
 	    		}
 	    		
 	        }
 			else{
-				System.out.println("No existe el mapa!");
+				this.mostrarMensajeDeError("No existe el mapa!");
 			}
     	}
     	else {
@@ -120,7 +128,13 @@ public class MainController extends BorderPane {
     	}
     }
     
-    @FXML public void agregarObstaculo(){
+    private void mostrarMensajeDeError(String mensaje) {
+		JOptionPane.showMessageDialog(frame,mensaje,
+				"Error",
+			    JOptionPane.ERROR_MESSAGE);
+	}
+
+	@FXML public void agregarObstaculo(){
     	boolean obstaculoValido;
     	Recinto recinto;
     	if (mapa != null){
@@ -136,23 +150,23 @@ public class MainController extends BorderPane {
     						System.out.println("Obstaculo agregado!");
     					}
     					else{
-    						System.out.println("El Obstaculo no se agrego ya que estaba en una posicion invalida!");
+    						this.mostrarMensajeDeError("El Obstaculo no se agrego ya que estaba en una posicion invalida!");
     					}
     				}
     				else{
-    					System.out.println("El recinto seleccionado es invalido");
+    					this.mostrarMensajeDeError("El recinto seleccionado es invalido");
     				}
     			}
     			else{
-    				System.out.println("Debe seleccionar un recinto!");
+    				this.mostrarMensajeDeError("Debe seleccionar un recinto!");
     			}
     		}
     		else{
-    			System.out.println("Debe seleccionar un obstaculo!");
+    			this.mostrarMensajeDeError("Debe seleccionar un obstaculo!");
     		}
     	}
     	else{
-    		System.out.println("No existe el mapa!");
+    		this.mostrarMensajeDeError("No existe el mapa!");
     	}
     	
     }
@@ -173,6 +187,11 @@ public class MainController extends BorderPane {
     	}
     	
     }
+    
+    @FXML public void agregarPuerta(){
+    	
+    	
+    }
 
     @FXML public void borrarMapa(){
     	if(mapa!=null){
@@ -181,7 +200,7 @@ public class MainController extends BorderPane {
     	mapa = null;
     	}
     	else{
-    		System.out.println("No existe el mapa!");
+    		this.mostrarMensajeDeError("No existe el mapa!");
     	}
     }
 
