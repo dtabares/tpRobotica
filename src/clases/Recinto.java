@@ -2,6 +2,8 @@ package clases;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -12,7 +14,8 @@ public class Recinto extends FormaPosicionableEnMapa{
 	private Grilla grilla;
 	Collection <Obstaculo> obstaculos = new HashSet<Obstaculo>();
 	private String nombre;
-	
+	private Collection<Puerta> puertas = new LinkedList<>();
+
 	public Recinto(float x, float y, float ancho, float alto, String nombre){
 		this.setNombre(nombre);
 		setFormaRecinto(new Rectangle(x,y,ancho,alto));
@@ -78,4 +81,11 @@ public class Recinto extends FormaPosicionableEnMapa{
 		this.nombre = nombre;
 	}
 
+	public Collection<Puerta> getPuertas() {
+		return puertas;
+	}
+
+	public void setPuertas(Collection<Puerta> puertas) {
+		this.puertas = puertas;
+	}
 }
