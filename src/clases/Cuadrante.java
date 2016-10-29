@@ -7,9 +7,10 @@ public class Cuadrante extends FormaPosicionableEnMapa{
 	
 	private boolean disponible;
 	private Rectangle rectangulo;
+	private int numero;
 	
 	
-	public Cuadrante(float posicionX, float posicionY, float ancho, float alto){
+	public Cuadrante(float posicionX, float posicionY, float ancho, float alto, int numero){
 		this.rectangulo = new Rectangle(posicionX,posicionY,ancho,alto);
 		this.rectangulo.setStroke(Color.BLACK);
 		this.rectangulo.setFill(Color.WHITE);
@@ -20,6 +21,7 @@ public class Cuadrante extends FormaPosicionableEnMapa{
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
 		this.calcularPosicionBordes();
+		this.numero = numero;
 	}
 	
 	public void marcarComoDisponible(){
@@ -38,6 +40,10 @@ public class Cuadrante extends FormaPosicionableEnMapa{
 	
 	public Rectangle getRectangle(){
 		return this.rectangulo;
+	}
+	
+	public int getNumero(){
+		return this.numero;
 	}
 
 }
