@@ -34,6 +34,7 @@ public class Puerta extends FormaPosicionableEnMapa {
 		}
 		
 		this.setearLinea(this.posicionFinalX, this.posicionFinalY);
+		this.calcularPosicionBordes();
 		
 		
 	}

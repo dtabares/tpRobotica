@@ -311,5 +311,26 @@ public class ValidadorTest {
 		Assert.assertTrue(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta3, mapa, recinto));
 		Assert.assertTrue(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta4, mapa, recinto));
 	}
+	
+	@Test
+	public void pongoUnaPuertaQueSePiseConOtra(){
+		//Creo un mapa de 800 por 600
+		Mapa mapa = new Mapa(800,600);
+
+		Recinto recinto = new Recinto(10, 10, 100, 100,"Recinto 1");
+		
+		Puerta puerta1 = new Puerta((float)10,(float)10,Orientacion.Horizontal,(float)20);
+		Puerta puerta2 = new Puerta((float)15,(float)10,Orientacion.Horizontal,(float)20);
+		
+		
+		recinto.agregarPuerta(puerta1);
+		
+		//Agrego el recinto al mapa
+		mapa.agregarRecinto(recinto);
+		
+		
+		Assert.assertFalse(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta2, mapa, recinto));
+
+	}
 
 }

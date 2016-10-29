@@ -150,7 +150,8 @@ public class Validador {
 	
 	public static boolean validarSiLaPuertaEstaEnUnaParedValida(Puerta puerta, Mapa mapa, Recinto recinto){
 		boolean posicionValida = false;
-		if(validarSiLaPuertaEntraEnElMapa(mapa, puerta) && validarSiLaPuertaEstaEnUnaParedDelRecinto(recinto,puerta)){
+		if(validarSiLaPuertaEntraEnElMapa(mapa, puerta) && validarSiLaPuertaEstaEnUnaParedDelRecinto(recinto,puerta)
+				&& !sePisaConOtrasPuertasDelRecinto(recinto,puerta)){
 			posicionValida = true;
 		}
 		return posicionValida;
@@ -192,6 +193,17 @@ public class Validador {
 		}
 		
 		return (entraEnX && entraEnY);
+	}
+	
+	private static boolean sePisaConOtrasPuertasDelRecinto(Recinto recinto, Puerta puerta){
+		Collection <Puerta> puertasDelRecinto = recinto.getPuertas();
+		Iterator <Puerta> iterador = puertasDelRecinto.iterator();
+		boolean sePisa  = false;
+		while(iterador.hasNext() && sePisa == false){
+			sePisa = seSuperponenLasFormas(puerta,iterador.next());
+		}
+		
+		return sePisa;
 	}
 	
 
