@@ -1,5 +1,6 @@
 package clases;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public class Mapa extends AnchorPane{
+public class Mapa extends AnchorPane implements Serializable{
 
 	private float tamanioX;
 	private float tamanioY;
