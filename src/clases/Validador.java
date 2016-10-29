@@ -146,5 +146,53 @@ public class Validador {
 		//System.out.println("Recinto Borde Inferior Izquierdo Y: " + a.getBordeInferiorIzquierdo().getY());
 		return sePisan;
 	}
+	
+	
+	public static boolean validarSiLaPuertaEstaEnUnaParedValida(Puerta puerta, Mapa mapa, Recinto recinto){
+		boolean posicionValida = false;
+		if(validarSiLaPuertaEntraEnElMapa(mapa, puerta) && validarSiLaPuertaEstaEnUnaParedDelRecinto(recinto,puerta)){
+			posicionValida = true;
+		}
+		return posicionValida;
+	}
+	
+	private static boolean validarSiLaPuertaEstaEnUnaParedDelRecinto(Recinto recinto, Puerta puerta) {
+		boolean xOK = false;
+		boolean yOK = false;
+		
+		if(puerta.getOrientacion().equals(Orientacion.Horizontal)){
+			if(puerta.posicionX >= recinto.getBordeSuperiorIzquierdo().getX() && puerta.getPosicionFinalX() <= recinto.getBordeSuperiorDerecho().getX()){
+				xOK = true;
+			}
+			if(puerta.getPosicionY() == recinto.getBordeSuperiorDerecho().getY() || puerta.getPosicionY() == recinto.getBordeInferiorDerecho().getY()){
+				yOK = true;
+			}
+		}
+		else{
+			if(puerta.getPosicionY() >= recinto.getBordeSuperiorDerecho().getY() && puerta.getPosicionFinalY() <= recinto.getBordeInferiorDerecho().getY()){
+				yOK = true;
+			}
+			if(puerta.getPosicionX() == recinto.getBordeSuperiorIzquierdo().getX() || puerta.getPosicionX() == recinto.getBordeSuperiorDerecho().getX()){
+				xOK = true;
+			}
+		}
+		
+		return (xOK && yOK);
+	}
+
+	private static boolean validarSiLaPuertaEntraEnElMapa(Mapa mapa, Puerta puerta){
+		boolean entraEnX = false;
+		boolean entraEnY = false;
+		if (puerta.getPosicionX() > 0 && puerta.getPosicionFinalX() < mapa.getTamanioX()){
+			entraEnX = true;
+		}
+		
+		if(puerta.getPosicionY() > 0 && puerta.getPosicionFinalY() < mapa.getTamanioY()){
+			entraEnY = true;
+		}
+		
+		return (entraEnX && entraEnY);
+	}
+	
 
 }

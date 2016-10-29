@@ -4,6 +4,8 @@ import org.junit.Test;
 import clases.Mapa;
 import clases.Obstaculo;
 import clases.Obstaculos;
+import clases.Orientacion;
+import clases.Puerta;
 import clases.Recinto;
 import clases.Validador;
 
@@ -215,6 +217,99 @@ public class ValidadorTest {
 		Assert.assertTrue(Validador.validarSiElObstaculoEntraEnElRecinto(recinto, obstaculo2));
 		
 		
+	}
+	
+	@Test
+	public void pongoUnaPuertaFueraDelMapa(){
+		//Creo un mapa de 800 por 600
+		Mapa mapa = new Mapa(800,600);
+		
+		//Creo un recinto de 100 por 100 y lo ubico en la posicion (0,0)
+		Recinto recinto = new Recinto(0, 0, 100, 100,"Recinto 1");
+		
+		//Agrego el recinto al mapa
+		mapa.agregarRecinto(recinto);
+		
+		//Creo una puerta y la posicionoFueraDelMapa()
+		Puerta puerta = new Puerta((float)900,(float)600,Orientacion.Horizontal,(float)20);
+		
+		
+		Assert.assertFalse(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta, mapa, recinto));
+	}
+	
+	@Test
+	public void pongoUnaPuertaFueraDelRecintoPeroDentroDelMapa(){
+		//Creo un mapa de 800 por 600
+		Mapa mapa = new Mapa(800,600);
+		
+		//Creo un recinto de 100 por 100 y lo ubico en la posicion (0,0)
+		Recinto recinto = new Recinto(0, 0, 100, 100,"Recinto 1");
+		
+		//Agrego el recinto al mapa
+		mapa.agregarRecinto(recinto);
+		
+		//Creo una puerta y la posiciono Fuera Del recinto
+		Puerta puerta = new Puerta((float)500,(float)40,Orientacion.Horizontal,(float)20);
+		
+		
+		Assert.assertFalse(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta, mapa, recinto));
+	}
+	
+	@Test
+	public void pongoUnaPuertaQueToqueAlRecintoPeroNoEstePosicionadoEnUnaPared(){
+		//Creo un mapa de 800 por 600
+		Mapa mapa = new Mapa(800,600);
+		
+		//Creo un recinto de 100 por 100 y lo ubico en la posicion (0,0)
+		Recinto recinto = new Recinto(0, 0, 100, 100,"Recinto 1");
+		
+		//Agrego el recinto al mapa
+		mapa.agregarRecinto(recinto);
+		
+		//Creo una puerta
+		Puerta puerta = new Puerta((float)0,(float)40,Orientacion.Horizontal,(float)20);
+		
+		
+		Assert.assertFalse(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta, mapa, recinto));
+	}
+	
+	@Test
+	public void pongoUnaPuertaEnUnaParedLinderaConElLimiteDelMapa(){
+		//Creo un mapa de 800 por 600
+		Mapa mapa = new Mapa(800,600);
+		
+		//Creo un recinto de 100 por 100 y lo ubico en la posicion (0,0)
+		Recinto recinto = new Recinto(0, 0, 100, 100,"Recinto 1");
+		
+		//Agrego el recinto al mapa
+		mapa.agregarRecinto(recinto);
+		
+		Puerta puerta = new Puerta((float)10,(float)0,Orientacion.Horizontal,(float)20);
+		
+		
+		Assert.assertFalse(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta, mapa, recinto));
+	}
+	
+	@Test
+	public void pongoUnaPuertaEnUnaPosicionValidaEnCadaParedDelRecinto(){
+		//Creo un mapa de 800 por 600
+		Mapa mapa = new Mapa(800,600);
+
+		Recinto recinto = new Recinto(10, 10, 100, 100,"Recinto 1");
+		
+		//Agrego el recinto al mapa
+		mapa.agregarRecinto(recinto);
+		
+		Puerta puerta1 = new Puerta((float)10,(float)10,Orientacion.Horizontal,(float)20);
+		Puerta puerta2 = new Puerta((float)10,(float)110,Orientacion.Horizontal,(float)20);
+		Puerta puerta3 = new Puerta((float)10,(float)10,Orientacion.Vertical,(float)20);
+		Puerta puerta4 = new Puerta((float)110,(float)10,Orientacion.Vertical,(float)20);
+		
+		
+		Assert.assertTrue(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta1, mapa, recinto));
+		Assert.assertTrue(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta2, mapa, recinto));
+		Assert.assertTrue(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta3, mapa, recinto));
+		Assert.assertTrue(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta4, mapa, recinto));
 	}
 
 }

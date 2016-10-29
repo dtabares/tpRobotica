@@ -11,6 +11,8 @@ import clases.Grilla;
 import clases.Mapa;
 import clases.Obstaculo;
 import clases.Obstaculos;
+import clases.Orientacion;
+import clases.Puerta;
 import clases.Recinto;
 import formularios.NuevoMapaControlador;
 import formularios.NuevoMapaControlador.NuevoMapaControladorListener;
@@ -189,6 +191,32 @@ public class MainController extends BorderPane {
     }
     
     @FXML public void agregarPuerta(){
+    	boolean puertaValida;
+    	Recinto recinto; 
+    	if (mapa != null){
+    		recinto = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
+    		if (recinto != null){
+    			Puerta puerta = new Puerta ((float)0,(float)0,Orientacion.Horizontal,(float)10);
+    			//new Obstaculo(Float.valueOf(inObstaculosPosicionX.getText()),Float.valueOf(inObstaculosPosicionY.getText()),inObstaculosComboBox.getValue());
+    			puertaValida = recinto.agregarPuerta(puerta);
+				if(puertaValida){
+					mapa.dibujarMapa();
+					panelCentral.getChildren().setAll(mapa.getChildren());
+					System.out.println("Puerta agregado!");
+				}
+				else{
+					this.mostrarMensajeDeError("La puerta No se encuentra en una pared valida del recinto");
+				}
+    		}
+			else{
+				this.mostrarMensajeDeError("El recinto seleccionado es invalido");
+			}
+    		
+    	}
+    	else{
+    		this.mostrarMensajeDeError("No existe el mapa!");
+    	}
+    	
     	
     	
     }

@@ -7,6 +7,8 @@ import javafx.scene.shape.Shape;
 public class Puerta extends FormaPosicionableEnMapa {
 	
 	private Shape linea;
+	private float posicionFinalX;
+	private float posicionFinalY;
 	private Orientacion orientacion;
 	
 //	protected float posicionX;
@@ -15,19 +17,23 @@ public class Puerta extends FormaPosicionableEnMapa {
 //	protected float largo;
 	
 	public Puerta(float posicionX, float posicionY, Orientacion orientacion, float ancho){
-		this.orientacion = orientacion;
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
+		this.orientacion = orientacion;
 		if(orientacion == Orientacion.Horizontal){
 			this.ancho = ancho;
 			this.largo = 0;
-			this.setearLinea(posicionX + ancho, posicionY);
+			this.posicionFinalX = posicionX + ancho;
+			this.posicionFinalY = posicionY;
 		}
 		else{
 			this.ancho = 0;
 			this.largo = ancho;
-			this.setearLinea(posicionX, posicionY+ancho);
+			this.posicionFinalX = posicionX;
+			this.posicionFinalY = posicionY+ancho;
 		}
+		
+		this.setearLinea(this.posicionFinalX, this.posicionFinalY);
 		
 		
 	}
@@ -37,4 +43,17 @@ public class Puerta extends FormaPosicionableEnMapa {
 		this.linea.setFill(Color.ORANGE);
 	}
 
+	public float getPosicionFinalX() {
+		return posicionFinalX;
+	}
+
+	public float getPosicionFinalY() {
+		return posicionFinalY;
+	}
+	
+	public Orientacion getOrientacion() {
+		return this.orientacion;
+	}
+
+	
 }

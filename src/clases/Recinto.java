@@ -85,7 +85,9 @@ public class Recinto extends FormaPosicionableEnMapa{
 		return puertas;
 	}
 
-	public void setPuertas(Collection<Puerta> puertas) {
-		this.puertas = puertas;
+	public boolean agregarPuerta(Puerta puerta) {
+		boolean puertaValida = false;
+		this.puertas.add(puerta);
+		return puertaValida;
 	}
 }
