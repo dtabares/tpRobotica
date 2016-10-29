@@ -55,6 +55,10 @@ public class Puerta extends FormaPosicionableEnMapa {
 	public Orientacion getOrientacion() {
 		return this.orientacion;
 	}
+	
+	public Shape getLinea(){
+		return this.linea;
+	}
 
 	
 }

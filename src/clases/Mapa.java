@@ -41,6 +41,7 @@ public class Mapa extends AnchorPane{
 		Collection<Shape> recintosParaSerAgregados = new LinkedList<Shape>();
 		Collection<Shape> grillasParaSerAgregadas = new LinkedList<Shape>();
 		Collection<Shape> obstaculosParaSerAgregados = new LinkedList<Shape>();
+		Collection<Shape> puertasParaSerAgregadas = new LinkedList<Shape>();
 		Rectangle background = new Rectangle (tamanioX,tamanioY);
 		background.setStroke(Color.BLACK);
 		background.setFill(Color.WHITE);
@@ -50,6 +51,11 @@ public class Mapa extends AnchorPane{
 			if(recinto.getGrilla() != null){
 				recinto.verificarDisponibilidadDeLaGrilla();
 				grillasParaSerAgregadas.addAll(recinto.getGrilla().getColeccionDeRectangulos());
+			}
+			if(recinto.getPuertas() != null){
+				for(Puerta puerta : recinto.getPuertas()){
+					puertasParaSerAgregadas.add(puerta.getLinea());
+				}
 			}
 			for (Obstaculo obstaculo : recinto.getObstaculos()) {
 				obstaculosParaSerAgregados.add(obstaculo.getObstaculo());
@@ -63,6 +69,8 @@ public class Mapa extends AnchorPane{
 		formasPosicionablesEnMapa.addAll(recintosParaSerAgregados);
 		//Luego se agregan las grillas en orden
 		formasPosicionablesEnMapa.addAll(grillasParaSerAgregadas);
+		//Luego se agregan las puertas en orden
+		formasPosicionablesEnMapa.addAll(puertasParaSerAgregadas);
 		//Finalmente los obstaculos en orden
 		formasPosicionablesEnMapa.addAll(obstaculosParaSerAgregados);
 		
