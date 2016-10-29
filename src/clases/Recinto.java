@@ -38,10 +38,12 @@ public class Recinto extends FormaPosicionableEnMapa{
 	}
 	
 	public void verificarDisponibilidadDeLaGrilla(){
-		for (Cuadrante cuadrante : this.grilla.getColeccionDeCuadrantes()) {
-			for (Obstaculo obstaculo : obstaculos) {
-				if (Validador.validarSiElCuadranteEsOcupadoPorUnObstaculo(cuadrante,obstaculo)){
-					cuadrante.marcarComoNoDisponible();
+		for (Cuadrante[] filacuadrante : this.grilla.getMatrizDeCuadrantes()) {
+			for (Cuadrante cuadrante : filacuadrante) {
+				for (Obstaculo obstaculo : obstaculos) {
+					if (Validador.validarSiElCuadranteEsOcupadoPorUnObstaculo(cuadrante,obstaculo)){
+						cuadrante.marcarComoNoDisponible();
+					}
 				}
 			}
 		}
