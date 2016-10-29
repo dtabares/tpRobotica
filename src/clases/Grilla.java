@@ -22,7 +22,6 @@ public class Grilla {
 	//Constructor de la clase Grilla, crea una grilla especificando el tamaño de cada unidad, require conocer el recinto para posicionarse
 	public Grilla(Recinto recinto, float tamanio){
 		this.coleccionDeRectangulos = new LinkedList<Shape>();
-		//this.matrizDeAdyacencia = new LinkedList<boolean>();
 		this.posicionX = recinto.getPosicionX();
 		this.posicionY = recinto.getPosicionY();
 		this.longitudNormal = tamanio;
@@ -42,9 +41,7 @@ public class Grilla {
 		float tamanioY;
 		
 		for (int fila=0; fila < filas ;fila++){
-			//System.out.println("Fila Numero: " + fila);
 			for (int columna=0;columna < columnas;columna++){
-				//System.out.println("Columna Numero: " + columna);
 				
 				if(fila +1 == filas){
 					tamanioY = this.longitudYUltimaFila;
@@ -293,7 +290,5 @@ public class Grilla {
 		
 		return valida;
 	}
-	
-
 	
 }
