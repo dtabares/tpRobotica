@@ -20,46 +20,149 @@ public class Grilla {
 	private int columnas;
 	
 	//Constructor de la clase Grilla, crea una grilla especificando el tamaño de cada unidad, require conocer el recinto para posicionarse
-	public Grilla(Recinto recinto, float tamanio){
+	public Grilla(Recinto recinto, float tamanio, int vertice){
 		this.coleccionDeRectangulos = new LinkedList<Shape>();
 		this.posicionX = recinto.getPosicionX();
 		this.posicionY = recinto.getPosicionY();
 		this.longitudNormal = tamanio;
 		this.recinto = recinto;
-		this.filas = (int) Math.ceil( this.recinto.getAlto() / this.longitudNormal);
-		this.columnas = (int) Math.ceil(this.recinto.getAncho() / this.longitudNormal);
+		this.filas = (int) Math.ceil( this.recinto.getAlto() / this.longitudNormal); System.out.println(filas);
+		this.columnas = (int) Math.ceil(this.recinto.getAncho() / this.longitudNormal); System.out.println(columnas);
 		matrizDeAdyacencia = new boolean[this.filas*this.columnas][this.filas*this.columnas];
 		this.matrizDeCuadrantes = new Cuadrante[this.filas][this.columnas];
-		
-		this.crearGrilla();
+		this.crearGrilla(vertice);
 	}
 	
-	private void crearGrilla(){
+	private void crearGrilla(int vertice){
 		this.prepararValoresGrilla();
 		int numero = 0;
 		float tamanioX;
 		float tamanioY;
 		
-		for (int fila=0; fila < filas ;fila++){
-			for (int columna=0;columna < columnas;columna++){
-				
-				if(fila +1 == filas){
-					tamanioY = this.longitudYUltimaFila;
+		switch(vertice){
+			case 1:
+				for (int fila=0; fila < filas ;fila++){
+					for (int columna=0;columna < columnas;columna++){
+						
+						if(fila +1 == filas){
+							tamanioY = this.longitudYUltimaFila;
+						}
+						else{
+							tamanioY = this.longitudNormal;
+						}
+						
+						if(columna +1 == columnas){
+							tamanioX = this.longitudXUltimaColumna;
+						}
+						else{
+							tamanioX = this.longitudNormal;
+						}
+						Cuadrante cuadrante = new Cuadrante((posicionX+(int)columna*longitudNormal),(posicionY+(int)fila*longitudNormal),tamanioX,tamanioY, numero);
+						matrizDeCuadrantes[fila][columna] = cuadrante;
+						numero++;
+					}
 				}
-				else{
-					tamanioY = this.longitudNormal;
+			break;
+			case 2:
+				for (int fila=0; fila < filas ;fila++){
+					for (int columna=columnas;columna > 0;columna--){
+						
+						if(fila +1 == filas){
+							tamanioY = this.longitudYUltimaFila;
+						}
+						else{
+							tamanioY = this.longitudNormal;
+						}
+						
+						if(columna -1 == 0){
+							tamanioX = this.longitudXUltimaColumna;
+						}
+						else{
+							tamanioX = this.longitudNormal;
+						}
+						Cuadrante cuadrante;
+						if(columna-1!=0){
+							cuadrante = new Cuadrante(((posicionX+recinto.getAncho())-((int)columna-1)*longitudNormal),(posicionY+(int)fila*longitudNormal),tamanioX,tamanioY, numero);
+						}
+						else{
+							cuadrante = new Cuadrante((posicionX),(posicionY+(int)fila*longitudNormal),tamanioX,tamanioY, numero);	
+						}
+						matrizDeCuadrantes[fila][columna-1] = cuadrante;
+						numero++;
+					}
 				}
-				
-				if(columna +1 == columnas){
-					tamanioX = this.longitudXUltimaColumna;
+			break;
+			case 3:
+				for (int fila=filas; fila > 0 ;fila--){
+					for (int columna=0;columna < columnas;columna++){
+						
+						if(fila -1 == 0){
+							tamanioY = this.longitudYUltimaFila;
+						}
+						else{
+							tamanioY = this.longitudNormal;
+						}
+						
+						if(columna +1 == columnas){
+							tamanioX = this.longitudXUltimaColumna;
+						}
+						else{
+							tamanioX = this.longitudNormal;
+						}
+						Cuadrante cuadrante;
+						if(fila-1!=0){
+							cuadrante = new Cuadrante((posicionX+(int)columna*longitudNormal),((posicionY+recinto.getAlto())-((int)fila-1)*longitudNormal),tamanioX,tamanioY, numero);
+						}
+						else{
+							cuadrante = new Cuadrante((posicionX+(int)columna*longitudNormal),(posicionY),tamanioX,tamanioY, numero);	
+						}						
+						matrizDeCuadrantes[fila-1][columna] = cuadrante;
+						numero++;
+					}
 				}
-				else{
-					tamanioX = this.longitudNormal;
+			break;
+			case 4:
+				for (int fila=filas; fila > 0 ;fila--){
+					for (int columna=columnas;columna > 0;columna--){
+						if(fila -1 == 0){
+							tamanioY = this.longitudYUltimaFila;
+						}
+						else{
+							tamanioY = this.longitudNormal;
+						}
+						
+						if(columna -1 == 0){
+							tamanioX = this.longitudXUltimaColumna;
+						}
+						else{
+							tamanioX = this.longitudNormal;
+						}
+						
+						Cuadrante cuadrante;
+						if(fila-1!=0){
+							if(columna-1!=0){
+								cuadrante = new Cuadrante(((posicionX+recinto.getAncho())-((int)columna-1)*longitudNormal),((posicionY+recinto.getAlto())-((int)fila-1)*longitudNormal),tamanioX,tamanioY, numero);
+							}
+							else{
+								cuadrante = new Cuadrante((posicionX),((posicionY+recinto.getAlto())-((int)fila-1)*longitudNormal),tamanioX,tamanioY, numero);	
+							}
+						}
+						else{
+							
+							if(columna-1!=0){
+								cuadrante = new Cuadrante(((posicionX+recinto.getAncho())-((int)columna-1)*longitudNormal),(posicionY),tamanioX,tamanioY, numero);
+							}
+							else {						
+								cuadrante = new Cuadrante((posicionX),(posicionY),tamanioX,tamanioY, numero);
+							}
+						}			
+						matrizDeCuadrantes[fila-1][columna-1] = cuadrante;
+						numero++;
+					}
 				}
-				Cuadrante cuadrante = new Cuadrante((posicionX+(int)columna*longitudNormal),(posicionY+(int)fila*longitudNormal),tamanioX,tamanioY, numero);
-				matrizDeCuadrantes[fila][columna] = cuadrante;
-				numero++;
-			}
+			break;
+			default: System.out.println("El vertice elegido es incorrecto");
+			break;
 		}
 	}
 	

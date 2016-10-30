@@ -40,14 +40,16 @@ public class MainController extends BorderPane {
 	
 	//Listas Observables
 	ObservableList<Obstaculos> obstaculos = FXCollections.observableArrayList(Arrays.asList(Obstaculos.values()));
+	ObservableList<Orientacion> orientaciones = FXCollections.observableArrayList(Arrays.asList(Orientacion.values()));
 	
 	//Items menu Mapa
-	@FXML private CheckBox inMenuCheckboxGrilla;
-	@FXML private TextField inMenuTamanioGrilla;
-	
+	@FXML private CheckBox inMapaCheckboxGrilla;
+	@FXML private TextField inMapaTamanioGrilla;
+	@FXML private ComboBox<Integer> inMapaComboVertices;
 	
 	//Items menu Recintos
 	@FXML private ComboBox<String> inRecintosComboBox;
+	@FXML private ComboBox<Integer> inRecintosComboVertices;
 	@FXML private TextField inPosicionX;
 	@FXML private TextField inPosicionY;
 	@FXML private TextField inAncho;
@@ -73,7 +75,12 @@ public class MainController extends BorderPane {
 		inObstaculosComboBox.setItems(obstaculos);
 		inRecintosComboBox.getSelectionModel().selectFirst();
 		inRecintosComboBox.getItems().add("Nuevo Recinto");
-    	
+		inPuertasComboBox.setItems(orientaciones);
+		inMapaComboVertices.setValue(1);
+		inMapaComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
+		inRecintosComboVertices.setValue(1);
+		inRecintosComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
+		
 		nuevoMapaControlador = new NuevoMapaControlador();
  		nuevoMapaControlador.setListener(new NuevoMapaControladorListener() {	
     	@Override public void nuevoMapaControladorListenerOK (ActionEvent e) {
@@ -100,7 +107,7 @@ public class MainController extends BorderPane {
 	    		if(recintoValido){
 	    			inRecintosComboBox.getItems().add(recinto.getNombre());
 			    	if(inCheckboxGrilla.isSelected()){
-			    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()));
+			    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()),(int)inRecintosComboVertices.getValue());
 			    		grilla.prepararGrillaParaDibujo();
 			    		recinto.setGrilla(grilla);
 			    	}
@@ -120,7 +127,7 @@ public class MainController extends BorderPane {
     		System.out.println("Modificacion");
     		Recinto recinto = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
 	    	if(inCheckboxGrilla.isSelected()){
-	    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()));
+	    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()),(int)inRecintosComboVertices.getValue());
 	    		grilla.prepararGrillaParaDibujo();
 	    		recinto.setGrilla(grilla);
 	    	}
@@ -181,8 +188,8 @@ public class MainController extends BorderPane {
     
     @FXML public void agregarGrillaEnMapa(){
     	
-    	if (inMenuCheckboxGrilla.isSelected()){
-    		mapa.setGrilla(new Grilla(mapa.getRecintoMapa(),Float.valueOf(inMenuTamanioGrilla.getText())));
+    	if (inMapaCheckboxGrilla.isSelected()){
+    		mapa.setGrilla(new Grilla(mapa.getRecintoMapa(),Float.valueOf(inMapaTamanioGrilla.getText()),(int)inMapaComboVertices.getValue()));
     		mapa.getGrilla().prepararGrillaParaDibujo();
     		mapa.dibujarMapa();
 			panelCentral.getChildren().setAll(mapa.getChildren());
@@ -196,7 +203,7 @@ public class MainController extends BorderPane {
     	if (mapa != null){
     		recinto = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
     		if (recinto != null){
-    			Puerta puerta = new Puerta ((float)0,(float)0,Orientacion.Horizontal,(float)10);
+    			Puerta puerta = new Puerta (Float.valueOf(inPuertasPosicionX.getText()),Float.valueOf(inPuertasPosicionY.getText()),(Orientacion)inPuertasComboBox.getValue(),(float)10);
     			//new Obstaculo(Float.valueOf(inObstaculosPosicionX.getText()),Float.valueOf(inObstaculosPosicionY.getText()),inObstaculosComboBox.getValue());
     			puertaValida = recinto.agregarPuerta(puerta);
 				if(puertaValida){

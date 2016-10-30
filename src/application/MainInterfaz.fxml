@@ -56,17 +56,24 @@
                     <rowConstraints>
                       <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="280.0" minHeight="30.0" prefHeight="45.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="280.0" minHeight="30.0" prefHeight="45.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="527.0" minHeight="30.0" prefHeight="527.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <CheckBox fx:id="inMenuCheckboxGrilla" mnemonicParsing="false" text="Grilla" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <TextField fx:id="inMenuTamanioGrilla" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <CheckBox fx:id="inMapaCheckboxGrilla" mnemonicParsing="false" text="Grilla" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <TextField fx:id="inMapaTamanioGrilla" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin></TextField>
-                        <Button mnemonicParsing="false" onAction="#agregarGrillaEnMapa" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#agregarGrillaEnMapa" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                         <Label text="Tamaño Grilla" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="inMapaComboVertices" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <Label text="Vertice Inicial" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </content>
@@ -91,6 +98,7 @@
                         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
@@ -131,7 +139,7 @@
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button fx:id="btnRecintoOK" mnemonicParsing="false" onAction="#ejecutar" prefHeight="25.0" prefWidth="188.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="13" GridPane.valignment="TOP">
+                        <Button fx:id="btnRecintoOK" mnemonicParsing="false" onAction="#ejecutar" prefHeight="25.0" prefWidth="188.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="14" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" top="20.0" />
                            </GridPane.margin>
@@ -148,6 +156,12 @@
                         </Label>
                         <Label text="Nombre" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                         <Line endX="100.0" startX="-100.0" GridPane.rowIndex="2" />
+                        <Label text="Vertice Inicial" GridPane.halignment="CENTER" GridPane.rowIndex="13" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="inRecintosComboVertices" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </ComboBox>
                      </children>
                   </GridPane>
                </content>
