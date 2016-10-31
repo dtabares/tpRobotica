@@ -25,7 +25,7 @@ public class MapaTest {
       	
 		Recinto r1 = new Recinto(0,0,100,100, "r1");
 		Recinto r2 = new Recinto(200,200,200,200,"r2");
-		Grilla g1 = new Grilla (r1,30);
+		Grilla g1 = new Grilla (r1,30,1);
 		g1.prepararGrillaParaDibujo();
 		r1.setGrilla(g1);
 		      	
