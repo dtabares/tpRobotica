@@ -1,6 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import clases.Grilla;
+import clases.Cuadrante;
 import clases.Mapa;
 import clases.Obstaculo;
 import clases.Obstaculos;
@@ -331,6 +333,59 @@ public class ValidadorTest {
 		
 		Assert.assertFalse(Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta2, mapa, recinto));
 
+	}
+	
+	@Test
+	public void obtenerCuadranteAPartirDeUnaPuerta(){
+		//Creo un mapa de 800 por 600
+		Mapa mapa = new Mapa(800,600);
+
+		Recinto recinto = new Recinto(0, 0, 100, 100,"Recinto 1");
+		Grilla grilla = new Grilla(recinto,50,1);
+		recinto.setGrilla(grilla);
+		Puerta puerta1 = new Puerta((float)60,(float)0,Orientacion.Horizontal,(float)20);
+		recinto.agregarPuerta(puerta1, mapa);
+		
+		//Agrego el recinto al mapa
+		mapa.agregarRecinto(recinto);
+		
+		//El numero 1, vendria ser el cuadrante superior derecho
+		
+		//	-------__--
+		//  |    |     |
+		//  |  0 |   1 |
+		//  ------------
+		//  |    |     |
+		//  |  2 |   3 |
+		//  ------------
+		Assert.assertEquals(1, recinto.obtenerCuadranteCercanoALaPuerta(puerta1).getNumero());
+	}
+	
+	//En este caso, debe tomar el primero de los cuadrantes
+	@Test
+	public void obtenerCuadranteAPartirDeUnaPuertaCuandoJustoEstaEntreMedioDeDosCuadrantes(){
+		//Creo un mapa de 800 por 600
+		Mapa mapa = new Mapa(800,600);
+
+		Recinto recinto = new Recinto(0, 0, 100, 100,"Recinto 1");
+		Grilla grilla = new Grilla(recinto,50,1);
+		recinto.setGrilla(grilla);
+		Puerta puerta = new Puerta((float)40,(float)0,Orientacion.Horizontal,(float)20);
+		recinto.agregarPuerta(puerta, mapa);
+		
+		//Agrego el recinto al mapa
+		mapa.agregarRecinto(recinto);
+		
+		//El numero 1, vendria ser el cuadrante superior derecho
+		
+		//	----___----
+		//  |    |     |
+		//  |  0 |   1 |
+		//  ------------
+		//  |    |     |
+		//  |  2 |   3 |
+		//  ------------
+		Assert.assertEquals(0, recinto.obtenerCuadranteCercanoALaPuerta(puerta).getNumero());
 	}
 
 }
