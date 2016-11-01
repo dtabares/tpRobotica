@@ -198,14 +198,16 @@ public class MainController extends BorderPane {
     }
     
     @FXML public void agregarPuerta(){
+    	System.out.println("Entre a agregarPuerta");
     	boolean puertaValida;
     	Recinto recinto; 
     	if (mapa != null){
     		recinto = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
     		if (recinto != null){
+        		System.out.println("Nombre Recinto: " + recinto.getNombre());
     			Puerta puerta = new Puerta (Float.valueOf(inPuertasPosicionX.getText()),Float.valueOf(inPuertasPosicionY.getText()),(Orientacion)inPuertasComboBox.getValue(),(float)10);
-    			//new Obstaculo(Float.valueOf(inObstaculosPosicionX.getText()),Float.valueOf(inObstaculosPosicionY.getText()),inObstaculosComboBox.getValue());
-    			puertaValida = recinto.agregarPuerta(puerta);
+    			puertaValida = recinto.agregarPuerta(puerta,mapa);
+    			System.out.println("Puerta valida? : " + puertaValida);
 				if(puertaValida){
 					mapa.dibujarMapa();
 					panelCentral.getChildren().setAll(mapa.getChildren());

@@ -87,9 +87,11 @@ public class Recinto extends FormaPosicionableEnMapa{
 		return puertas;
 	}
 
-	public boolean agregarPuerta(Puerta puerta) {
-		boolean puertaValida = false;
-		this.puertas.add(puerta);
+	public boolean agregarPuerta(Puerta puerta, Mapa mapa) {
+		boolean puertaValida = Validador.validarSiLaPuertaEstaEnUnaParedValida(puerta,mapa , this);
+		if (puertaValida){
+			this.puertas.add(puerta);
+		}
 		return puertaValida;
 	}
 }

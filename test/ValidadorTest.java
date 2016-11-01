@@ -323,7 +323,7 @@ public class ValidadorTest {
 		Puerta puerta2 = new Puerta((float)15,(float)10,Orientacion.Horizontal,(float)20);
 		
 		
-		recinto.agregarPuerta(puerta1);
+		recinto.agregarPuerta(puerta1, mapa);
 		
 		//Agrego el recinto al mapa
 		mapa.agregarRecinto(recinto);
