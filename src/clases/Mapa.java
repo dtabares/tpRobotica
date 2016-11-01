@@ -17,6 +17,7 @@ public class Mapa extends AnchorPane implements Serializable{
 	private float tamanioY;
 	private float escalaX;
 	private float escalaY;
+	private double posicionEnGradosRespectoDelNorteMagnetico;
 	private Grilla grilla;
 	private Recinto recintoMapa;
 	Collection <Recinto> recintos = new LinkedList<Recinto>();
@@ -151,6 +152,10 @@ public class Mapa extends AnchorPane implements Serializable{
 
 	public void setRecintoMapa(Recinto recintoMapa) {
 		this.recintoMapa = recintoMapa;
+	}
+	
+	public double getPosicionEnGradosRespectoDelNorteMagnetico() {
+		return posicionEnGradosRespectoDelNorteMagnetico;
 	}
 
 
