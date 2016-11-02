@@ -65,7 +65,7 @@ public class MainController extends BorderPane {
 	@FXML private TextField inObstaculosPosicionY;
 	
 	//Items menu Puertas
-	@FXML private ComboBox inPuertasComboBox;
+	@FXML private ComboBox<Orientacion> inPuertasComboBox;
 	@FXML private TextField inPuertasPosicionX;
 	@FXML private TextField inPuertasPosicionY;
 

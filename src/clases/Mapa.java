@@ -2,21 +2,16 @@ package clases;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
-
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public class Mapa extends AnchorPane implements Serializable{
+public class Mapa extends AnchorPane implements Serializable {
 
 	private float tamanioX;
 	private float tamanioY;
-	private float escalaX;
-	private float escalaY;
 	private double posicionEnGradosRespectoDelNorteMagnetico;
 	private Grilla grilla;
 	private Recinto recintoMapa;
@@ -41,6 +36,7 @@ public class Mapa extends AnchorPane implements Serializable{
 	}
 		
 	public void dibujarMapa(){
+		
 		Collection<Shape> formasPosicionablesEnMapa = new LinkedList<Shape>();
 		Collection<Shape> recintosParaSerAgregados = new LinkedList<Shape>();
 		Collection<Shape> grillasParaSerAgregadas = new LinkedList<Shape>();
@@ -68,6 +64,7 @@ public class Mapa extends AnchorPane implements Serializable{
 		
 		//Primero se agrega el fondo
 		formasPosicionablesEnMapa.add(background);
+		//Si existe una grilla se agrega
 		if(grilla!=null){formasPosicionablesEnMapa.addAll(grilla.getColeccionDeRectangulos());}
 		//Luego se agregan los recintos en orden
 		formasPosicionablesEnMapa.addAll(recintosParaSerAgregados);
@@ -110,14 +107,6 @@ public class Mapa extends AnchorPane implements Serializable{
 	}
 		
 	//Getters & Setters
-	public float getEscalaX() {
-		return escalaX;
-	}
-
-	public float getEscalaY() {
-		return escalaY;
-	}
-
 	public float getTamanioX() {
 		return tamanioX;
 	}
@@ -157,7 +146,5 @@ public class Mapa extends AnchorPane implements Serializable{
 	public double getPosicionEnGradosRespectoDelNorteMagnetico() {
 		return posicionEnGradosRespectoDelNorteMagnetico;
 	}
-
-
 
 }

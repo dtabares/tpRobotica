@@ -1,8 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
-
 import clases.Grilla;
-import clases.Cuadrante;
 import clases.Mapa;
 import clases.Obstaculo;
 import clases.Obstaculos;

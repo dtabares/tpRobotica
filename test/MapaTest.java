@@ -1,10 +1,6 @@
 import java.io.IOException;
-import java.util.Collection;
-import java.util.LinkedList;
-
 import org.junit.Rule;
 import org.junit.Test;
-
 import clases.Grilla;
 import clases.Mapa;
 import clases.Recinto;
