@@ -1,5 +1,8 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+
+import clases.Contador;
 import clases.Grilla;
 import clases.Mapa;
 import clases.Obstaculo;
@@ -10,6 +13,10 @@ import clases.Recinto;
 import clases.Validador;
 
 public class ValidadorTest {
+	
+    @Before public void initialize() {
+        Contador.getContador().setProximoNumeroDeCuadrante(0);
+     }
 
 	@Test
 	public void CreoUnRecintoValidoYLoPosicionoFueraDelMapa() {
