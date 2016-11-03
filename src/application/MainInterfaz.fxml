@@ -150,7 +150,7 @@
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button fx:id="btnRecintoOK" mnemonicParsing="false" onAction="#ejecutar" prefHeight="25.0" prefWidth="188.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="14" GridPane.valignment="TOP">
+                        <Button fx:id="btnRecintoOK" mnemonicParsing="false" onAction="#agregarRecinto" prefHeight="25.0" prefWidth="188.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="14" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" top="20.0" />
                            </GridPane.margin>

@@ -1,5 +1,5 @@
 package clases;
 
 public enum Obstaculos {
-	Mesa, Silla, Pizarron, Armario
+	Mesa, Silla, Pizarron, Armario,Recinto
 }

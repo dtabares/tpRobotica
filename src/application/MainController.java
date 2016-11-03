@@ -41,6 +41,7 @@ public class MainController extends BorderPane {
 	//Listas Observables
 	ObservableList<Obstaculos> obstaculos = FXCollections.observableArrayList(Arrays.asList(Obstaculos.values()));
 	ObservableList<Orientacion> orientaciones = FXCollections.observableArrayList(Arrays.asList(Orientacion.values()));
+	//ObservableList<String> nombresRecintos = new ObservableList<String>();
 	
 	//Items menu Mapa
 	@FXML private CheckBox inMapaCheckboxGrilla;
@@ -75,6 +76,7 @@ public class MainController extends BorderPane {
 	public void initialize() {
         
 		inObstaculosComboBox.setValue(Obstaculos.Mesa);
+		obstaculos.remove(Obstaculos.Recinto);
 		inObstaculosComboBox.setItems(obstaculos);
 		inRecintosComboBox.getSelectionModel().selectFirst();
 		inRecintosComboBox.getItems().add("Nuevo Recinto");
@@ -101,7 +103,7 @@ public class MainController extends BorderPane {
 		
     }
     
-    @FXML public void ejecutar(){
+    @FXML public void agregarRecinto(){
     	
     	if(inRecintosComboBox.getValue()==null || inRecintosComboBox.getValue()== "Nuevo Recinto"){
 	    	if (mapa != null){
