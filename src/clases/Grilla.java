@@ -18,10 +18,12 @@ public class Grilla {
 	private Recinto recinto;
 	private int filas;
 	private int columnas;
+	private Contador contador;
 	
 	//Constructor de la clase Grilla, crea una grilla especificando el tamaño de cada unidad, require conocer el recinto para posicionarse
 	public Grilla(Recinto recinto, float tamanio, int vertice){
 		this.coleccionDeRectangulos = new LinkedList<Shape>();
+		this.contador = Contador.getContador();
 		this.posicionX = recinto.getPosicionX();
 		this.posicionY = recinto.getPosicionY();
 		this.longitudNormal = tamanio;
@@ -35,7 +37,7 @@ public class Grilla {
 	
 	private void crearGrilla(int vertice){
 		this.prepararValoresGrilla();
-		int numero = 0;
+		int numero = this.contador.getProximoNumeroDeCuadrante();
 		float tamanioX;
 		float tamanioY;
 		
@@ -164,6 +166,7 @@ public class Grilla {
 			default: System.out.println("El vertice elegido es incorrecto");
 			break;
 		}
+		this.contador.setProximoNumeroDeCuadrante(numero);
 	}
 	
 	public Cuadrante[][] getMatrizDeCuadrantes(){
