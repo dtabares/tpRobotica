@@ -9,7 +9,7 @@ public class Grilla {
 	
 	private Cuadrante[][] matrizDeCuadrantes;
 	private Collection <Shape> coleccionDeRectangulos;
-	private boolean[][] matrizDeAdyacencia;
+	private MatrizDeAdyacencia matrizDeAdyacencia;
 	private float posicionX;
 	private float posicionY;
 	private float longitudNormal;
@@ -30,7 +30,7 @@ public class Grilla {
 		this.recinto = recinto;
 		this.filas = (int) Math.ceil( this.recinto.getAlto() / this.longitudNormal); System.out.println(filas);
 		this.columnas = (int) Math.ceil(this.recinto.getAncho() / this.longitudNormal); System.out.println(columnas);
-		matrizDeAdyacencia = new boolean[this.filas*this.columnas][this.filas*this.columnas];
+		matrizDeAdyacencia = new MatrizDeAdyacencia(this);
 		this.matrizDeCuadrantes = new Cuadrante[this.filas][this.columnas];
 		this.crearGrilla(vertice);
 	}
@@ -205,70 +205,7 @@ public class Grilla {
 		}
 	}
 	
-	public boolean[][] calcularMatrizDeAdyacencia(){
-		this.inicializarMatrizDeAdyacencia();
-		int numeroDelCuadranteARevisar;
-		int numeroCuadranteAMarcarComoDisp;
-		int[] posCuadranteARevisar;
-		for (int fila = 0; fila < matrizDeAdyacencia.length; fila++) {
-			numeroDelCuadranteARevisar = fila;
-			posCuadranteARevisar = this.obtenerPosicionDeUnCuadrante(numeroDelCuadranteARevisar);
-			
-			if(this.verificarDisponibilidadCuadranteSuperiorIzquierdo(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-				numeroCuadranteAMarcarComoDisp = this.matrizDeCuadrantes[posCuadranteARevisar[0] +1][posCuadranteARevisar[1] -1].getNumero();
-				this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
-			}
-			
-			if(this.verificarDisponibilidadCuadranteSuperior(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-				numeroCuadranteAMarcarComoDisp = this.matrizDeCuadrantes[posCuadranteARevisar[0] +1 ][posCuadranteARevisar[1]].getNumero();
-				this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
-			}
-			
-			if(this.verificarDisponibilidadCuadranteSuperiorDerecho(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-				numeroCuadranteAMarcarComoDisp = this.matrizDeCuadrantes[posCuadranteARevisar[0] +1][posCuadranteARevisar[1] +1].getNumero();
-				this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
-			}
-			
-			if(this.verificarDisponibilidadCuadranteInferiorIzquierdo(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-				numeroCuadranteAMarcarComoDisp = this.matrizDeCuadrantes[posCuadranteARevisar[0] -1][posCuadranteARevisar[1] -1].getNumero();
-				this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
-			}
-			
-			if(this.verificarDisponibilidadCuadranteInferior(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-				numeroCuadranteAMarcarComoDisp = this.matrizDeCuadrantes[posCuadranteARevisar[0] -1 ][posCuadranteARevisar[1]].getNumero();
-				this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
-			}
-			
-			if(this.verificarDisponibilidadCuadranteInferiorDerecho(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-				numeroCuadranteAMarcarComoDisp = this.matrizDeCuadrantes[posCuadranteARevisar[0] -1][posCuadranteARevisar[1] +1].getNumero();
-				this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
-			}
-			
-			if(this.verificarDisponibilidadCuadranteIzquierdo(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-				numeroCuadranteAMarcarComoDisp = this.matrizDeCuadrantes[posCuadranteARevisar[0]][posCuadranteARevisar[1] -1].getNumero();
-				this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
-			}
-			
-			
-			if(this.verificarDisponibilidadCuadranteDerecho(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-				numeroCuadranteAMarcarComoDisp = this.matrizDeCuadrantes[posCuadranteARevisar[0]][posCuadranteARevisar[1] +1].getNumero();
-				this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
-			}
-			
-		}
-
-		return this.matrizDeAdyacencia;
-	}
-	
-	private void inicializarMatrizDeAdyacencia(){
-		for (int i = 0; i < matrizDeAdyacencia.length; i++) {
-			for (int j = 0; j < matrizDeAdyacencia[i].length; j++) {
-				this.matrizDeAdyacencia[i][j] = false;
-			}
-		}
-	}
-	
-	private int[] obtenerPosicionDeUnCuadrante(int numeroDeCuadrante){
+	public int[] obtenerPosicionDeUnCuadrante(int numeroDeCuadrante){
 		int[] posicion = new int[2];
 		boolean encontro = false;
 		int fila = 0;
@@ -291,7 +228,7 @@ public class Grilla {
 		return posicion;
 	}
 	
-	private boolean verificarDisponibilidadCuadranteSuperiorIzquierdo(int filaActual, int columnaActual){
+	public boolean verificarDisponibilidadCuadranteSuperiorIzquierdo(int filaActual, int columnaActual){
 		boolean disponible = false;
 		//Para sacar la posicion superior izquierda, tengo que restar 1 en x (columna) y 1 en y (fila)
 		if (posicionValida(filaActual -1 , columnaActual -1)){
@@ -303,7 +240,7 @@ public class Grilla {
 		return disponible;
 	}
 	
-	private boolean verificarDisponibilidadCuadranteSuperior(int filaActual, int columnaActual){
+	public boolean verificarDisponibilidadCuadranteSuperior(int filaActual, int columnaActual){
 		boolean disponible = false;
 		//Para sacar la posicion superior, tengo que restar 1 en y (fila)
 		if (posicionValida(filaActual -1 , columnaActual)){
@@ -315,7 +252,7 @@ public class Grilla {
 		return disponible;
 	}
 	
-	private boolean verificarDisponibilidadCuadranteSuperiorDerecho(int filaActual, int columnaActual){
+	public boolean verificarDisponibilidadCuadranteSuperiorDerecho(int filaActual, int columnaActual){
 		boolean disponible = false;
 		//Para sacar la posicion superior derecha, tengo que sumar 1 en x (columna) y restar 1 en y (fila)
 		if (posicionValida(filaActual -1 , columnaActual +1)){
@@ -327,7 +264,7 @@ public class Grilla {
 		return disponible;
 	}
 	
-	private boolean verificarDisponibilidadCuadranteIzquierdo(int filaActual, int columnaActual){
+	public boolean verificarDisponibilidadCuadranteIzquierdo(int filaActual, int columnaActual){
 		boolean disponible = false;
 		//Para sacar la posicion izquierda, tengo que restar 1 en x (columna)
 		if (posicionValida(filaActual, columnaActual -1)){
@@ -339,7 +276,7 @@ public class Grilla {
 		return disponible;
 	}
 	
-	private boolean verificarDisponibilidadCuadranteDerecho(int filaActual, int columnaActual){
+	public boolean verificarDisponibilidadCuadranteDerecho(int filaActual, int columnaActual){
 		boolean disponible = false;
 		//Para sacar la posicion derecha, tengo que sumar 1 en x (columna)
 		if (posicionValida(filaActual , columnaActual +1)){
@@ -351,7 +288,7 @@ public class Grilla {
 		return disponible;
 	}
 	
-	private boolean verificarDisponibilidadCuadranteInferiorIzquierdo(int filaActual, int columnaActual){
+	public boolean verificarDisponibilidadCuadranteInferiorIzquierdo(int filaActual, int columnaActual){
 		boolean disponible = false;
 		//Para sacar la posicion inferior izquierda, tengo que restar 1 en x (columna) y sumar 1 en y (fila)
 		if (posicionValida(filaActual +1 , columnaActual -1)){
@@ -363,7 +300,7 @@ public class Grilla {
 		return disponible;
 	}
 	
-	private boolean verificarDisponibilidadCuadranteInferior(int filaActual, int columnaActual){
+	public boolean verificarDisponibilidadCuadranteInferior(int filaActual, int columnaActual){
 		boolean disponible = false;
 		//Para sacar la posicion inferior, sumar 1 en y (fila)
 		if (posicionValida(filaActual +1 , columnaActual)){
@@ -375,7 +312,7 @@ public class Grilla {
 		return disponible;
 	}
 	
-	private boolean verificarDisponibilidadCuadranteInferiorDerecho(int filaActual, int columnaActual){
+	public boolean verificarDisponibilidadCuadranteInferiorDerecho(int filaActual, int columnaActual){
 		boolean disponible = false;
 		//Para sacar la posicion inferior derecha, tengo que sumar 1 en x (columna) y 1 en y (fila)
 		if (posicionValida(filaActual +1 , columnaActual +1)){
@@ -387,14 +324,37 @@ public class Grilla {
 		return disponible;
 	}
 	
-	private boolean posicionValida(int fila, int columna){
+	public boolean verificarDisponibilidadCuadranteActual(int filaActual, int columnaActual){
+		boolean disponible = false;
+		if (posicionValida(filaActual , columnaActual)){
+			if(this.matrizDeCuadrantes[filaActual][columnaActual].estaDisponible()){
+				disponible = true;
+			}
+		}
+		return disponible;
+	}
+	
+	public boolean posicionValida(int fila, int columna){
 		boolean valida = false;
 		
-		if(fila < this.filas && columna < this.columnas){
+		if(fila < this.filas && fila >=0 && columna >= 0 && columna < this.columnas){
 			valida = true;
 		}
 		
 		return valida;
+	}
+
+	public int getFilas() {
+		return filas;
+	}
+
+	public int getColumnas() {
+		return columnas;
+	}
+	
+	public MatrizDeAdyacencia getMatrizDeAdyacencia(){
+		this.matrizDeAdyacencia.calcularMatrizDeAdyacencia();
+		return this.matrizDeAdyacencia;
 	}
 	
 }
