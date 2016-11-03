@@ -18,6 +18,18 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 		this.posicionY = y;
 		this.calcularPosicionBordes();
 	}
+	
+	public Obstaculo(Float x, Float y, Float ancho, Float alto, Obstaculos tipo){
+		obstaculo = new Rectangle(x,y,ancho,alto);
+		obstaculo.setStroke(Color.BLACK);
+		obstaculo.setFill(Color.WHITESMOKE);
+		obstaculo.setStrokeWidth(2);
+		this.posicionX = x;
+		this.posicionY = y;
+		this.ancho = ancho;
+		this.largo = alto;
+		this.calcularPosicionBordes();
+	}
 
 	public Shape getObstaculo() {
 		return obstaculo;
