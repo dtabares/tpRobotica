@@ -11,7 +11,7 @@ public class Dijkstra {
 	private static Map<Integer, Boolean> vis = new HashMap<Integer, Boolean>();
 	private static Map<Integer, Integer> prev = new HashMap<Integer, Integer>();
 	
-	public static List<Integer> getDirections(boolean [][] matrizDeAdyacencia, int inicio, int fin){
+	public static List<Integer> obtenerCaminoMasCorto(boolean [][] matrizDeAdyacencia, int inicio, int fin){
 		    List<Integer> direcciones = new LinkedList<Integer>();
 		    Queue<Integer> q = new LinkedList<Integer>();
 		    int actual = inicio;
@@ -74,7 +74,7 @@ public class Dijkstra {
 
 	};
 	
-	System.out.println(getDirections(matriz, 0,22));
+	System.out.println(obtenerCaminoMasCorto(matriz, 0,22));
 	
 	}
 
