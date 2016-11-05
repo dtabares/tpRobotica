@@ -1,7 +1,10 @@
 package clases;
 
-public class Contador {
+import java.io.Serializable;
+
+public class Contador implements Serializable{
 	
+	private static final long serialVersionUID = 2688427677898794473L;
 	private static Contador instance = null;
 	private int proximoNumeroDeCuadrante;
 	protected Contador() {
@@ -18,6 +21,10 @@ public class Contador {
 	}
 	public void setProximoNumeroDeCuadrante(int numeroDeCuadrante) {
 		this.proximoNumeroDeCuadrante = numeroDeCuadrante;
+	}
+	
+	public void resetearContador(){
+		this.proximoNumeroDeCuadrante = 0;
 	}
 	
 }
