@@ -11,6 +11,10 @@ public class MatrizDeAdyacencia {
 		int tamanio = grilla.getFilas()*grilla.getColumnas();
 		this.matrizDeAdyacencia = new boolean[tamanio][tamanio];
 	}
+	
+	public MatrizDeAdyacencia(int tamanio){
+		this.matrizDeAdyacencia = new boolean[tamanio][tamanio];
+	}
 
 	public boolean[][] getMatrizDeAdyacencia() {
 		return this.matrizDeAdyacencia;
