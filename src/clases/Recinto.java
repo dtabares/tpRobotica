@@ -135,4 +135,45 @@ public class Recinto extends FormaPosicionableEnMapa{
 		cuadranteADevolver = this.grilla.obtenerCuadrante(coordenada);
 		return cuadranteADevolver;
 	}
+	
+	public Cuadrante obtenerCuadranteExteriorDeUnaPuerta(Puerta puerta){
+		Cuadrante cuadranteADevolver = null;
+		float inicio;
+		float fin;
+		float medio;
+		Coordenada coordenada;
+		
+		if (puerta.getOrientacion().equals(Orientacion.Horizontal)){
+			inicio = puerta.getPosicionX();
+			fin = puerta.getPosicionFinalX();
+			medio = (inicio + fin) /2;
+			//Tengo que saber si la puerta esta en la parte inferior o superior del recinto
+			if(puerta.bordeInferiorDerecho.getY() == this.bordeInferiorDerecho.getY()){
+				//estoy abajo
+				coordenada = new Coordenada(medio,puerta.getPosicionY() + (float)0.5);
+			}
+			else{
+				//estoy en la parte de arriba
+				coordenada = new Coordenada(medio,puerta.getPosicionY() - (float)0.5);
+			}
+			
+		}
+		else{
+			inicio = puerta.getPosicionY();
+			fin = puerta.getPosicionFinalY();
+			medio = (inicio + fin) /2;
+			if(puerta.bordeInferiorIzquierdo.getX() == this.bordeInferiorIzquierdo.getX()){
+				//Estoy en el lateral izquierdo
+				coordenada = new Coordenada(puerta.getPosicionX() - (float)0.5,medio);
+			}
+			else{
+				//Estoy en el lateral derecho
+				coordenada = new Coordenada(puerta.getPosicionX() + (float)0.5,medio);
+			}
+			
+		}
+		
+		cuadranteADevolver = this.grilla.obtenerCuadrante(coordenada);
+		return cuadranteADevolver;
+	}
 }
