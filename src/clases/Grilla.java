@@ -372,4 +372,39 @@ public class Grilla {
 		this.contador.setProximoNumeroDeCuadrante(id);
 	}
 	
+	/**
+	 * 
+	 * @param coordenada
+	 * Le pasas una coordenada y te devuelve el Cuadrante que esta en esa coordenada
+	 * @return
+	 */
+	public Cuadrante obtenerCuadrante(Coordenada coordenada){
+		Cuadrante cuadranteADevolver = null;
+		Cuadrante cuadranteAEvaluar;
+		Cuadrante[][] cuadrantes = this.getMatrizDeCuadrantes();
+		boolean encontro = false;
+		for(int i=0; i<cuadrantes.length; i++){
+			if (encontro){
+				break;
+			}
+			else{
+				for (int j = 0; j < cuadrantes[i].length; j++) {
+					cuadranteAEvaluar = cuadrantes[i][j];
+					if(cuadranteAEvaluar.getPosicionX()<= coordenada.getX()
+						&& cuadranteAEvaluar.getBordeSuperiorDerecho().getX() >= coordenada.getX()
+						&& cuadranteAEvaluar.getBordeSuperiorDerecho().getY() <= coordenada.getY()
+						&& cuadranteAEvaluar.getBordeInferiorDerecho().getY() >= coordenada.getY()){
+						
+						encontro = true;
+						cuadranteADevolver = cuadranteAEvaluar;
+						break;
+						
+					}
+				}
+			}
+		}
+		
+		return cuadranteADevolver;
+	}
+	
 }
