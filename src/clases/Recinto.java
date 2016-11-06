@@ -136,8 +136,7 @@ public class Recinto extends FormaPosicionableEnMapa{
 		return cuadranteADevolver;
 	}
 	
-	public Cuadrante obtenerCuadranteExteriorDeUnaPuerta(Puerta puerta){
-		Cuadrante cuadranteADevolver = null;
+	public Coordenada obtenerCoordenadaExteriorDeUnaPuerta(Puerta puerta){
 		float inicio;
 		float fin;
 		float medio;
@@ -172,8 +171,17 @@ public class Recinto extends FormaPosicionableEnMapa{
 			}
 			
 		}
+		return coordenada;
+	}
+	
+	public boolean coordenadaPerteneceAlRecinto(Coordenada coordenada){
+		boolean pertenece = false;
 		
-		cuadranteADevolver = this.grilla.obtenerCuadrante(coordenada);
-		return cuadranteADevolver;
+		if(coordenada.getX() >= this.getBordeSuperiorIzquierdo().getX() && coordenada.getX() <= this.getBordeInferiorDerecho().getX()
+				&& coordenada.getY() >= this.getBordeInferiorDerecho().getY() && coordenada.getY() <= this.getBordeSuperiorDerecho().getY()){
+			pertenece = true;
+		}
+		
+		return pertenece;
 	}
 }
