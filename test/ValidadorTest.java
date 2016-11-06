@@ -363,7 +363,7 @@ public class ValidadorTest {
 		//  |    |     |
 		//  |  2 |   3 |
 		//  ------------
-		Assert.assertEquals(1, recinto.obtenerCuadranteCercanoALaPuerta(puerta1).getNumero());
+		Assert.assertEquals(1, recinto.obtenerCuadranteCercanoALaPuerta(puerta1).getId());
 	}
 	
 	//En este caso, debe tomar el primero de los cuadrantes
@@ -390,7 +390,7 @@ public class ValidadorTest {
 		//  |    |     |
 		//  |  2 |   3 |
 		//  ------------
-		Assert.assertEquals(0, recinto.obtenerCuadranteCercanoALaPuerta(puerta).getNumero());
+		Assert.assertEquals(0, recinto.obtenerCuadranteCercanoALaPuerta(puerta).getId());
 	}
 
 }
