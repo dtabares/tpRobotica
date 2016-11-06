@@ -1,14 +1,13 @@
-import org.junit.Test;
+import org.junit.*;
 
 import clases.Contador;
 import clases.Grilla;
 import clases.Mapa;
 import clases.Recinto;
-import junit.framework.Assert;
 
 public class GrillaTest {
 	
-	@SuppressWarnings("deprecation")
+
 	@Test
 	public void creoUnaGrilla(){
 
@@ -26,7 +25,7 @@ public class GrillaTest {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
+
 	@Test
 	public void creoDosGrillas(){
 		Contador contador = Contador.getContador();
