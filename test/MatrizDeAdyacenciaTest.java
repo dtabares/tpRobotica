@@ -33,7 +33,7 @@ public class MatrizDeAdyacenciaTest {
 		
 		
 		
-		boolean[][] matriz = grilla.getMatrizDeAdyacencia().getMatrizDeAdyacencia();
+		boolean[][] matriz = grilla.getMatrizDeAdyacencia().getMatrizDeAdyacenciaEnBooleanos();
 		boolean[][] matrizEsperada = new boolean[25][];
 		matrizEsperada[0]= new boolean[] {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false};
 		matrizEsperada[1]= new boolean[]{false,false,true,false,false,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false};
