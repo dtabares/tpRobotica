@@ -143,6 +143,7 @@ public class MainController extends BorderPane {
 	    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()),(int)inRecintosComboVertices.getValue());
 	    		grilla.prepararGrillaParaDibujo();
 	    		recinto.setGrilla(grilla);
+	    		mapa.regenerarIdsCuadrantesDeTodoElMapa();
 	    	}
 			mapa.dibujarMapa();
     		panelCentral.getChildren().setAll(mapa.getChildren());

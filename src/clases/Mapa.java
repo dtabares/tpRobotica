@@ -2,6 +2,7 @@ package clases;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -15,7 +16,8 @@ public class Mapa extends AnchorPane implements Serializable {
 	private double posicionEnGradosRespectoDelNorteMagnetico;
 	private Grilla grilla;
 	private Recinto recintoMapa;
-	Collection <Recinto> recintos = new LinkedList<Recinto>();
+	private Collection <Recinto> recintos = new LinkedList<Recinto>();
+	private MatrizDeAdyacencia matrizDeAdyacenciaGlobal;
 		
 	public Mapa(float tamanioX, float tamanioY) {
 		this.setPrefSize(tamanioX, tamanioY);
@@ -145,6 +147,61 @@ public class Mapa extends AnchorPane implements Serializable {
 	
 	public double getPosicionEnGradosRespectoDelNorteMagnetico() {
 		return posicionEnGradosRespectoDelNorteMagnetico;
+	}
+	
+	
+	//Hay que forzar que cada Recinto (inclusive el del mapa) tenga una grilla, si es opcional revienta todo y no encontramos camino
+	public Cuadrante buscarCuadrantePorId(int idCuadrante){
+		Cuadrante cuadranteEncontrado = null;
+		boolean encontrado = false;
+		
+		//Primero reviso si esta en la grilla local del recinto del mapa, el cual corresponde al espacio global
+		Cuadrante[][] cuadrantesDelMapa = this.grilla.getMatrizDeCuadrantes();
+		for (Cuadrante[] filaCuadrantes : cuadrantesDelMapa) {
+			for (Cuadrante cuadrante : filaCuadrantes) {
+				if(cuadrante.getId() == idCuadrante){
+					cuadranteEncontrado = cuadrante;
+					encontrado = true;
+					break;
+				}
+			}
+			if(encontrado){
+				break;
+			}
+		}
+		
+		//Si no lo encontro en el espacio global lo busco iterando por las grillas de cada recinto
+		if(!encontrado){
+			Iterator<Recinto> iteradorDeRecintos = this.recintos.iterator();
+			while(iteradorDeRecintos.hasNext() && !encontrado){
+				Cuadrante[][] cuadrantes = iteradorDeRecintos.next().getGrilla().getMatrizDeCuadrantes();
+				for (Cuadrante[] filaCuadrantes : cuadrantes) {
+					for (Cuadrante cuadrante : filaCuadrantes) {
+						if(cuadrante.getId() == idCuadrante){
+							cuadranteEncontrado = cuadrante;
+							encontrado = true;
+							break;
+						}
+					}
+					if(encontrado){
+						break;
+					}
+				}
+			}
+		}
+		return cuadranteEncontrado;
+	}
+	
+	public void regenerarIdsCuadrantesDeTodoElMapa(){
+		//reseteo el contador
+		this.grilla.getContador().resetearContador();
+		//primero regenero los de la grilla del mapa
+		this.grilla.regenerarIdsCuadrantes();
+		//luego regenero iterando por cada recinto
+		Iterator<Recinto> iteradorDeRecintos = this.recintos.iterator();
+		while(iteradorDeRecintos.hasNext()){
+			iteradorDeRecintos.next().getGrilla().regenerarIdsCuadrantes();
+		}
 	}
 
 }

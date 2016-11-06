@@ -28,8 +28,8 @@ public class Grilla {
 		this.posicionY = recinto.getPosicionY();
 		this.longitudNormal = tamanio;
 		this.recinto = recinto;
-		this.filas = (int) Math.ceil( this.recinto.getAlto() / this.longitudNormal); System.out.println(filas);
-		this.columnas = (int) Math.ceil(this.recinto.getAncho() / this.longitudNormal); System.out.println(columnas);
+		this.filas = (int) Math.ceil( this.recinto.getAlto() / this.longitudNormal);// System.out.println(filas);
+		this.columnas = (int) Math.ceil(this.recinto.getAncho() / this.longitudNormal); //System.out.println(columnas);
 		matrizDeAdyacencia = new MatrizDeAdyacencia(this);
 		this.matrizDeCuadrantes = new Cuadrante[this.filas][this.columnas];
 		this.crearGrilla(vertice);
@@ -214,7 +214,7 @@ public class Grilla {
 		while(!encontro && fila < this.filas){
 			columna = 0;
 			while(!encontro && columna < this.columnas){
-				if(this.matrizDeCuadrantes[fila][columna].getNumero() == numeroDeCuadrante){
+				if(this.matrizDeCuadrantes[fila][columna].getId() == numeroDeCuadrante){
 					encontro = true;
 					posicion[0] = fila;
 					posicion[1] = columna;
@@ -355,6 +355,21 @@ public class Grilla {
 	public MatrizDeAdyacencia getMatrizDeAdyacencia(){
 		this.matrizDeAdyacencia.calcularMatrizDeAdyacencia();
 		return this.matrizDeAdyacencia;
+	}
+	public Contador getContador() {
+		return contador;
+	}
+	
+	public void regenerarIdsCuadrantes(){
+		int id = this.contador.getProximoNumeroDeCuadrante();;
+		for (Cuadrante[] filaCuadrantes : this.getMatrizDeCuadrantes()) {
+			for (Cuadrante cuadrante : filaCuadrantes) {
+				cuadrante.setId(id);
+				id++;
+				
+			}
+		}
+		this.contador.setProximoNumeroDeCuadrante(id);
 	}
 	
 }
