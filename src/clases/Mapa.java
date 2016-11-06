@@ -203,5 +203,96 @@ public class Mapa extends AnchorPane implements Serializable {
 			iteradorDeRecintos.next().getGrilla().regenerarIdsCuadrantes();
 		}
 	}
+	
+	public void calcularMatrizDeAdyacenciaGlobal(){
+		int cantidadTotalDeCuadrantes = this.grilla.getContador().getProximoNumeroDeCuadrante();
+		this.matrizDeAdyacenciaGlobal = new MatrizDeAdyacencia(cantidadTotalDeCuadrantes);
+		
+		//Primero calculo la de adyacencia de la grilla del mapa y la inserto en la global
+		this.grilla.prepararGrillaParaDibujo();
+		boolean[][] matrizDeAdyacenciaDelMapa = this.grilla.getMatrizDeAdyacencia().getMatrizDeAdyacenciaEnBooleanos();
+		this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelMapa, this.grilla.getIdInicial());
+		
+		//Luego itero por cada recinto, y genero la de adyacencia de cada recinto, y la inserto en la global
+		Iterator<Recinto> iteradorDeRecintos = this.recintos.iterator();
+		while(iteradorDeRecintos.hasNext()){
+			Recinto recinto = iteradorDeRecintos.next();
+			Grilla grillaDelRecinto = recinto.getGrilla();
+			grillaDelRecinto.prepararGrillaParaDibujo();
+			boolean[][] matrizDeAdyacenciaDelRecinto = grillaDelRecinto.getMatrizDeAdyacencia().getMatrizDeAdyacenciaEnBooleanos();
+			this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelRecinto, grillaDelRecinto.getIdInicial());
+		}
+		
+		//Puertas --> Conectar los grafos
+		iteradorDeRecintos = this.recintos.iterator();
+		Iterator<Recinto> iteradorDeRecintosEnBusquedaDeCoordenada;
+		Recinto recintoEnBusquedaDeCoordenada = null;
+		Coordenada coordenadaDelCuadranteExteriorALaPuerta;
+		Cuadrante cuadranteInterior;
+		Cuadrante cuadranteExterior;
+		int idCuadranteInterior;
+		int idCuadranteExterior;
+		boolean encontroElRecinto = false;
+		
+		//Itero por cada recinto
+		while(iteradorDeRecintos.hasNext()){
+			Recinto recinto = iteradorDeRecintos.next();
+			Iterator<Puerta> iteradorDePuertas = recinto.getPuertas().iterator();
+			//Itero por las puertas de cada recinto
+			while(iteradorDePuertas.hasNext()){
+				Puerta puerta = iteradorDePuertas.next();
+				cuadranteInterior = recinto.obtenerCuadranteCercanoALaPuerta(puerta);
+				//Verifico si el cuadrante dentro del recinto (interior) pegado a la puerta esta disponible
+				//Si no lo esta, ya ni busco en el exterior
+				if(cuadranteInterior.estaDisponible()){
+					idCuadranteInterior = cuadranteInterior.getId();
+					coordenadaDelCuadranteExteriorALaPuerta = recinto.obtenerCoordenadaExteriorDeUnaPuerta(puerta);
+					//Tengo que encontrar si esa coordenada pertenece al espacio global o a algun recinto
+					//Empiezo iterando por cada recinto, para ver si esa coordenada pertenece a alguno de ellos
+					iteradorDeRecintosEnBusquedaDeCoordenada = this.recintos.iterator();
+					while(iteradorDeRecintosEnBusquedaDeCoordenada.hasNext() && !encontroElRecinto){
+						recintoEnBusquedaDeCoordenada = iteradorDeRecintosEnBusquedaDeCoordenada.next();
+						if(recintoEnBusquedaDeCoordenada.coordenadaPerteneceAlRecinto(coordenadaDelCuadranteExteriorALaPuerta)){
+							encontroElRecinto = true;
+						}
+					}
+					//pertenecia a un recinto
+					if(encontroElRecinto){
+						cuadranteExterior = recintoEnBusquedaDeCoordenada.getGrilla().buscarCuadrantePorCoordenada(coordenadaDelCuadranteExteriorALaPuerta);
+					}
+					//pertenece al espacio global
+					else{
+						cuadranteExterior = this.grilla.buscarCuadrantePorCoordenada(coordenadaDelCuadranteExteriorALaPuerta);
+					}
+					
+					//Si ambos estan disponibles los marco como conexos en la matriz global
+					if(cuadranteExterior.estaDisponible()){
+						idCuadranteInterior = cuadranteInterior.getId();
+						idCuadranteExterior = cuadranteExterior.getId();		
+						this.matrizDeAdyacenciaGlobal.marcarDosNodosComoConexos(idCuadranteInterior, idCuadranteExterior);
+					}
+				}
+			}
+		}
+	}
+	
+	public MatrizDeAdyacencia getMatrizDeAdyacenciaGlobal(){
+		return this.matrizDeAdyacenciaGlobal;
+	}
+	
+	private void insertarMatrizLocalEnGlobal(boolean[][] matrizLocal, int idInicial){
+		int posicionFila = idInicial;
+		int posicionColumna = idInicial;
+		
+		for (boolean[] bs : matrizLocal) {
+			for (boolean b : bs) {
+				this.matrizDeAdyacenciaGlobal.getMatrizDeAdyacenciaEnBooleanos()[posicionFila][posicionColumna] = b;
+				posicionColumna++;
+			}
+			posicionColumna = idInicial;
+			posicionFila++;
+		}
+		
+	}
 
 }
