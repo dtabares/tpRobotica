@@ -14,9 +14,10 @@ public class MatrizDeAdyacencia {
 	
 	public MatrizDeAdyacencia(int tamanio){
 		this.matrizDeAdyacencia = new boolean[tamanio][tamanio];
+		this.inicializarMatrizDeAdyacencia();
 	}
 
-	public boolean[][] getMatrizDeAdyacencia() {
+	public boolean[][] getMatrizDeAdyacenciaEnBooleanos() {
 		return this.matrizDeAdyacencia;
 	}
 	
@@ -86,5 +87,10 @@ public class MatrizDeAdyacencia {
 		}
 
 		//return this.matrizDeAdyacencia;
+	}
+	
+	public void marcarDosNodosComoConexos(int idNodo1, int idNodo2){
+		this.matrizDeAdyacencia[idNodo1][idNodo2] = true;
+		this.matrizDeAdyacencia[idNodo2][idNodo1] = true;
 	}
 }
