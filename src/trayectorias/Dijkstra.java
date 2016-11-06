@@ -43,7 +43,7 @@ public class Dijkstra {
 	
 	public static void main(String[] args){
 	
-	//Matriz de 5 x 5 todos los cuadrantes disponibles	
+	//Recinto de 5 x 5 todos los cuadrantes disponibles	
 	boolean [][] matriz = new boolean[][]{
 	
 		{false,true,false,false,false,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
@@ -74,7 +74,7 @@ public class Dijkstra {
 
 	};
 	
-	System.out.println(obtenerCaminoMasCorto(matriz, 0,22));
+	System.out.println(obtenerCaminoMasCorto(matriz, 0,24));
 	
 	}
 
