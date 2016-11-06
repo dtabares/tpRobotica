@@ -7,12 +7,13 @@ import java.util.Map;
 import java.util.Queue;
 
 public class Dijkstra {
-
-	private static Map<Integer, Boolean> vis = new HashMap<Integer, Boolean>();
-	private static Map<Integer, Integer> prev = new HashMap<Integer, Integer>();
 	
-	public static List<Integer> obtenerCaminoMasCorto(boolean [][] matrizDeAdyacencia, int inicio, int fin){
-		    List<Integer> direcciones = new LinkedList<Integer>();
+	public List<Integer> obtenerCaminoMasCorto(boolean [][] matrizDeAdyacencia, int inicio, int fin){
+
+		Map<Integer, Boolean> vis = new HashMap<Integer, Boolean>();
+		Map<Integer, Integer> prev = new HashMap<Integer, Integer>();
+		
+		List<Integer> direcciones = new LinkedList<Integer>();
 		    Queue<Integer> q = new LinkedList<Integer>();
 		    int actual = inicio;
 		    q.add(actual);
@@ -40,42 +41,5 @@ public class Dijkstra {
 		    direcciones.add(inicio);
 		    return direcciones;
 		}
-	
-	public static void main(String[] args){
-	
-	//Recinto de 5 x 5 todos los cuadrantes disponibles	
-	boolean [][] matriz = new boolean[][]{
-	
-		{false,true,false,false,false,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
-		{true,false,true,false,false,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
-		{false,true,false,true,false,false,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
-		{false,false,true,false,true,false,false,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
-		{false,false,false,true,false,false,false,false,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false},
-		{true,true,false,false,false,false,true,false,false,false,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false},
-		{true,true,true,false,false,true,false,true,false,false,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false},
-		{false,true,true,true,false,false,true,false,true,false,false,true,true,true,false,false,false,false,false,false,false,false,false,false,false},
-		{false,false,true,true,true,false,false,true,false,true,false,false,true,true,true,false,false,false,false,false,false,false,false,false,false},
-		{false,false,false,true,true,false,false,false,true,false,false,false,false,true,true,false,false,false,false,false,false,false,false,false,false},
-		{false,false,false,false,false,true,true,false,false,false,false,true,false,false,false,true,true,false,false,false,false,false,false,false,false},
-		{false,false,false,false,false,true,true,true,false,false,true,false,true,false,false,true,true,true,false,false,false,false,false,false,false},
-		{false,false,false,false,false,false,true,true,true,false,false,true,false,true,false,false,true,true,true,false,false,false,false,false,false},
-		{false,false,false,false,false,false,false,true,true,true,false,false,true,false,true,false,false,true,true,true,false,false,false,false,false},
-		{false,false,false,false,false,false,false,false,true,true,false,false,false,true,false,false,false,false,true,true,false,false,false,false,false},
-		{false,false,false,false,false,false,false,false,false,false,true,true,false,false,false,false,true,false,false,false,true,true,false,false,false},
-		{false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,true,false,true,false,false,true,true,true,false,false},
-		{false,false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,true,false,true,false,false,true,true,true,false},
-		{false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,true,false,true,false,false,true,true,true},
-		{false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,false,false,false,true,false,false,false,false,true,true},
-		{false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,false,false,false,false,true,false,false,false},
-		{false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,true,false,true,false,false},
-		{false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,true,false,true,false},
-		{false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,true,false,true},
-		{false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,false,false,false,true,false}
-
-	};
-	
-	System.out.println(obtenerCaminoMasCorto(matriz, 0,24));
-	
-	}
 
 }
