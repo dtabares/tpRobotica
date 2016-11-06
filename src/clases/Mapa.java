@@ -294,5 +294,23 @@ public class Mapa extends AnchorPane implements Serializable {
 		}
 		
 	}
+	
+	public Cuadrante buscarCuadrantePorCoordenada(Coordenada coordenada){
+		Cuadrante cuadrante = null;
+		
+		//primero busco en cada recinto
+		Iterator<Recinto> iteradorDeRecintos = this.recintos.iterator();
+		Recinto r;
+		while (iteradorDeRecintos.hasNext() && cuadrante == null){
+			r = iteradorDeRecintos.next();
+			cuadrante = r.getGrilla().buscarCuadrantePorCoordenada(coordenada);
+		}
+		
+		//finalmente en el mapa libre
+		if (cuadrante == null){
+			cuadrante = this.grilla.buscarCuadrantePorCoordenada(coordenada);
+		}
+		return cuadrante;
+	}
 
 }

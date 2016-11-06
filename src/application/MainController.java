@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import clases.Coordenada;
 import clases.Cuadrante;
 import clases.Grilla;
 import clases.Mapa;
@@ -267,15 +268,42 @@ public class MainController extends BorderPane {
     		List<Integer> listaDeIds;
     		List<Cuadrante> listaDeCuadrantes = new LinkedList<Cuadrante>();
     		//AMIGACHO: cambiar el origen y destino a algo que venga de la UI
-    		listaDeIds = dijkstra.obtenerCaminoMasCorto(mapa.getMatrizDeAdyacenciaGlobal().getMatrizDeAdyacenciaEnBooleanos(), 0, 0);
+    		//Asumo que lo que van a elegir son un (x,y) para cada uno
+    		Coordenada origen = new Coordenada (2,4);
+    		Coordenada destino = new Coordenada (2,4);
+    		Cuadrante cuadranteOrigen = mapa.buscarCuadrantePorCoordenada(origen);
+    		Cuadrante cuadranteDestino = mapa.buscarCuadrantePorCoordenada(destino);
+    		if(cuadranteOrigen == null || cuadranteDestino == null){
+    			if(cuadranteOrigen == null){
+    				this.mostrarMensajeDeError("Cuadrante Origen Invalido!");
+    			}
+    			else{
+    				this.mostrarMensajeDeError("Cuadrante Destino Invalido!");
+    			}
+    		}
+    		else{
+    			if (!cuadranteOrigen.estaDisponible() || !cuadranteDestino.estaDisponible()){
+    				if (!cuadranteOrigen.estaDisponible()){
+    					this.mostrarMensajeDeError("Cuadrante Origen no esta libre!");
+    				}
+    				else{
+    					this.mostrarMensajeDeError("Cuadrante Destino no esta libre!");
+    				}
+    			}
+    			else{
+    	    		listaDeIds = dijkstra.obtenerCaminoMasCorto(mapa.getMatrizDeAdyacenciaGlobal().getMatrizDeAdyacenciaEnBooleanos(), cuadranteOrigen.getId(), cuadranteDestino.getId());
+    	    		
+    	    		for (Integer id : listaDeIds) {
+    					Cuadrante c = mapa.buscarCuadrantePorId(id);
+    					listaDeCuadrantes.add(c);
+    				}
+    	    		
+    	    		Trayectoria trayectoria = new Trayectoria(listaDeCuadrantes,mapa.getPosicionEnGradosRespectoDelNorteMagnetico());
+    	    		trayectoria.calcularTrayectoria();
+    			}
+    		}
     		
-    		for (Integer id : listaDeIds) {
-				Cuadrante c = mapa.buscarCuadrantePorId(id);
-				listaDeCuadrantes.add(c);
-			}
-    		
-    		Trayectoria trayectoria = new Trayectoria(listaDeCuadrantes,mapa.getPosicionEnGradosRespectoDelNorteMagnetico());
-    		trayectoria.calcularTrayectoria();
+
     	}
     	else{
     		this.mostrarMensajeDeError("Debe crear un mapa primero!");
