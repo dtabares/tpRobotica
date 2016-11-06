@@ -2,19 +2,19 @@ package clases;
 
 public class Paso {
 	private double direccionEnGrados;
-	private int numeroDeBaldozas;
+	private int numeroDeBaldosas;
 	
-	public Paso(double direccion, int baldozas){
+	public Paso(double direccion, int baldosas){
 		this.direccionEnGrados = direccion;
-		this.numeroDeBaldozas = baldozas;
+		this.numeroDeBaldosas = baldosas;
 	}
 	
 	
 	public double getDireccionEnGrados() {
 		return direccionEnGrados;
 	}
-	public int getNumeroDeBaldozas() {
-		return numeroDeBaldozas;
+	public int getNumeroDeBaldosas() {
+		return numeroDeBaldosas;
 	}
 	
 	

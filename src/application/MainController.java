@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import clases.Cuadrante;
 import clases.Grilla;
 import clases.Mapa;
 import clases.Obstaculo;
@@ -15,6 +17,7 @@ import clases.Obstaculos;
 import clases.Orientacion;
 import clases.Puerta;
 import clases.Recinto;
+import clases.Trayectoria;
 import formularios.NuevoMapaControlador;
 import formularios.NuevoMapaControlador.NuevoMapaControladorListener;
 import javafx.collections.FXCollections;
@@ -28,6 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Shape;
+import trayectorias.Dijkstra;
 
 public class MainController extends BorderPane {
 	
@@ -253,6 +257,30 @@ public class MainController extends BorderPane {
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
     	}
+    }
+    
+    //AMIGACHO: Agregarlo a la UI
+    @FXML public void buscarCaminoMasCorto(){
+    	if (mapa != null){
+    		System.out.println("Entre a buscarCaminoMasCorto");
+    		Dijkstra dijkstra = new Dijkstra();
+    		List<Integer> listaDeIds;
+    		List<Cuadrante> listaDeCuadrantes = new LinkedList<Cuadrante>();
+    		//AMIGACHO: cambiar el origen y destino a algo que venga de la UI
+    		listaDeIds = dijkstra.obtenerCaminoMasCorto(mapa.getMatrizDeAdyacenciaGlobal().getMatrizDeAdyacenciaEnBooleanos(), 0, 0);
+    		
+    		for (Integer id : listaDeIds) {
+				Cuadrante c = mapa.buscarCuadrantePorId(id);
+				listaDeCuadrantes.add(c);
+			}
+    		
+    		Trayectoria trayectoria = new Trayectoria(listaDeCuadrantes,mapa.getPosicionEnGradosRespectoDelNorteMagnetico());
+    		trayectoria.calcularTrayectoria();
+    	}
+    	else{
+    		this.mostrarMensajeDeError("Debe crear un mapa primero!");
+    	}
+    	
     }
 
 }
