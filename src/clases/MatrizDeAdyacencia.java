@@ -1,6 +1,8 @@
 package clases;
 
-public class MatrizDeAdyacencia {
+import java.io.Serializable;
+
+public class MatrizDeAdyacencia implements Serializable{
 	
 	private boolean[][] matrizDeAdyacencia;
 	private Grilla grilla;

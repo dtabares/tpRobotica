@@ -1,6 +1,12 @@
 package application;
 
 import java.awt.Component;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -309,6 +315,24 @@ public class MainController extends BorderPane {
     		this.mostrarMensajeDeError("Debe crear un mapa primero!");
     	}
     	
+    }
+    
+    @FXML public void guardarMapa() throws IOException{
+    	//AMIGACHO: Aca hay que tomar donde se quiere guardar del formulario por ahora lo hardcodeo
+    	String location = "c:\\mapa.obj";
+    	FileOutputStream fout = new FileOutputStream(location);
+    	ObjectOutputStream oos = new ObjectOutputStream(fout);
+    	oos.writeObject(mapa);
+    	oos.close();
+    	System.out.println("Mapa guardado en: " + location);
+    }
+    
+    @FXML public void cargarMapa() throws IOException, ClassNotFoundException{
+    	//AMIGACHO: Aca hay que tomar donde se quiere guardar del formulario por ahora lo hardcodeo
+    	String location = "c:\\mapa.obj";
+    	FileInputStream fin = new FileInputStream("c:\\address.ser");
+    	ObjectInputStream ois = new ObjectInputStream(fin);
+    	Mapa mapa = (Mapa) ois.readObject();
     }
 
 }

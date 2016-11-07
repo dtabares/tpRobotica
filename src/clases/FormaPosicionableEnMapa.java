@@ -1,6 +1,8 @@
 package clases;
 
-public abstract class FormaPosicionableEnMapa {
+import java.io.Serializable;
+
+public abstract class FormaPosicionableEnMapa implements Serializable{
 	
 	protected Coordenada bordeSuperiorIzquierdo;
 	protected Coordenada bordeSuperiorDerecho;

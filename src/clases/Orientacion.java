@@ -1,5 +1,7 @@
 package clases;
 
-public enum Orientacion {
+import java.io.Serializable;
+
+public enum Orientacion implements Serializable{
 	Horizontal, Vertical
 }

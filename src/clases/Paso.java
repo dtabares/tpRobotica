@@ -1,6 +1,8 @@
 package clases;
 
-public class Paso {
+import java.io.Serializable;
+
+public class Paso implements Serializable{
 	private double direccionEnGrados;
 	private int numeroDeBaldosas;
 	

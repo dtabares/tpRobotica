@@ -1,11 +1,12 @@
 package clases;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedList;
 import javafx.scene.shape.Shape;
 
 
-public class Grilla {
+public class Grilla implements Serializable{
 	
 	private Cuadrante[][] matrizDeCuadrantes;
 	private Collection <Shape> coleccionDeRectangulos;

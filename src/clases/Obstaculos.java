@@ -1,5 +1,7 @@
 package clases;
 
-public enum Obstaculos {
+import java.io.Serializable;
+
+public enum Obstaculos implements Serializable{
 	Mesa, Silla, Pizarron, Armario,Recinto
 }
