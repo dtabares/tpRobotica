@@ -9,7 +9,6 @@ public class Cuadrante extends FormaPosicionableEnMapa{
 	private Rectangle rectangulo;
 	private int id;
 	
-	
 	public Cuadrante(float posicionX, float posicionY, float ancho, float alto, int numero){
 		this.rectangulo = new Rectangle(posicionX,posicionY,ancho,alto);
 		this.rectangulo.setStroke(Color.BLACK);

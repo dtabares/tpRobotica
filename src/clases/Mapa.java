@@ -107,49 +107,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		}
 		return recintoBuscado;
 	}
-		
-	//Getters & Setters
-	public float getTamanioX() {
-		return tamanioX;
-	}
-
-	public void setTamanioX(float tamanioX) {
-		this.tamanioX = tamanioX;
-	}
-
-	public float getTamanioY() {
-		return tamanioY;
-	}
-
-	public void setTamanioY(float tamanioY) {
-		this.tamanioY = tamanioY;
-	}
-	
-	public Collection<Recinto> getRecintos() {
-		return recintos;
-	}
-
-	public Grilla getGrilla() {
-		return grilla;
-	}
-
-	public void setGrilla(Grilla grilla) {
-		this.grilla = grilla;
-	}
-
-	public Recinto getRecintoMapa() {
-		return recintoMapa;
-	}
-
-	public void setRecintoMapa(Recinto recintoMapa) {
-		this.recintoMapa = recintoMapa;
-	}
-	
-	public double getPosicionEnGradosRespectoDelNorteMagnetico() {
-		return posicionEnGradosRespectoDelNorteMagnetico;
-	}
-	
-	
+			
 	//Hay que forzar que cada Recinto (inclusive el del mapa) tenga una grilla, si es opcional revienta todo y no encontramos camino
 	public Cuadrante buscarCuadrantePorId(int idCuadrante){
 		Cuadrante cuadranteEncontrado = null;
@@ -311,6 +269,47 @@ public class Mapa extends AnchorPane implements Serializable {
 			cuadrante = this.grilla.buscarCuadrantePorCoordenada(coordenada);
 		}
 		return cuadrante;
+	}
+	
+	//Getters & Setters
+	public float getTamanioX() {
+		return tamanioX;
+	}
+
+	public void setTamanioX(float tamanioX) {
+		this.tamanioX = tamanioX;
+	}
+
+	public float getTamanioY() {
+		return tamanioY;
+	}
+
+	public void setTamanioY(float tamanioY) {
+		this.tamanioY = tamanioY;
+	}
+	
+	public Collection<Recinto> getRecintos() {
+		return recintos;
+	}
+
+	public Grilla getGrilla() {
+		return grilla;
+	}
+
+	public void setGrilla(Grilla grilla) {
+		this.grilla = grilla;
+	}
+
+	public Recinto getRecintoMapa() {
+		return recintoMapa;
+	}
+
+	public void setRecintoMapa(Recinto recintoMapa) {
+		this.recintoMapa = recintoMapa;
+	}
+	
+	public double getPosicionEnGradosRespectoDelNorteMagnetico() {
+		return posicionEnGradosRespectoDelNorteMagnetico;
 	}
 
 }

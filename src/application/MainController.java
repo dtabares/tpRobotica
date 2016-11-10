@@ -83,7 +83,13 @@ public class MainController extends BorderPane {
 	@FXML private TextField inPuertasPosicionY;
 	@FXML private ComboBox<String> inPuertasComboRecintos;
 	@FXML private TextField inPuertasAncho;
-
+	
+	//Items menu Trayectorias
+	@FXML private TextField inTrayectoriasOrigenPosicionX;
+	@FXML private TextField inTrayectoriasOrigenPosicionY;
+	@FXML private TextField inTrayectoriasDestinoPosicionX;
+	@FXML private TextField inTrayectoriasDestinoPosicionY;
+	
 	public void initialize() {
         
 		inObstaculosComboBox.setValue(Obstaculos.Mesa);
@@ -266,17 +272,16 @@ public class MainController extends BorderPane {
     	}
     }
     
-    //AMIGACHO: Agregarlo a la UI
     @FXML public void buscarCaminoMasCorto(){
     	if (mapa != null){
     		System.out.println("Entre a buscarCaminoMasCorto");
     		Dijkstra dijkstra = new Dijkstra();
     		List<Integer> listaDeIds;
     		List<Cuadrante> listaDeCuadrantes = new LinkedList<Cuadrante>();
-    		//AMIGACHO: cambiar el origen y destino a algo que venga de la UI
-    		//Asumo que lo que van a elegir son un (x,y) para cada uno
-    		Coordenada origen = new Coordenada (2,4);
-    		Coordenada destino = new Coordenada (2,4);
+    		Coordenada origen = new Coordenada (Float.parseFloat(inTrayectoriasOrigenPosicionX.getText()),Float.parseFloat(inTrayectoriasOrigenPosicionY.getText()));
+    		Coordenada destino = new Coordenada (Float.parseFloat(inTrayectoriasDestinoPosicionX.getText()),Float.parseFloat(inTrayectoriasDestinoPosicionY.getText()));
+    		System.out.println(origen.getX() + " " + origen.getY());
+    		System.out.println(destino.getX() + " " + destino.getY());
     		Cuadrante cuadranteOrigen = mapa.buscarCuadrantePorCoordenada(origen);
     		Cuadrante cuadranteDestino = mapa.buscarCuadrantePorCoordenada(destino);
     		if(cuadranteOrigen == null || cuadranteDestino == null){
@@ -334,5 +339,5 @@ public class MainController extends BorderPane {
     	ObjectInputStream ois = new ObjectInputStream(fin);
     	Mapa mapa = (Mapa) ois.readObject();
     }
-
+    
 }
