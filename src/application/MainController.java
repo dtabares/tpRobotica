@@ -45,6 +45,7 @@ public class MainController extends BorderPane {
 	private static Mapa mapa;
 	Collection <Shape> formas = new LinkedList<Shape>();
 	NuevoMapaControlador nuevoMapaControlador;
+	Trayectoria trayectoria;
 	//Objeto para instanciar mensajes 
 	Component frame = null;
 
@@ -274,6 +275,7 @@ public class MainController extends BorderPane {
     
     @FXML public void buscarCaminoMasCorto(){
     	if (mapa != null){
+    		if(trayectoria != null){ trayectoria.borrarTrayectoria();}
     		System.out.println("Entre a buscarCaminoMasCorto");
     		Dijkstra dijkstra = new Dijkstra();
     		List<Integer> listaDeIds;
@@ -308,7 +310,7 @@ public class MainController extends BorderPane {
     					listaDeCuadrantes.add(c);
     				}
     	    		
-    	    		Trayectoria trayectoria = new Trayectoria(listaDeCuadrantes,mapa.getPosicionEnGradosRespectoDelNorteMagnetico());
+    	    		trayectoria = new Trayectoria(listaDeCuadrantes,mapa.getPosicionEnGradosRespectoDelNorteMagnetico());
     	    		trayectoria.calcularTrayectoria();
     			}
     		}

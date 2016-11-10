@@ -57,6 +57,17 @@ public class Trayectoria implements Serializable{
 		}
 	}
 	
+	public void borrarTrayectoria(){
+		
+		Iterator<Cuadrante> iterador = this.listaDeCuadrantesDeOrigenADestino.iterator();
+		Cuadrante cuadranteActual;
+		while (iterador.hasNext()){
+			cuadranteActual=iterador.next();
+			cuadranteActual.getRectangle().setFill(Color.WHITE);
+		}
+		
+	}
+	
 	private double calcularDireccionEnGrados(Cuadrante actual, Cuadrante siguiente){
 		double direccion = 0;
 		float x = actual.getPosicionX() - siguiente.getPosicionX();

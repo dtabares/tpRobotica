@@ -1,7 +1,7 @@
 package trayectorias;
 
-import java.util.LinkedList;
 
+import java.util.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 
