@@ -418,8 +418,8 @@ public class Grilla implements Serializable{
 		boolean pertenece = false;
 		for (Cuadrante[] cuadrantes : matriz) {
 			for (Cuadrante cuadrante : cuadrantes) {
-				if(coordenada.getX() >= cuadrante.getBordeSuperiorIzquierdo().getX() && coordenada.getX() <= cuadrante.getBordeInferiorDerecho().getX()
-						&& coordenada.getY() >= cuadrante.getBordeInferiorDerecho().getY() && coordenada.getY() <= cuadrante.getBordeSuperiorDerecho().getY()){
+				if(coordenada.getX() > cuadrante.getBordeSuperiorIzquierdo().getX() && coordenada.getX() < cuadrante.getBordeSuperiorDerecho().getX()
+						&& coordenada.getY() < cuadrante.getBordeInferiorDerecho().getY() && coordenada.getY() > cuadrante.getBordeSuperiorDerecho().getY()){
 					pertenece = true;
 					cuadranteADevolver = cuadrante;
 					break;

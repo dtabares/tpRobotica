@@ -40,7 +40,8 @@ public class Dijkstra {
 		for (int i = fin; i!=inicio ;i = previos.get(i)){
 		    	direcciones.add(i);
 		}
-		direcciones.add(inicio);
+		//direcciones.add(inicio);
+		System.out.println(direcciones);
 		return direcciones;
 	}
 

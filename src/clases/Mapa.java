@@ -263,7 +263,6 @@ public class Mapa extends AnchorPane implements Serializable {
 			r = iteradorDeRecintos.next();
 			cuadrante = r.getGrilla().buscarCuadrantePorCoordenada(coordenada);
 		}
-		
 		//finalmente en el mapa libre
 		if (cuadrante == null){
 			cuadrante = this.grilla.buscarCuadrantePorCoordenada(coordenada);

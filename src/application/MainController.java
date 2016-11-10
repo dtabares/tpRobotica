@@ -302,6 +302,7 @@ public class MainController extends BorderPane {
     				}
     			}
     			else{
+    				mapa.calcularMatrizDeAdyacenciaGlobal();
     	    		listaDeIds = dijkstra.obtenerCaminoMasCorto(mapa.getMatrizDeAdyacenciaGlobal().getMatrizDeAdyacenciaEnBooleanos(), cuadranteOrigen.getId(), cuadranteDestino.getId());
     	    		
     	    		for (Integer id : listaDeIds) {

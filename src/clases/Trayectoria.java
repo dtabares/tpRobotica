@@ -40,6 +40,7 @@ public class Trayectoria implements Serializable{
 			}
 			else{
 				cuadranteActual = cuadranteSiguiente;
+				cuadranteActual.getRectangle().setFill(Color.BLUE);
 			}
 			if(iterador.hasNext()){
 				cuadranteSiguiente = iterador.next();
