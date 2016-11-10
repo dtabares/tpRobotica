@@ -10,6 +10,8 @@ public class Dijkstra {
 	
 	public List<Integer> obtenerCaminoMasCorto(boolean [][] matrizDeAdyacencia, int inicio, int fin){
 
+		System.out.println("origen: "+ inicio);
+		System.out.println("destino: " + fin);
 		Map<Integer, Boolean> visitados = new HashMap<Integer, Boolean>();
 		Map<Integer, Integer> previos = new HashMap<Integer, Integer>();
 		List<Integer> direcciones = new LinkedList<Integer>();
@@ -29,8 +31,6 @@ public class Dijkstra {
 		                if(!visitados.containsKey(i) && matrizDeAdyacencia[actual][i]==true){
 		                    cola.add(i);
 		                    visitados.put(i, true);
-		                    System.out.println("i: " + i);
-		                    System.out.println("actual: " + actual);
 		                    previos.put(i, actual);
 		                    
 		                }

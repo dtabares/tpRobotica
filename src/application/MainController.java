@@ -223,6 +223,7 @@ public class MainController extends BorderPane {
     	if (inMapaCheckboxGrilla.isSelected()){
     		mapa.setGrilla(new Grilla(mapa.getRecintoMapa(),Float.valueOf(inMapaTamanioGrilla.getText()),(int)inMapaComboVertices.getValue()));
     		mapa.getGrilla().prepararGrillaParaDibujo();
+    		mapa.regenerarIdsCuadrantesDeTodoElMapa();
     		mapa.dibujarMapa();
 			panelCentral.getChildren().setAll(mapa.getChildren());
     	}
