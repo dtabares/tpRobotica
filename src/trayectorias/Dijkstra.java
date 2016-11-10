@@ -29,7 +29,10 @@ public class Dijkstra {
 		                if(!visitados.containsKey(i) && matrizDeAdyacencia[actual][i]==true){
 		                    cola.add(i);
 		                    visitados.put(i, true);
+		                    System.out.println("i: " + i);
+		                    System.out.println("actual: " + actual);
 		                    previos.put(i, actual);
+		                    
 		                }
 		            }
 		        }

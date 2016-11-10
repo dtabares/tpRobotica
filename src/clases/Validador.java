@@ -84,24 +84,24 @@ public class Validador {
 	private static boolean sePisanEnX(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean sePisan = false;
 		
-		if((b.getBordeSuperiorDerecho().getX() >= a.getBordeSuperiorDerecho().getX() && 
-				b.getBordeSuperiorIzquierdo().getX() <= a.getBordeSuperiorDerecho().getX()) 
-				|| (b.getBordeInferiorDerecho().getX() >= a.getBordeInferiorDerecho().getX() && 
-					b.getBordeInferiorIzquierdo().getX() <= a.getBordeInferiorDerecho().getX())){
+		if((b.getBordeSuperiorDerecho().getX() > a.getBordeSuperiorDerecho().getX() && 
+				b.getBordeSuperiorIzquierdo().getX() < a.getBordeSuperiorDerecho().getX()) 
+				|| (b.getBordeInferiorDerecho().getX() > a.getBordeInferiorDerecho().getX() && 
+					b.getBordeInferiorIzquierdo().getX() < a.getBordeInferiorDerecho().getX())){
 			sePisan = true;
 		}
 		else{
-			if((b.getBordeSuperiorIzquierdo().getX() <= a.getBordeSuperiorIzquierdo().getX() && 
-				b.getBordeSuperiorDerecho().getX() >= a.getBordeSuperiorIzquierdo().getX()) ||
-				(b.getBordeInferiorIzquierdo().getX() <= a.getBordeInferiorIzquierdo().getX() && 
-				b.getBordeInferiorDerecho().getX() >= a.getBordeInferiorIzquierdo().getX())){
+			if((b.getBordeSuperiorIzquierdo().getX() < a.getBordeSuperiorIzquierdo().getX() && 
+				b.getBordeSuperiorDerecho().getX() > a.getBordeSuperiorIzquierdo().getX()) ||
+				(b.getBordeInferiorIzquierdo().getX() < a.getBordeInferiorIzquierdo().getX() && 
+				b.getBordeInferiorDerecho().getX() > a.getBordeInferiorIzquierdo().getX())){
 				sePisan = true;
 			}
 			else {
-				if((b.getBordeSuperiorIzquierdo().getX() >= a.getBordeSuperiorIzquierdo().getX() && 
-					b.getBordeSuperiorDerecho().getX() <= a.getBordeSuperiorDerecho().getX()) ||
-					(b.getBordeInferiorIzquierdo().getX() >= a.getBordeInferiorIzquierdo().getX() && 
-					b.getBordeInferiorDerecho().getX() <= a.getBordeInferiorDerecho().getX())){
+				if((b.getBordeSuperiorIzquierdo().getX() > a.getBordeSuperiorIzquierdo().getX() && 
+					b.getBordeSuperiorDerecho().getX() < a.getBordeSuperiorDerecho().getX()) ||
+					(b.getBordeInferiorIzquierdo().getX() > a.getBordeInferiorIzquierdo().getX() && 
+					b.getBordeInferiorDerecho().getX() < a.getBordeInferiorDerecho().getX())){
 					sePisan = true;
 				}
 			}
@@ -112,28 +112,28 @@ public class Validador {
 	private static boolean sePisanEnY(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean sePisan = false;
 		//arranca arriba y termina abajo de donde empieza el otro
-		if((b.getBordeSuperiorDerecho().getY() <= a.getBordeSuperiorDerecho().getY() && 
-			b.getBordeInferiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY()) ||
-			(b.getBordeSuperiorIzquierdo().getY() <= a.getBordeSuperiorIzquierdo().getY() && 
-			b.getBordeInferiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY())){
+		if((b.getBordeSuperiorDerecho().getY() < a.getBordeSuperiorDerecho().getY() && 
+			b.getBordeInferiorDerecho().getY() > a.getBordeSuperiorDerecho().getY()) ||
+			(b.getBordeSuperiorIzquierdo().getY() < a.getBordeSuperiorIzquierdo().getY() && 
+			b.getBordeInferiorIzquierdo().getY() > a.getBordeSuperiorIzquierdo().getY())){
 			sePisan = true;
 			//System.out.println("entro 1");
 		}
 		else{
 			//arranca abajo (adentro) y termina abajo (afuera)
-			if((b.getBordeSuperiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY() && 
-				b.getBordeInferiorIzquierdo().getY() <= a.getBordeInferiorIzquierdo().getY()) ||
-				(b.getBordeSuperiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY() && 
-				b.getBordeInferiorDerecho().getY() <= a.getBordeInferiorDerecho().getY())){
+			if((b.getBordeSuperiorIzquierdo().getY() > a.getBordeSuperiorIzquierdo().getY() && 
+				b.getBordeInferiorIzquierdo().getY() < a.getBordeInferiorIzquierdo().getY()) ||
+				(b.getBordeSuperiorDerecho().getY() > a.getBordeSuperiorDerecho().getY() && 
+				b.getBordeInferiorDerecho().getY() < a.getBordeInferiorDerecho().getY())){
 				sePisan = true;
 				//System.out.println("entro 2");
 			}
 			else {
 				//arranca abajo (adentro) y termina arriba (adentro)
-				if((b.getBordeSuperiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY() && 
-					b.getBordeSuperiorIzquierdo().getY() <= a.getBordeInferiorIzquierdo().getY()) ||
-					(b.getBordeSuperiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY() && 
-					b.getBordeSuperiorDerecho().getY() <= a.getBordeInferiorDerecho().getY())){
+				if((b.getBordeSuperiorIzquierdo().getY() > a.getBordeSuperiorIzquierdo().getY() && 
+					b.getBordeSuperiorIzquierdo().getY() < a.getBordeInferiorIzquierdo().getY()) ||
+					(b.getBordeSuperiorDerecho().getY() > a.getBordeSuperiorDerecho().getY() && 
+					b.getBordeSuperiorDerecho().getY() < a.getBordeInferiorDerecho().getY())){
 					sePisan = true;
 					//System.out.println("entro 3");
 				}

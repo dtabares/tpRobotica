@@ -43,43 +43,43 @@ public class MatrizDeAdyacencia implements Serializable{
 			
 			if (this.grilla.verificarDisponibilidadCuadranteActual(posCuadranteARevisar[0], posCuadranteARevisar[1])){
 				if(this.grilla.verificarDisponibilidadCuadranteSuperiorIzquierdo(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] -1][posCuadranteARevisar[1] -1].getId();
+					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] -1][posCuadranteARevisar[1] -1].getIdLocal();
 					this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
 				}
 				
 				if(this.grilla.verificarDisponibilidadCuadranteSuperior(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] -1 ][posCuadranteARevisar[1]].getId();
+					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] -1 ][posCuadranteARevisar[1]].getIdLocal();
 					this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
 				}
 				
 				if(this.grilla.verificarDisponibilidadCuadranteSuperiorDerecho(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] -1][posCuadranteARevisar[1] +1].getId();
+					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] -1][posCuadranteARevisar[1] +1].getIdLocal();
 					this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
 				}
 				
 				if(this.grilla.verificarDisponibilidadCuadranteInferiorIzquierdo(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] +1][posCuadranteARevisar[1] -1].getId();
+					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] +1][posCuadranteARevisar[1] -1].getIdLocal();
 					this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
 				}
 				
 				if(this.grilla.verificarDisponibilidadCuadranteInferior(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] +1 ][posCuadranteARevisar[1]].getId();
+					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] +1 ][posCuadranteARevisar[1]].getIdLocal();
 					this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
 				}
 				
 				if(this.grilla.verificarDisponibilidadCuadranteInferiorDerecho(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] +1][posCuadranteARevisar[1] +1].getId();
+					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0] +1][posCuadranteARevisar[1] +1].getIdLocal();
 					this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
 				}
 				
 				if(this.grilla.verificarDisponibilidadCuadranteIzquierdo(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0]][posCuadranteARevisar[1] -1].getId();
+					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0]][posCuadranteARevisar[1] -1].getIdLocal();
 					this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
 				}
 				
 				
 				if(this.grilla.verificarDisponibilidadCuadranteDerecho(posCuadranteARevisar[0], posCuadranteARevisar[1])){
-					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0]][posCuadranteARevisar[1] +1].getId();
+					numeroCuadranteAMarcarComoDisp = matrizDeCuadrantes[posCuadranteARevisar[0]][posCuadranteARevisar[1] +1].getIdLocal();
 					this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
 				}
 			}
@@ -87,8 +87,6 @@ public class MatrizDeAdyacencia implements Serializable{
 
 			
 		}
-
-		//return this.matrizDeAdyacencia;
 	}
 	
 	public void marcarDosNodosComoConexos(int idNodo1, int idNodo2){

@@ -167,7 +167,10 @@ public class Mapa extends AnchorPane implements Serializable {
 		this.matrizDeAdyacenciaGlobal = new MatrizDeAdyacencia(cantidadTotalDeCuadrantes);
 		
 		//Primero calculo la de adyacencia de la grilla del mapa y la inserto en la global
-		this.grilla.prepararGrillaParaDibujo();
+		//this.grilla.prepararGrillaParaDibujo();
+		this.recintoMapa.setGrilla(this.grilla);
+		this.recintoMapa.verificarDisponibilidadDeLaGrilla();
+		this.grilla = this.recintoMapa.getGrilla();
 		boolean[][] matrizDeAdyacenciaDelMapa = this.grilla.getMatrizDeAdyacencia().getMatrizDeAdyacenciaEnBooleanos();
 		this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelMapa, this.grilla.getIdInicial());
 		

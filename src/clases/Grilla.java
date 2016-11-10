@@ -39,6 +39,7 @@ public class Grilla implements Serializable{
 	private void crearGrilla(int vertice){
 		this.prepararValoresGrilla();
 		int numero = this.contador.getProximoNumeroDeCuadrante();
+		int idLocal = 0;
 		float tamanioX;
 		float tamanioY;
 		
@@ -61,8 +62,10 @@ public class Grilla implements Serializable{
 							tamanioX = this.longitudNormal;
 						}
 						Cuadrante cuadrante = new Cuadrante((posicionX+(int)columna*longitudNormal),(posicionY+(int)fila*longitudNormal),tamanioX,tamanioY, numero);
+						cuadrante.setIdLocal(idLocal);
 						matrizDeCuadrantes[fila][columna] = cuadrante;
 						numero++;
+						idLocal++;
 					}
 				}
 			break;
@@ -90,8 +93,10 @@ public class Grilla implements Serializable{
 						else{
 							cuadrante = new Cuadrante((posicionX),(posicionY+(int)fila*longitudNormal),tamanioX,tamanioY, numero);	
 						}
+						cuadrante.setIdLocal(idLocal);
 						matrizDeCuadrantes[fila][columna-1] = cuadrante;
 						numero++;
+						idLocal++;
 					}
 				}
 			break;
@@ -119,8 +124,10 @@ public class Grilla implements Serializable{
 						else{
 							cuadrante = new Cuadrante((posicionX+(int)columna*longitudNormal),(posicionY),tamanioX,tamanioY, numero);	
 						}						
+						cuadrante.setIdLocal(idLocal);
 						matrizDeCuadrantes[fila-1][columna] = cuadrante;
 						numero++;
+						idLocal++;
 					}
 				}
 			break;
@@ -158,9 +165,11 @@ public class Grilla implements Serializable{
 							else {						
 								cuadrante = new Cuadrante((posicionX),(posicionY),tamanioX,tamanioY, numero);
 							}
-						}			
+						}
+						cuadrante.setIdLocal(idLocal);
 						matrizDeCuadrantes[fila-1][columna-1] = cuadrante;
 						numero++;
+						idLocal++;
 					}
 				}
 			break;
