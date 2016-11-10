@@ -280,8 +280,6 @@ public class MainController extends BorderPane {
     		List<Cuadrante> listaDeCuadrantes = new LinkedList<Cuadrante>();
     		Coordenada origen = new Coordenada (Float.parseFloat(inTrayectoriasOrigenPosicionX.getText()),Float.parseFloat(inTrayectoriasOrigenPosicionY.getText()));
     		Coordenada destino = new Coordenada (Float.parseFloat(inTrayectoriasDestinoPosicionX.getText()),Float.parseFloat(inTrayectoriasDestinoPosicionY.getText()));
-    		System.out.println(origen.getX() + " " + origen.getY());
-    		System.out.println(destino.getX() + " " + destino.getY());
     		Cuadrante cuadranteOrigen = mapa.buscarCuadrantePorCoordenada(origen);
     		Cuadrante cuadranteDestino = mapa.buscarCuadrantePorCoordenada(destino);
     		if(cuadranteOrigen == null || cuadranteDestino == null){

@@ -52,10 +52,8 @@ public class Trayectoria implements Serializable{
 				Paso paso = new Paso(dir,1);
 				this.pasos.add(paso);
 			}
-			else{
-				//llegue a destino, ver que hacer
-				cuadranteActual.getRectangle().setFill(Color.GREEN);
-			}
+			System.out.println("Destino:" + cuadranteActual.getId());
+			cuadranteSiguiente.getRectangle().setFill(Color.GREEN);
 		}
 	}
 	
