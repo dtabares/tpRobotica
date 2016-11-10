@@ -176,6 +176,7 @@ public class Grilla implements Serializable{
 			default: System.out.println("El vertice elegido es incorrecto");
 			break;
 		}
+		imprimirMatriz(matrizDeCuadrantes);
 		this.contador.setProximoNumeroDeCuadrante(numero);
 	}
 	
@@ -440,6 +441,19 @@ public class Grilla implements Serializable{
 		}
 		
 		return cuadranteADevolver;
+	}
+	
+	public void imprimirMatriz(Cuadrante[][] matrizDeCuadrantes){
+		
+		for(int i=0;i<matrizDeCuadrantes.length;i++){
+			for (int j=0;j<matrizDeCuadrantes[0].length;j++){
+				System.out.print(matrizDeCuadrantes[i][j].getId());
+				System.out.print(",");
+				
+			}
+			System.out.println("");
+		}
+		
 	}
 	
 }
