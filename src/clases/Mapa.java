@@ -95,13 +95,18 @@ public class Mapa extends AnchorPane implements Serializable {
 	public Recinto buscarRecintoPorNombre(String nombreBuscado) {
 		boolean encontro = false;
 		Recinto recintoBuscado = null;
-		for (Recinto recinto : recintos) {
-			if (encontro == true){
-				break;
-			}
-			else{
-				if(recinto.getNombre().equals(nombreBuscado)){
-					recintoBuscado = recinto;
+		if(nombreBuscado.equals("Mapa")){
+			recintoBuscado = this.recintoMapa;
+		}
+		else{
+			for (Recinto recinto : recintos) {
+				if (encontro == true){
+					break;
+				}
+				else{
+					if(recinto.getNombre().equals(nombreBuscado)){
+						recintoBuscado = recinto;
+					}
 				}
 			}
 		}

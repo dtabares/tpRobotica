@@ -2,19 +2,15 @@ package application;
 
 import java.awt.Component;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import clases.Coordenada;
 import clases.Cuadrante;
 import clases.Grilla;
@@ -25,6 +21,7 @@ import clases.Orientacion;
 import clases.Puerta;
 import clases.Recinto;
 import clases.Trayectoria;
+import formularios.GuardarMapaControlador;
 import formularios.NuevoMapaControlador;
 import formularios.NuevoMapaControlador.NuevoMapaControladorListener;
 import javafx.collections.FXCollections;
@@ -96,6 +93,7 @@ public class MainController extends BorderPane {
 		inObstaculosComboBox.setValue(Obstaculos.Mesa);
 		obstaculos.remove(Obstaculos.Recinto);
 		inObstaculosComboBox.setItems(obstaculos);
+		inObstaculosComboRecintos.getItems().add("Mapa");
 		
 		inRecintosComboBox.getSelectionModel().selectFirst();
 		inRecintosComboBox.getItems().add("Nuevo Recinto");
@@ -103,11 +101,10 @@ public class MainController extends BorderPane {
 		inRecintosComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
 		
 		inPuertasComboBox.setItems(orientaciones);
+		inPuertasComboRecintos.getItems().add("Mapa");
 		
 		inMapaComboVertices.setValue(1);
 		inMapaComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
-		
-
 		
 		nuevoMapaControlador = new NuevoMapaControlador();
  		nuevoMapaControlador.setListener(new NuevoMapaControladorListener() {	
@@ -325,17 +322,17 @@ public class MainController extends BorderPane {
     }
     
     @FXML public void guardarMapa() throws IOException{
-    	//AMIGACHO: Aca hay que tomar donde se quiere guardar del formulario por ahora lo hardcodeo
-    	String location = "c:\\mapa.obj";
-    	FileOutputStream fout = new FileOutputStream(location);
-    	ObjectOutputStream oos = new ObjectOutputStream(fout);
-    	oos.writeObject(mapa);
-    	oos.close();
-    	System.out.println("Mapa guardado en: " + location);
+    	
+    	if(mapa!=null){
+	    	GuardarMapaControlador guardarMapaControlador = new GuardarMapaControlador(mapa);
+	    	guardarMapaControlador.mostrarFormulario();}
+    	else{
+    		this.mostrarMensajeDeError("No existe el mapa!");
+    	}
     }
     
     @FXML public void cargarMapa() throws IOException, ClassNotFoundException{
-    	//AMIGACHO: Aca hay que tomar donde se quiere guardar del formulario por ahora lo hardcodeo
+    	//Aca hay que tomar donde se quiere guardar del formulario por ahora lo hardcodeo
     	String location = "c:\\mapa.obj";
     	FileInputStream fin = new FileInputStream("c:\\address.ser");
     	ObjectInputStream ois = new ObjectInputStream(fin);
