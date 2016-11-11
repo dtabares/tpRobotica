@@ -83,9 +83,6 @@ public class MatrizDeAdyacencia implements Serializable{
 					this.matrizDeAdyacencia[fila][numeroCuadranteAMarcarComoDisp] = true;
 				}
 			}
-			
-
-			
 		}
 	}
 	

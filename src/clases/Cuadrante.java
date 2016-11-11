@@ -3,7 +3,7 @@ package clases;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Cuadrante extends FormaPosicionableEnMapa{
+public class Cuadrante extends FormaPosicionableEnMapa {
 	
 	private boolean disponible;
 	private Rectangle rectangulo;

@@ -141,6 +141,12 @@ public class MainController extends BorderPane {
 			    	}
 	    			mapa.dibujarMapa();
 		    		panelCentral.getChildren().setAll(mapa.getChildren());
+		    		//test
+		    		System.out.println("Creando Grila del recinto");
+		    		Grilla g = recinto.getGrilla();
+		    		g.prepararGrillaParaDibujo();
+		    		g.getMatrizDeAdyacencia().imprimirMatriz();
+		    		System.out.println("Grilla creada");
 	    		}
 	    		else{
 	    			this.mostrarMensajeDeError("Recinto invalido");

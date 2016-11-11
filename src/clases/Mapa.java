@@ -24,18 +24,6 @@ public class Mapa extends AnchorPane implements Serializable {
 		this.tamanioX = tamanioX;
 		this.tamanioY = tamanioY;
 	}
-	
-	public void agregarForma(Shape forma){
-		
-		System.out.println(this.getChildren().size());
-		if (this.getChildren().contains(forma)){
-			System.out.println("La forma: " + forma + "ya existe");
-		}
-		else{
-			this.getChildren().add(forma);
-		}
-		System.out.println(this.getChildren().size());
-	}
 		
 	public void dibujarMapa(){
 		
