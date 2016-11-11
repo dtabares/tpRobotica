@@ -104,6 +104,15 @@ public class Validador {
 					b.getBordeInferiorDerecho().getX() < a.getBordeInferiorDerecho().getX())){
 					sePisan = true;
 				}
+				else{
+					//arranca y termina en el mismo lugar (linea) como una puerta
+					if(b.getBordeInferiorDerecho().getX() == a.getBordeInferiorDerecho().getX() &&
+							b.getBordeInferiorIzquierdo().getX() == a.getBordeInferiorIzquierdo().getX() ||
+							b.getBordeSuperiorDerecho().getX() == a.getBordeSuperiorDerecho().getX() &&
+							b.getBordeSuperiorIzquierdo().getX() == a.getBordeSuperiorIzquierdo().getX()){
+						sePisan = true;
+					}
+				}
 			}
 		}
 		return sePisan;
@@ -136,6 +145,15 @@ public class Validador {
 					b.getBordeSuperiorDerecho().getY() < a.getBordeInferiorDerecho().getY())){
 					sePisan = true;
 					//System.out.println("entro 3");
+				}
+				//arranca y termina en el mismo lugar (linea) como una puerta
+				else{
+					if(b.getBordeSuperiorDerecho().getY() == a.getBordeSuperiorDerecho().getY() &&
+							b.getBordeSuperiorIzquierdo().getY() == a.getBordeSuperiorIzquierdo().getY() ||
+							b.getBordeInferiorDerecho().getY() == a.getBordeInferiorDerecho().getY() &&
+							b.getBordeInferiorIzquierdo().getY() == a.getBordeInferiorIzquierdo().getY()){
+						sePisan=true;
+					}
 				}
 			}
 		}
