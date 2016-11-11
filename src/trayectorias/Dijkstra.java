@@ -10,8 +10,8 @@ public class Dijkstra {
 	
 	public List<Integer> obtenerCaminoMasCorto(boolean [][] matrizDeAdyacencia, int inicio, int fin){
 
-		System.out.println("origen: "+ inicio);
-		System.out.println("destino: " + fin);
+		//System.out.println("origen: "+ inicio);
+		//System.out.println("destino: " + fin);
 		Map<Integer, Boolean> visitados = new HashMap<Integer, Boolean>();
 		Map<Integer, Integer> previos = new HashMap<Integer, Integer>();
 		List<Integer> direcciones = new LinkedList<Integer>();
@@ -40,11 +40,12 @@ public class Dijkstra {
 		if (actual!=fin){
 		        System.out.println("No existe el destino");
 		}
-		for (int i = fin; i!=inicio ;i = previos.get(i)){
+		//System.out.println("Origen: " + inicio + ", Destino: "+ fin);
+		for (int i = fin; i!=inicio; i = previos.get(i)){
 		    	direcciones.add(i);
 		}
 		direcciones.add(inicio);
-		System.out.println(direcciones);
+		//System.out.println(direcciones);
 		return direcciones;
 	}
 

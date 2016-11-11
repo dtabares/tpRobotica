@@ -274,7 +274,7 @@ public class MainController extends BorderPane {
     @FXML public void buscarCaminoMasCorto(){
     	if (mapa != null){
     		if(trayectoria != null){ trayectoria.borrarTrayectoria();}
-    		System.out.println("Entre a buscarCaminoMasCorto");
+    		//System.out.println("Entre a buscarCaminoMasCorto");
     		Dijkstra dijkstra = new Dijkstra();
     		List<Integer> listaDeIds;
     		List<Cuadrante> listaDeCuadrantes = new LinkedList<Cuadrante>();
@@ -301,6 +301,10 @@ public class MainController extends BorderPane {
     			}
     			else{
     				mapa.calcularMatrizDeAdyacenciaGlobal();
+    				//System.out.println("Matriz Resultado");
+    				//System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
+    				//mapa.getMatrizDeAdyacenciaGlobal().imprimirMatriz();
+    				//System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
     	    		listaDeIds = dijkstra.obtenerCaminoMasCorto(mapa.getMatrizDeAdyacenciaGlobal().getMatrizDeAdyacenciaEnBooleanos(), cuadranteOrigen.getId(), cuadranteDestino.getId());
     	    		
     	    		for (Integer id : listaDeIds) {

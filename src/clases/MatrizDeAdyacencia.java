@@ -93,4 +93,18 @@ public class MatrizDeAdyacencia implements Serializable{
 		this.matrizDeAdyacencia[idNodo1][idNodo2] = true;
 		this.matrizDeAdyacencia[idNodo2][idNodo1] = true;
 	}
+		
+	public void imprimirMatriz(){
+		
+		for(int i=0;i<matrizDeAdyacencia.length;i++){
+			for (int j=0;j<matrizDeAdyacencia[0].length;j++){
+				System.out.print(matrizDeAdyacencia[i][j]);
+				System.out.print(",");
+				
+			}
+			System.out.println("");
+		}
+		
+	}
+	
 }

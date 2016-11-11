@@ -178,6 +178,10 @@ public class Mapa extends AnchorPane implements Serializable {
 		this.grilla = this.recintoMapa.getGrilla();
 		boolean[][] matrizDeAdyacenciaDelMapa = this.grilla.getMatrizDeAdyacencia().getMatrizDeAdyacenciaEnBooleanos();
 		this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelMapa, this.grilla.getIdInicial());
+//		System.out.println("Insertando cuadrantes del mapa");
+//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
+//		matrizDeAdyacenciaGlobal.imprimirMatriz();
+//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
 		
 		//Luego itero por cada recinto, y genero la de adyacencia de cada recinto, y la inserto en la global
 		Iterator<Recinto> iteradorDeRecintos = this.recintos.iterator();
@@ -188,7 +192,11 @@ public class Mapa extends AnchorPane implements Serializable {
 			boolean[][] matrizDeAdyacenciaDelRecinto = grillaDelRecinto.getMatrizDeAdyacencia().getMatrizDeAdyacenciaEnBooleanos();
 			this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelRecinto, grillaDelRecinto.getIdInicial());
 		}
-		
+
+//		System.out.println("Insertando Recintos");
+//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
+//		matrizDeAdyacenciaGlobal.imprimirMatriz();
+//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
 		//Puertas --> Conectar los grafos
 		iteradorDeRecintos = this.recintos.iterator();
 		Iterator<Recinto> iteradorDeRecintosEnBusquedaDeCoordenada;

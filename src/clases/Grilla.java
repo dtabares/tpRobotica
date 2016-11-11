@@ -176,7 +176,7 @@ public class Grilla implements Serializable{
 			default: System.out.println("El vertice elegido es incorrecto");
 			break;
 		}
-		imprimirMatriz(matrizDeCuadrantes);
+		//imprimirMatriz(matrizDeCuadrantes);
 		this.contador.setProximoNumeroDeCuadrante(numero);
 	}
 	
