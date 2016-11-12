@@ -58,9 +58,19 @@ public class Validador {
 	//Devuelve true si se superponen
 	private static boolean seSuperponenLasFormas(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean seSuperponen = true;
-		if (!sonIgualesYTienenLaMismaPosicion(a, b)){
-			seSuperponen = (sePisanEnX(a, b) && sePisanEnY(a, b));
+		//Veo el caso del recinto como un especial forzado
+		if(b.getClass() == Obstaculo.class){
+			Obstaculo obs = (Obstaculo) b;
+			if(obs.getTipo().equals(Obstaculos.Recinto)){
+				seSuperponen = validarCuadranteYrecinto(a,obs);
+			}
 		}
+		else{
+			if (!sonIgualesYTienenLaMismaPosicion(a, b)){
+				seSuperponen = (sePisanEnX(a, b) && sePisanEnY(a, b));
+			}
+		}
+
 		
 		//System.out.println("entro  a seSuperponenLasFormas");
 		
@@ -68,6 +78,37 @@ public class Validador {
 		return seSuperponen;
 	}
 	
+	private static boolean validarCuadranteYrecinto(FormaPosicionableEnMapa a, Obstaculo obs) {
+		float inicialXCuadrante = a.getPosicionX();
+		float finalXCuadrante = inicialXCuadrante + a.getAncho();
+		float inicialYCuadrante = a.getPosicionY();
+		float finalYCuadrante = inicialYCuadrante + a.getAlto();
+		float inicialXObstaculo = obs.getPosicionX();
+		float finalXObstaculo = inicialXObstaculo + obs.getAncho();
+		float inicialYObstaculo = obs.getPosicionY();
+		float finalYObstaculo = inicialYObstaculo + obs.getAlto();
+		boolean sePisanEnX;
+		boolean sePisanEnY;
+		if(inicialXCuadrante >= inicialXObstaculo && finalXCuadrante < finalXObstaculo ||
+				inicialXCuadrante > inicialXObstaculo && finalXCuadrante <= finalXObstaculo ||
+				inicialXCuadrante == inicialXObstaculo && finalXCuadrante == finalXObstaculo){
+			sePisanEnX = true;
+		}
+		else{
+			sePisanEnX = false;
+		}
+		
+		if(inicialYCuadrante >= inicialYObstaculo && finalYCuadrante < finalYObstaculo ||
+				inicialYCuadrante > inicialYObstaculo && finalYCuadrante <= finalYObstaculo ||
+				inicialYCuadrante == inicialYObstaculo && finalYCuadrante == finalYObstaculo){
+			sePisanEnY = true;
+		}
+		else{
+			sePisanEnY = false;
+		}
+		return (sePisanEnX && sePisanEnY);
+	}
+
 	private static boolean sonIgualesYTienenLaMismaPosicion(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean iguales = false;
 		
@@ -84,24 +125,24 @@ public class Validador {
 	private static boolean sePisanEnX(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean sePisan = false;
 		
-		if((b.getBordeSuperiorDerecho().getX() > a.getBordeSuperiorDerecho().getX() && 
-				b.getBordeSuperiorIzquierdo().getX() < a.getBordeSuperiorDerecho().getX()) 
-				|| (b.getBordeInferiorDerecho().getX() > a.getBordeInferiorDerecho().getX() && 
-					b.getBordeInferiorIzquierdo().getX() < a.getBordeInferiorDerecho().getX())){
+		if((b.getBordeSuperiorDerecho().getX() >= a.getBordeSuperiorDerecho().getX() && 
+				b.getBordeSuperiorIzquierdo().getX() <= a.getBordeSuperiorDerecho().getX()) 
+				|| (b.getBordeInferiorDerecho().getX() >= a.getBordeInferiorDerecho().getX() && 
+					b.getBordeInferiorIzquierdo().getX() <= a.getBordeInferiorDerecho().getX())){
 			sePisan = true;
 		}
 		else{
-			if((b.getBordeSuperiorIzquierdo().getX() < a.getBordeSuperiorIzquierdo().getX() && 
-				b.getBordeSuperiorDerecho().getX() > a.getBordeSuperiorIzquierdo().getX()) ||
-				(b.getBordeInferiorIzquierdo().getX() < a.getBordeInferiorIzquierdo().getX() && 
-				b.getBordeInferiorDerecho().getX() > a.getBordeInferiorIzquierdo().getX())){
+			if((b.getBordeSuperiorIzquierdo().getX() <= a.getBordeSuperiorIzquierdo().getX() && 
+				b.getBordeSuperiorDerecho().getX() >= a.getBordeSuperiorIzquierdo().getX()) ||
+				(b.getBordeInferiorIzquierdo().getX() <= a.getBordeInferiorIzquierdo().getX() && 
+				b.getBordeInferiorDerecho().getX() >= a.getBordeInferiorIzquierdo().getX())){
 				sePisan = true;
 			}
 			else {
-				if((b.getBordeSuperiorIzquierdo().getX() > a.getBordeSuperiorIzquierdo().getX() && 
-					b.getBordeSuperiorDerecho().getX() < a.getBordeSuperiorDerecho().getX()) ||
-					(b.getBordeInferiorIzquierdo().getX() > a.getBordeInferiorIzquierdo().getX() && 
-					b.getBordeInferiorDerecho().getX() < a.getBordeInferiorDerecho().getX())){
+				if((b.getBordeSuperiorIzquierdo().getX() >= a.getBordeSuperiorIzquierdo().getX() && 
+					b.getBordeSuperiorDerecho().getX() <= a.getBordeSuperiorDerecho().getX()) ||
+					(b.getBordeInferiorIzquierdo().getX() >= a.getBordeInferiorIzquierdo().getX() && 
+					b.getBordeInferiorDerecho().getX() <= a.getBordeInferiorDerecho().getX())){
 					sePisan = true;
 				}
 				else{
@@ -121,28 +162,28 @@ public class Validador {
 	private static boolean sePisanEnY(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean sePisan = false;
 		//arranca arriba y termina abajo de donde empieza el otro
-		if((b.getBordeSuperiorDerecho().getY() < a.getBordeSuperiorDerecho().getY() && 
-			b.getBordeInferiorDerecho().getY() > a.getBordeSuperiorDerecho().getY()) ||
-			(b.getBordeSuperiorIzquierdo().getY() < a.getBordeSuperiorIzquierdo().getY() && 
-			b.getBordeInferiorIzquierdo().getY() > a.getBordeSuperiorIzquierdo().getY())){
+		if((b.getBordeSuperiorDerecho().getY() <= a.getBordeSuperiorDerecho().getY() && 
+			b.getBordeInferiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY()) ||
+			(b.getBordeSuperiorIzquierdo().getY() <= a.getBordeSuperiorIzquierdo().getY() && 
+			b.getBordeInferiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY())){
 			sePisan = true;
 			//System.out.println("entro 1");
 		}
 		else{
 			//arranca abajo (adentro) y termina abajo (afuera)
-			if((b.getBordeSuperiorIzquierdo().getY() > a.getBordeSuperiorIzquierdo().getY() && 
-				b.getBordeInferiorIzquierdo().getY() < a.getBordeInferiorIzquierdo().getY()) ||
-				(b.getBordeSuperiorDerecho().getY() > a.getBordeSuperiorDerecho().getY() && 
-				b.getBordeInferiorDerecho().getY() < a.getBordeInferiorDerecho().getY())){
+			if((b.getBordeSuperiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY() && 
+				b.getBordeInferiorIzquierdo().getY() <= a.getBordeInferiorIzquierdo().getY()) ||
+				(b.getBordeSuperiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY() && 
+				b.getBordeInferiorDerecho().getY() <= a.getBordeInferiorDerecho().getY())){
 				sePisan = true;
 				//System.out.println("entro 2");
 			}
 			else {
 				//arranca abajo (adentro) y termina arriba (adentro)
-				if((b.getBordeSuperiorIzquierdo().getY() > a.getBordeSuperiorIzquierdo().getY() && 
-					b.getBordeSuperiorIzquierdo().getY() < a.getBordeInferiorIzquierdo().getY()) ||
-					(b.getBordeSuperiorDerecho().getY() > a.getBordeSuperiorDerecho().getY() && 
-					b.getBordeSuperiorDerecho().getY() < a.getBordeInferiorDerecho().getY())){
+				if((b.getBordeSuperiorIzquierdo().getY() >= a.getBordeSuperiorIzquierdo().getY() && 
+					b.getBordeSuperiorIzquierdo().getY() <= a.getBordeInferiorIzquierdo().getY()) ||
+					(b.getBordeSuperiorDerecho().getY() >= a.getBordeSuperiorDerecho().getY() && 
+					b.getBordeSuperiorDerecho().getY() <= a.getBordeInferiorDerecho().getY())){
 					sePisan = true;
 					//System.out.println("entro 3");
 				}
