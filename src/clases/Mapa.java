@@ -16,7 +16,6 @@ public class Mapa extends AnchorPane implements Serializable {
 	private float tamanioX;
 	private float tamanioY;
 	private double posicionEnGradosRespectoDelNorteMagnetico;
-	private Grilla grilla;
 	private Recinto recintoMapa;
 	private Collection <Recinto> recintos = new LinkedList<Recinto>();
 	private MatrizDeAdyacencia matrizDeAdyacenciaGlobal;
@@ -37,6 +36,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		Rectangle background = new Rectangle (tamanioX,tamanioY);
 		background.setStroke(Color.BLACK);
 		background.setFill(Color.LIGHTGREY);
+		recintoMapa.setFormaRecinto(background);
 		
 		for (Recinto recinto : this.recintos) {
 			recintosParaSerAgregados.add(recinto.getFormaRecinto());
@@ -55,9 +55,9 @@ public class Mapa extends AnchorPane implements Serializable {
 		}
 		
 		//Primero se agrega el fondo
-		formasPosicionablesEnMapa.add(background);
+		formasPosicionablesEnMapa.add(this.recintoMapa.getFormaRecinto());
 		//Si existe una grilla se agrega
-		if(grilla!=null){formasPosicionablesEnMapa.addAll(grilla.getColeccionDeRectangulos());}
+		if(this.recintoMapa.getGrilla()!=null){formasPosicionablesEnMapa.addAll(this.recintoMapa.getGrilla().getColeccionDeRectangulos());}
 		//Luego se agregan los recintos en orden
 		formasPosicionablesEnMapa.addAll(recintosParaSerAgregados);
 		//Luego se agregan las grillas en orden
@@ -66,7 +66,6 @@ public class Mapa extends AnchorPane implements Serializable {
 		formasPosicionablesEnMapa.addAll(puertasParaSerAgregadas);
 		//Finalmente los obstaculos en orden
 		formasPosicionablesEnMapa.addAll(obstaculosParaSerAgregados);
-		
 		this.getChildren().clear();
 		this.getChildren().addAll(formasPosicionablesEnMapa);
 
@@ -109,7 +108,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		boolean encontrado = false;
 		
 		//Primero reviso si esta en la grilla local del recinto del mapa, el cual corresponde al espacio global
-		Cuadrante[][] cuadrantesDelMapa = this.grilla.getMatrizDeCuadrantes();
+		Cuadrante[][] cuadrantesDelMapa = this.recintoMapa.getGrilla().getMatrizDeCuadrantes();
 		for (Cuadrante[] filaCuadrantes : cuadrantesDelMapa) {
 			for (Cuadrante cuadrante : filaCuadrantes) {
 				if(cuadrante.getId() == idCuadrante){
@@ -147,9 +146,9 @@ public class Mapa extends AnchorPane implements Serializable {
 	
 	public void regenerarIdsCuadrantesDeTodoElMapa(){
 		//reseteo el contador
-		this.grilla.getContador().resetearContador();
+		this.recintoMapa.getGrilla().getContador().resetearContador();
 		//primero regenero los de la grilla del mapa
-		this.grilla.regenerarIdsCuadrantes();
+		this.recintoMapa.getGrilla().regenerarIdsCuadrantes();
 		//luego regenero iterando por cada recinto
 		Iterator<Recinto> iteradorDeRecintos = this.recintos.iterator();
 		while(iteradorDeRecintos.hasNext()){
@@ -158,24 +157,18 @@ public class Mapa extends AnchorPane implements Serializable {
 	}
 	
 	public void calcularMatrizDeAdyacenciaGlobal(){
-		int cantidadTotalDeCuadrantes = this.grilla.getContador().getProximoNumeroDeCuadrante();
+		int cantidadTotalDeCuadrantes = this.recintoMapa.getGrilla().getContador().getProximoNumeroDeCuadrante();
 		this.matrizDeAdyacenciaGlobal = new MatrizDeAdyacencia(cantidadTotalDeCuadrantes);
 		
 		//Primero calculo la de adyacencia de la grilla del mapa y la inserto en la global
-		//this.grilla.prepararGrillaParaDibujo();
-		this.recintoMapa.setGrilla(this.grilla);
+		this.recintoMapa.getGrilla().prepararGrillaParaDibujo();
 		this.recintoMapa.verificarDisponibilidadDeLaGrilla();
-		this.grilla = this.recintoMapa.getGrilla();
-		MatrizDeAdyacencia ma = this.grilla.getMatrizDeAdyacencia();
+		MatrizDeAdyacencia ma = this.recintoMapa.getGrilla().getMatrizDeAdyacencia();
 		System.out.println("Matriz de adyacencia del mapa:");
 		//ma.imprimirMatriz();
 		boolean[][] matrizDeAdyacenciaDelMapa = ma.getMatrizDeAdyacenciaEnBooleanos();
-		this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelMapa, this.grilla.getIdInicial());
+		this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelMapa, this.recintoMapa.getGrilla().getIdInicial());
 		System.out.println("Insertando cuadrantes del mapa");
-//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
-//		matrizDeAdyacenciaGlobal.imprimirMatriz();
-//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
-		
 		//Luego itero por cada recinto, y genero la de adyacencia de cada recinto, y la inserto en la global
 		Iterator<Recinto> iteradorDeRecintos = this.recintos.iterator();
 		while(iteradorDeRecintos.hasNext()){
@@ -188,11 +181,6 @@ public class Mapa extends AnchorPane implements Serializable {
 			boolean[][] matrizDeAdyacenciaDelRecinto = mar.getMatrizDeAdyacenciaEnBooleanos();
 			this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelRecinto, grillaDelRecinto.getIdInicial());
 		}
-
-//		System.out.println("Insertando Recintos");
-//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
-//		matrizDeAdyacenciaGlobal.imprimirMatriz();
-//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
 		//Puertas --> Conectar los grafos
 		iteradorDeRecintos = this.recintos.iterator();
 		Iterator<Recinto> iteradorDeRecintosEnBusquedaDeCoordenada;
@@ -239,7 +227,7 @@ public class Mapa extends AnchorPane implements Serializable {
 					}
 					//pertenece al espacio global
 					else{
-						cuadranteExterior = this.grilla.buscarCuadrantePorCoordenada(coordenadaDelCuadranteExteriorALaPuerta);
+						cuadranteExterior = this.recintoMapa.getGrilla().buscarCuadrantePorCoordenada(coordenadaDelCuadranteExteriorALaPuerta);
 						cuadranteExterior.setLinderoAPuerta(true);
 						colaCuadranteInterior.add(cuadranteInterior);
 						colaCuadranteExterior.add(cuadranteExterior);
@@ -250,7 +238,6 @@ public class Mapa extends AnchorPane implements Serializable {
 		}
 		
 		//ACA
-		System.out.println("Vuelvo a verificar la grilla del mapa");
 		this.recintoMapa.verificarDisponibilidadDeLaGrilla();
 		while(!colaCuadranteInterior.isEmpty()){
 			cuadranteExterior = colaCuadranteExterior.poll();
@@ -299,7 +286,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		}
 		//finalmente en el mapa libre
 		if (cuadrante == null){
-			cuadrante = this.grilla.buscarCuadrantePorCoordenada(coordenada);
+			cuadrante = this.recintoMapa.getGrilla().buscarCuadrantePorCoordenada(coordenada);
 		}
 		return cuadrante;
 	}
@@ -326,11 +313,7 @@ public class Mapa extends AnchorPane implements Serializable {
 	}
 
 	public Grilla getGrilla() {
-		return grilla;
-	}
-
-	public void setGrilla(Grilla grilla) {
-		this.grilla = grilla;
+		return this.recintoMapa.getGrilla();
 	}
 
 	public Recinto getRecintoMapa() {
