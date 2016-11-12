@@ -349,6 +349,7 @@ public class MainController extends BorderPane {
 	    	    	ObjectOutputStream oos = new ObjectOutputStream(fout);
 	    	    	oos.writeObject(mapa);
 	    	    	oos.close();
+	    	    	fout.close();
     	    	System.out.println("Mapa guardado en: " + ubicacion);
     			}
     		}
@@ -388,6 +389,8 @@ public class MainController extends BorderPane {
     	mapa = (Mapa) ois.readObject();
     	mapa.dibujarMapa();
 		panelCentral.getChildren().setAll(mapa.getChildren());
+		ois.close();
+		fis.close();
     
     }
 
