@@ -42,7 +42,10 @@ public class Grilla implements Serializable{
 		int idLocal = 0;
 		float tamanioX;
 		float tamanioY;
-		
+		System.out.println("Creando Grilla del recinto: " + this.recinto.getNombre());
+		System.out.println("Num Filas: "  + filas);
+		System.out.println("Num Col: " + columnas);
+		System.out.println("Id Primer Cuadrante: " + numero);
 		switch(vertice){
 			case 1:
 				for (int fila=0; fila < filas ;fila++){
@@ -178,6 +181,7 @@ public class Grilla implements Serializable{
 		}
 		//imprimirMatriz(matrizDeCuadrantes);
 		this.contador.setProximoNumeroDeCuadrante(numero);
+		System.out.println("Ultimo Id: " + numero);
 	}
 	
 	public Cuadrante[][] getMatrizDeCuadrantes(){
@@ -225,7 +229,7 @@ public class Grilla implements Serializable{
 		while(!encontro && fila < this.filas){
 			columna = 0;
 			while(!encontro && columna < this.columnas){
-				if(this.matrizDeCuadrantes[fila][columna].getId() == numeroDeCuadrante){
+				if(this.matrizDeCuadrantes[fila][columna].getIdLocal() == numeroDeCuadrante){
 					encontro = true;
 					posicion[0] = fila;
 					posicion[1] = columna;
