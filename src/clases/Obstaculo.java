@@ -11,7 +11,7 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 	
 	public Obstaculo(Float x, Float y, Obstaculos tipo){
 		setearCaracteristicasDelObstaculo(tipo);
-		obstaculo = new Rectangle(x,y,this.ancho,this.largo);
+		obstaculo = new Rectangle(x,y,this.ancho,this.alto);
 		obstaculo.setStroke(Color.BLACK);
 		obstaculo.setFill(Color.WHITESMOKE);
 		obstaculo.setStrokeWidth(2);
@@ -29,7 +29,7 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 		this.posicionX = x;
 		this.posicionY = y;
 		this.ancho = ancho;
-		this.largo = alto;
+		this.alto = alto;
 		this.calcularPosicionBordes();
 		this.tipo = tipo;
 	}
@@ -47,21 +47,21 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 		switch (tipo) {
 		case Silla:
 			this.ancho = (float) 10;
-			this.largo = (float) 10;
+			this.alto = (float) 10;
 			break;
 		case Mesa:
 			this.ancho = (float) 30;
-			this.largo = (float) 20;
+			this.alto = (float) 20;
 			break;
 			
 		case Pizarron:
 			this.ancho = (float) 0.1;
-			this.largo = (float) 2;
+			this.alto = (float) 2;
 			break;
 			
 		case Armario:
 			this.ancho = (float) 0.6;
-			this.largo = (float) 10;
+			this.alto = (float) 10;
 			break;
 
 		default:
@@ -74,7 +74,7 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 	}
 	
 	public void regenerarObstaculo(){
-		this.obstaculo = new Rectangle(this.posicionX,this.posicionY,this.ancho,this.largo);
+		this.obstaculo = new Rectangle(this.posicionX,this.posicionY,this.ancho,this.alto);
 		this.obstaculo.setStroke(Color.BLACK);
 		this.obstaculo.setFill(Color.WHITESMOKE);
 		this.obstaculo.setStrokeWidth(2);

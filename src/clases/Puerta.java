@@ -22,13 +22,13 @@ public class Puerta extends FormaPosicionableEnMapa {
 		this.orientacion = orientacion;
 		if(orientacion == Orientacion.Horizontal){
 			this.ancho = ancho;
-			this.largo = 0;
+			this.alto = 0;
 			this.posicionFinalX = posicionX + ancho;
 			this.posicionFinalY = posicionY;
 		}
 		else{
 			this.ancho = 0;
-			this.largo = ancho;
+			this.alto = ancho;
 			this.posicionFinalX = posicionX;
 			this.posicionFinalY = posicionY+ancho;
 		}

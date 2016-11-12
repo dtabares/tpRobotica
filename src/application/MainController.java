@@ -397,6 +397,7 @@ public class MainController extends BorderPane {
 	    	FileInputStream fis = new FileInputStream(ubicacion);
 	    	ObjectInputStream ois = new ObjectInputStream(fis);
 	    	mapa = (Mapa) ois.readObject();
+	    	mapa.regenerarFiguras();
 	    	mapa.dibujarMapa();
 			panelCentral.getChildren().setAll(mapa.getChildren());
 			ois.close();

@@ -6,7 +6,7 @@ import javafx.scene.shape.Rectangle;
 public class Cuadrante extends FormaPosicionableEnMapa {
 	
 	private boolean disponible;
-	private Rectangle rectangulo;
+	private transient Rectangle rectangulo;
 	private int id;
 	private int idLocal;
 	private boolean linderoAPuerta;
@@ -17,7 +17,7 @@ public class Cuadrante extends FormaPosicionableEnMapa {
 		this.rectangulo.setFill(Color.WHITE);
 		this.rectangulo.setStrokeWidth(1);	
 		this.disponible = true;
-		this.largo = alto;
+		this.alto = alto;
 		this.ancho = ancho;
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
@@ -66,6 +66,13 @@ public class Cuadrante extends FormaPosicionableEnMapa {
 
 	public void setLinderoAPuerta(boolean linderoAPuerta) {
 		this.linderoAPuerta = linderoAPuerta;
+	}
+	
+	public void recrearRectangulo(){
+		this.rectangulo = new Rectangle(posicionX,posicionY,ancho,this.alto);
+		this.rectangulo.setStroke(Color.BLACK);
+		this.rectangulo.setFill(Color.WHITE);
+		this.rectangulo.setStrokeWidth(1);
 	}
 	
 	

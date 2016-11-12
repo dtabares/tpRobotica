@@ -11,14 +11,14 @@ public abstract class FormaPosicionableEnMapa implements Serializable{
 	protected float posicionX;
 	protected float posicionY;
 	protected float ancho;
-	protected float largo;
+	protected float alto;
 	
 	
 	protected void calcularPosicionBordes(){
 		this.bordeSuperiorIzquierdo = new Coordenada(this.posicionX,this.posicionY);
 		this.bordeSuperiorDerecho = new Coordenada(this.posicionX + this.ancho, this.posicionY);
-		this.bordeInferiorIzquierdo = new Coordenada(this.posicionX, this.posicionY + this.largo);
-		this.bordeInferiorDerecho = new Coordenada(this.posicionX + this.ancho, this.posicionY + this.largo);
+		this.bordeInferiorIzquierdo = new Coordenada(this.posicionX, this.posicionY + this.alto);
+		this.bordeInferiorDerecho = new Coordenada(this.posicionX + this.ancho, this.posicionY + this.alto);
 	}
 	
 	public Coordenada getBordeSuperiorIzquierdo() {
@@ -42,7 +42,7 @@ public abstract class FormaPosicionableEnMapa implements Serializable{
 	}
 
 	public float getAlto() {
-		return largo;
+		return alto;
 	}
 	
 	public float getPosicionX() {

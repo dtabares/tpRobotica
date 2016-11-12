@@ -9,7 +9,7 @@ import javafx.scene.shape.Shape;
 public class Grilla implements Serializable{
 	
 	private Cuadrante[][] matrizDeCuadrantes;
-	private Collection <Shape> coleccionDeRectangulos;
+	private transient Collection <Shape> coleccionDeRectangulos;
 	private MatrizDeAdyacencia matrizDeAdyacencia;
 	private float posicionX;
 	private float posicionY;
@@ -196,6 +196,19 @@ public class Grilla implements Serializable{
 		this.coleccionDeRectangulos.clear();
 		for (Cuadrante[] filacuadrante : this.matrizDeCuadrantes) {
 			for (Cuadrante cuadrante : filacuadrante) {
+				this.coleccionDeRectangulos.add(cuadrante.getRectangle());
+			}	
+		}
+	}
+	
+	public void prepararGrillaParaDibujoDespuesDeCargarMapa(){
+		if(this.coleccionDeRectangulos != null){
+			this.coleccionDeRectangulos.clear();
+		}
+		this.coleccionDeRectangulos = new LinkedList<Shape>();
+		for (Cuadrante[] filacuadrante : this.matrizDeCuadrantes) {
+			for (Cuadrante cuadrante : filacuadrante) {
+				cuadrante.recrearRectangulo();
 				this.coleccionDeRectangulos.add(cuadrante.getRectangle());
 			}	
 		}

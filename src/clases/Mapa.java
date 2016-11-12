@@ -13,6 +13,7 @@ import javafx.scene.shape.Shape;
 
 public class Mapa extends AnchorPane implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private float tamanioX;
 	private float tamanioY;
 	private double posicionEnGradosRespectoDelNorteMagnetico;
@@ -343,6 +344,25 @@ public class Mapa extends AnchorPane implements Serializable {
 	
 	public double getPosicionEnGradosRespectoDelNorteMagnetico() {
 		return posicionEnGradosRespectoDelNorteMagnetico;
+	}
+	
+	public void regenerarFiguras(){
+		//Primero regenero la grilla del mapa y su recinto
+		this.recintoMapa.regenerarFormaRecinto();
+		this.grilla.prepararGrillaParaDibujoDespuesDeCargarMapa();
+		//Despues itero por cada recinto
+		//Regenerando :
+		//El recinto, la grilla, los obstaculos, las puertas
+		for (Recinto recinto : recintos) {
+				recinto.regenerarFormaRecinto();
+				recinto.getGrilla().prepararGrillaParaDibujoDespuesDeCargarMapa();
+				for (Obstaculo obstaculo : recinto.getObstaculos()) {
+					obstaculo.regenerarObstaculo();
+				}
+				for (Puerta puerta : recinto.getPuertas()) {
+					puerta.regenerateLinea();
+				}
+		}
 	}
 
 }

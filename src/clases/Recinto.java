@@ -25,7 +25,7 @@ public class Recinto extends FormaPosicionableEnMapa{
 		this.posicionX = x;
 		this.posicionY = y;
 		this.ancho = ancho;
-		this.largo = alto;
+		this.alto = alto;
 		this.calcularPosicionBordes();
 	}
 	
@@ -188,7 +188,7 @@ public class Recinto extends FormaPosicionableEnMapa{
 	}
 	
 	public void regenerarFormaRecinto(){
-		setFormaRecinto(new Rectangle(this.posicionX,this.posicionY,this.ancho,this.largo));
+		setFormaRecinto(new Rectangle(this.posicionX,this.posicionY,this.ancho,this.alto));
 		getFormaRecinto().setStroke(Color.BLACK);
 		getFormaRecinto().setFill(Color.WHITE);
 		getFormaRecinto().setStrokeWidth(2);
