@@ -250,6 +250,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		}
 		
 		//ACA
+		System.out.println("Vuelvo a verificar la grilla del mapa");
 		this.recintoMapa.verificarDisponibilidadDeLaGrilla();
 		while(!colaCuadranteInterior.isEmpty()){
 			cuadranteExterior = colaCuadranteExterior.poll();

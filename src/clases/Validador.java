@@ -65,7 +65,9 @@ public class Validador {
 				Cuadrante c = (Cuadrante) a;
 				if(obs.getTipo().equals(Obstaculos.Recinto)){
 					if(c.esLinderoAPuerta()){
-						seSuperponen = validarCuadranteLinderoAPuertaYrecinto(c,obs);
+						//seSuperponen = validarCuadranteLinderoAPuertaYrecinto(c,obs);
+						seSuperponen = false;
+						c.marcarComoDisponible();
 						System.out.println("entre");
 					}
 					else{

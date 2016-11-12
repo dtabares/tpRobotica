@@ -38,12 +38,14 @@ public class Recinto extends FormaPosicionableEnMapa{
 	}
 	
 	public void verificarDisponibilidadDeLaGrilla(){
+		System.out.println("Imprimiendo Grilla del recinto: " + this.nombre);
 		for (Cuadrante[] filacuadrante : this.grilla.getMatrizDeCuadrantes()) {
 			for (Cuadrante cuadrante : filacuadrante) {
 				for (Obstaculo obstaculo : obstaculos) {
 					if (Validador.validarSiElCuadranteEsOcupadoPorUnObstaculo(cuadrante,obstaculo)){
 						cuadrante.marcarComoNoDisponible();
 					}
+					System.out.println("Cuadrante: " + cuadrante.getId() + " disponible: " + cuadrante.estaDisponible());
 				}
 			}
 		}
