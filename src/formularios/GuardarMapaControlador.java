@@ -51,12 +51,8 @@ public class GuardarMapaControlador extends GridPane {
 	@FXML public void guardarMapa() throws IOException{
 		
 		String location = directorio.getText();
-		
-		if(location.contains("jpg")){
-			
-            WritableImage wi = new WritableImage((int) mapa.getTamanioX(),(int) mapa.getTamanioY());
-            SnapshotParameters sp = new SnapshotParameters();
-            Image imagen = mapa.snapshot(sp, wi);
+		if(location.contains("png")){
+            WritableImage imagen = mapa.snapshot(new SnapshotParameters(), new WritableImage((int) mapa.getTamanioX(),(int) mapa.getTamanioY()));
             if (file != null) {
                 try {
                     ImageIO.write(SwingFXUtils.fromFXImage(imagen,
@@ -75,18 +71,18 @@ public class GuardarMapaControlador extends GridPane {
 	    	System.out.println("Mapa guardado en: " + location);
 			}
 		}
-		
+		this.ocultarFormulario();
 	}
 	
 	@FXML public File buscarDirectorio(){
 		
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar Mapa");          
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagen (*.jpg)", "*.jpg"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagen (*.png)", "*.png"));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Objeto (*.obj)", "*.obj"));
         file = fileChooser.showSaveDialog(stage);
-        if(!file.getName().contains(".jpg") && fileChooser.getSelectedExtensionFilter().equals("*.jpg")) {
-        	file = new File(file.getAbsolutePath() + ".jpg");
+        if(!file.getName().contains(".png") && fileChooser.getSelectedExtensionFilter().equals("*.png")) {
+        	file = new File(file.getAbsolutePath() + ".png");
         }
         else if(!file.getName().contains(".obj") && fileChooser.getSelectedExtensionFilter().equals("*.obj")){
         	file = new File(file.getAbsolutePath() + ".obj");
