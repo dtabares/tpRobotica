@@ -43,6 +43,7 @@ public class Puerta extends FormaPosicionableEnMapa {
 		this.linea = new Line(this.posicionX,this.posicionY,posFinalX,posFinalY);
 		this.linea.setFill(Color.NAVY);
 		this.linea.setStroke(Color.NAVY);
+		this.linea.setStrokeWidth(5);
 	}
 
 	public float getPosicionFinalX() {
