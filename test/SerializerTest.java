@@ -28,7 +28,7 @@ public class SerializerTest {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		Puerta p = (Puerta) ois.readObject();
 		ois.close();
-		p.regenerarFormaObstaculo();
+		p.regenerateLinea();
 		
 		Assert.assertEquals(20, p.getAncho(),0);
 	}

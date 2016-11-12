@@ -165,8 +165,6 @@ public class MainController extends BorderPane {
     		mapa.getRecintos().remove(mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue()));
     		inRecintosComboBox.getItems().remove(inRecintosComboBox.getValue());
     		inRecintosComboBox.setValue("Nuevo Recinto");
-    		inPuertasComboBox.getItems().remove(inRecintosComboBox.getValue());
-    		inObstaculosComboBox.getItems().remove(inRecintosComboBox.getValue());
     		this.agregarRecinto();
 			mapa.dibujarMapa();
     		panelCentral.getChildren().setAll(mapa.getChildren());
@@ -232,7 +230,7 @@ public class MainController extends BorderPane {
     @FXML public void agregarGrillaEnMapa(){
     	
     	if (inMapaCheckboxGrilla.isSelected()){
-    		mapa.getRecintoMapa().setGrilla(new Grilla(mapa.getRecintoMapa(),Float.valueOf(inMapaTamanioGrilla.getText()),(int)inMapaComboVertices.getValue()));
+    		mapa.setGrilla(new Grilla(mapa.getRecintoMapa(),Float.valueOf(inMapaTamanioGrilla.getText()),(int)inMapaComboVertices.getValue()));
     		mapa.getGrilla().prepararGrillaParaDibujo();
     		mapa.regenerarIdsCuadrantesDeTodoElMapa();
     		mapa.dibujarMapa();

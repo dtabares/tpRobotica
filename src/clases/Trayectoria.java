@@ -68,7 +68,7 @@ public class Trayectoria implements Serializable{
 	
 	private double calcularDireccionEnGrados(Cuadrante actual, Cuadrante siguiente){
 		double direccion = 0;
-		float x = actual.getPosicionX() - siguiente.getPosicionX();     
+		float x = actual.getPosicionX() - siguiente.getPosicionX();
 		float y = actual.getPosicionY() - siguiente.getPosicionY();
 		
 		//En caso de que x == 0 quiere decir que puede se mueve solo en Y

@@ -11,6 +11,11 @@ public class Puerta extends FormaPosicionableEnMapa {
 	private float posicionFinalY;
 	private Orientacion orientacion;
 	
+//	protected float posicionX;
+//	protected float posicionY;
+//	protected float ancho;
+//	protected float largo;
+	
 	public Puerta(float posicionX, float posicionY, Orientacion orientacion, float ancho){
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
@@ -41,7 +46,7 @@ public class Puerta extends FormaPosicionableEnMapa {
 		this.linea.setStrokeWidth(5);
 	}
 	
-	public void regenerarFormaObstaculo(){
+	public void regenerateLinea(){
 		this.setearLinea(this.posicionFinalX, this.posicionFinalY);
 	}
 
