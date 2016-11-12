@@ -125,7 +125,6 @@ public class Trayectoria implements Serializable{
 		return direccion;
 	}
 	
-	//YA PODES CONSUMIR ESTO DESDE LA UI
 	public List<String> obtenerSecuenciaDePasosComoString(){
 		List<String> secuencia = new LinkedList<String>();
 		Iterator<Paso> iterador = this.pasos.iterator();
