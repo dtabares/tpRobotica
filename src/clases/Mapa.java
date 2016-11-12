@@ -176,7 +176,10 @@ public class Mapa extends AnchorPane implements Serializable {
 		this.recintoMapa.setGrilla(this.grilla);
 		this.recintoMapa.verificarDisponibilidadDeLaGrilla();
 		this.grilla = this.recintoMapa.getGrilla();
-		boolean[][] matrizDeAdyacenciaDelMapa = this.grilla.getMatrizDeAdyacencia().getMatrizDeAdyacenciaEnBooleanos();
+		MatrizDeAdyacencia ma = this.grilla.getMatrizDeAdyacencia();
+		System.out.println("Matriz de adyacencia del mapa:");
+		ma.imprimirMatriz();
+		boolean[][] matrizDeAdyacenciaDelMapa = ma.getMatrizDeAdyacenciaEnBooleanos();
 		this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelMapa, this.grilla.getIdInicial());
 		System.out.println("Insertando cuadrantes del mapa");
 //		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -189,7 +192,10 @@ public class Mapa extends AnchorPane implements Serializable {
 			Recinto recinto = iteradorDeRecintos.next();
 			recinto.verificarDisponibilidadDeLaGrilla();
 			Grilla grillaDelRecinto = recinto.getGrilla();
-			boolean[][] matrizDeAdyacenciaDelRecinto = grillaDelRecinto.getMatrizDeAdyacencia().getMatrizDeAdyacenciaEnBooleanos();
+			MatrizDeAdyacencia mar = grillaDelRecinto.getMatrizDeAdyacencia();
+			System.out.println("Matriz de adyacencia del recinto: " + recinto.getNombre());
+			mar.imprimirMatriz();
+			boolean[][] matrizDeAdyacenciaDelRecinto = mar.getMatrizDeAdyacenciaEnBooleanos();
 			this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelRecinto, grillaDelRecinto.getIdInicial());
 		}
 
@@ -248,6 +254,8 @@ public class Mapa extends AnchorPane implements Serializable {
 				}
 			}
 		}
+		System.out.println("Matriz de Adyacencia Global:");
+		matrizDeAdyacenciaGlobal.imprimirMatriz();
 	}
 	
 	public MatrizDeAdyacencia getMatrizDeAdyacenciaGlobal(){
@@ -260,6 +268,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		
 		for (boolean[] bs : matrizLocal) {
 			for (boolean b : bs) {
+				//System.out.println("Inserto el valor: " + b + " en la fila: " + posicionFila  + " columna: " +posicionColumna);
 				this.matrizDeAdyacenciaGlobal.getMatrizDeAdyacenciaEnBooleanos()[posicionFila][posicionColumna] = b;
 				posicionColumna++;
 			}
