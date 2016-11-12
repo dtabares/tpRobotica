@@ -7,7 +7,6 @@ public class MatrizDeAdyacencia implements Serializable{
 	private boolean[][] matrizDeAdyacencia;
 	private Grilla grilla;
 	
-	
 	public MatrizDeAdyacencia(Grilla grilla){
 		this.grilla = grilla;
 		int tamanio = grilla.getFilas()*grilla.getColumnas();

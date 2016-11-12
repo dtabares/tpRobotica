@@ -25,10 +25,12 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="botonNuevoMapa" mnemonicParsing="false" onAction="#crearNuevoMapa" text="Crear Nuevo Mapa" />
-                  <MenuItem mnemonicParsing="false" onAction="#guardarMapa" text="Guardar" />
-                  <MenuItem mnemonicParsing="false" text="Cargar" />
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="botonNuevoMapa" mnemonicParsing="false" onAction="#crearNuevoMapa" text="Crear mapa" />
+                  <MenuItem mnemonicParsing="false" onAction="#guardarMapa" text="Guardar mapa" />
+                  <MenuItem mnemonicParsing="false" onAction="#cargarMapa" text="Cargar mapa" />
+                  <MenuItem mnemonicParsing="false" onAction="#guardarTrayectorias" text="Guardar trayectorias" />
+                  <MenuItem mnemonicParsing="false" onAction="#cargarTrayectorias" text="Cargar trayectorias" />
+              <MenuItem mnemonicParsing="false" onAction="#cerrarAplicacion" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
