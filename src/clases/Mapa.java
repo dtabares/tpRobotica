@@ -34,7 +34,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		Collection<Shape> puertasParaSerAgregadas = new LinkedList<Shape>();
 		Rectangle background = new Rectangle (tamanioX,tamanioY);
 		background.setStroke(Color.BLACK);
-		background.setFill(Color.WHITE);
+		background.setFill(Color.LIGHTGREY);
 		
 		for (Recinto recinto : this.recintos) {
 			recintosParaSerAgregados.add(recinto.getFormaRecinto());

@@ -1,6 +1,7 @@
 package application;
 
 import java.awt.Component;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import clases.Coordenada;
 import clases.Cuadrante;
@@ -21,20 +23,24 @@ import clases.Orientacion;
 import clases.Puerta;
 import clases.Recinto;
 import clases.Trayectoria;
-import formularios.GuardarMapaControlador;
 import formularios.NuevoMapaControlador;
 import formularios.NuevoMapaControlador.NuevoMapaControladorListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Shape;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import trayectorias.Dijkstra;
 
 public class MainController extends BorderPane {
@@ -45,6 +51,7 @@ public class MainController extends BorderPane {
 	Trayectoria trayectoria;
 	//Objeto para instanciar mensajes 
 	Component frame = null;
+	File archivo=null;
 
 	@FXML private AnchorPane panelCentral;
 	
@@ -141,12 +148,12 @@ public class MainController extends BorderPane {
 			    	}
 	    			mapa.dibujarMapa();
 		    		panelCentral.getChildren().setAll(mapa.getChildren());
-		    		//test
-		    		System.out.println("Creando Grila del recinto");
-		    		Grilla g = recinto.getGrilla();
-		    		g.prepararGrillaParaDibujo();
-		    		g.getMatrizDeAdyacencia().imprimirMatriz();
-		    		System.out.println("Grilla creada");
+//		    		//test
+//		    		System.out.println("Creando Grila del recinto");
+//		    		Grilla g = recinto.getGrilla();
+//		    		g.prepararGrillaParaDibujo();
+//		    		g.getMatrizDeAdyacencia().imprimirMatriz();
+//		    		System.out.println("Grilla creada");
 	    		}
 	    		else{
 	    			this.mostrarMensajeDeError("Recinto invalido");
@@ -158,13 +165,16 @@ public class MainController extends BorderPane {
 			}
     	}
     	else {
-    		System.out.println("Modificacion");
+    		System.out.println("Modificando Recinto");
     		Recinto recinto = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
 	    	if(inCheckboxGrilla.isSelected()){
 	    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()),(int)inRecintosComboVertices.getValue());
 	    		grilla.prepararGrillaParaDibujo();
 	    		recinto.setGrilla(grilla);
 	    		mapa.regenerarIdsCuadrantesDeTodoElMapa();
+	    	}
+	    	else{
+	    		//Borrar recinto y llamarse a si mismo
 	    	}
 			mapa.dibujarMapa();
     		panelCentral.getChildren().setAll(mapa.getChildren());
@@ -256,14 +266,10 @@ public class MainController extends BorderPane {
 			else{
 				this.mostrarMensajeDeError("El recinto seleccionado es invalido");
 			}
-    		
     	}
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
     	}
-    	
-    	
-    	
     }
 
     @FXML public void borrarMapa(){
@@ -326,7 +332,7 @@ public class MainController extends BorderPane {
 
     	}
     	else{
-    		this.mostrarMensajeDeError("Debe crear un mapa primero!");
+    		this.mostrarMensajeDeError("No existe el mapa!");
     	}
     	
     }
@@ -334,19 +340,65 @@ public class MainController extends BorderPane {
     @FXML public void guardarMapa() throws IOException{
     	
     	if(mapa!=null){
-	    	GuardarMapaControlador guardarMapaControlador = new GuardarMapaControlador(mapa);
-	    	guardarMapaControlador.mostrarFormulario();}
+    		String ubicacion = buscarDirectorio().getAbsolutePath();
+    		if(ubicacion.contains("png")){
+    			System.out.println("Guardando mapa como imagen");
+    		    WritableImage imagen = panelCentral.snapshot(new SnapshotParameters(), null);
+    		    File archivo = new File(ubicacion);
+    		    try {
+    		        ImageIO.write(SwingFXUtils.fromFXImage(imagen, null), "png", archivo);
+    		        System.out.println("Mapa guardado en: " + ubicacion);
+    		    } catch (IOException e) {
+    		    	System.out.println(e.getMessage());
+    		    }
+    		}
+    		else{
+    			System.out.println("Guardando mapa como objeto");
+    			if(ubicacion!=null){	
+	    	    	FileOutputStream fout = new FileOutputStream(ubicacion);
+	    	    	ObjectOutputStream oos = new ObjectOutputStream(fout);
+	    	    	oos.writeObject(mapa);
+	    	    	oos.close();
+    	    	System.out.println("Mapa guardado en: " + ubicacion);
+    			}
+    		}
+    	}
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
     	}
     }
     
+    public File buscarDirectorio(){
+		
+    	Stage directorioStage = null;
+        FileChooser fileChooser = new FileChooser();
+        if (archivo!=null){
+        	//fileChooser.setInitialDirectory(archivo.);
+        }
+        fileChooser.setTitle("Guardar Mapa");          
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagen (*.png)", "*.png"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Objeto (*.obj)", "*.obj"));
+        archivo = fileChooser.showSaveDialog(directorioStage);
+        if(!archivo.getName().contains(".png") && fileChooser.getSelectedExtensionFilter().equals("*.png")) {
+        	archivo = new File(archivo.getAbsolutePath() + ".png");
+        }
+        else if(!archivo.getName().contains(".obj") && fileChooser.getSelectedExtensionFilter().equals("*.obj")){
+        	archivo = new File(archivo.getAbsolutePath() + ".obj");
+        }
+		return archivo;
+	}
+    
     @FXML public void cargarMapa() throws IOException, ClassNotFoundException{
-    	//Aca hay que tomar donde se quiere guardar del formulario por ahora lo hardcodeo
-    	String location = "c:\\mapa.obj";
-    	FileInputStream fin = new FileInputStream("c:\\address.ser");
-    	ObjectInputStream ois = new ObjectInputStream(fin);
-    	Mapa mapa = (Mapa) ois.readObject();
+    	String ubicacion = buscarDirectorio().getAbsolutePath();
+    	FileInputStream fis = new FileInputStream(ubicacion);
+    	ObjectInputStream ois = new ObjectInputStream(fis);
+    	mapa = (Mapa) ois.readObject();
+    	mapa.dibujarMapa();
+		panelCentral.getChildren().setAll(mapa.getChildren());
     }
+
+	@FXML public void guardarTrayectorias(){}
+	@FXML public void cargarTrayectorias(){}
+	@FXML public void cerrarAplicacion(){}
     
 }
