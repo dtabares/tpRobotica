@@ -7,6 +7,7 @@ import javafx.scene.shape.Shape;
 public class Obstaculo extends FormaPosicionableEnMapa{
 	
 	private Shape obstaculo;
+	private Obstaculos tipo;
 	
 	public Obstaculo(Float x, Float y, Obstaculos tipo){
 		setearCaracteristicasDelObstaculo(tipo);
@@ -17,6 +18,7 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 		this.posicionX = x;
 		this.posicionY = y;
 		this.calcularPosicionBordes();
+		this.tipo = tipo;
 	}
 	
 	public Obstaculo(Float x, Float y, Float ancho, Float alto, Obstaculos tipo){
@@ -29,6 +31,7 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 		this.ancho = ancho;
 		this.largo = alto;
 		this.calcularPosicionBordes();
+		this.tipo = tipo;
 	}
 
 	public Shape getObstaculo() {
@@ -64,6 +67,10 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 		default:
 			break;
 		}
+	}
+	
+	public Obstaculos getTipo(){
+		return this.tipo;
 	}
 
 }
