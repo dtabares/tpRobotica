@@ -130,37 +130,24 @@ public class Validador {
 	private static boolean sePisanEnX(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
 		boolean sePisan = false;
 		
-		if((b.getBordeSuperiorDerecho().getX() >= a.getBordeSuperiorDerecho().getX() && 
-				b.getBordeSuperiorIzquierdo().getX() <= a.getBordeSuperiorDerecho().getX()) 
-				|| (b.getBordeInferiorDerecho().getX() >= a.getBordeInferiorDerecho().getX() && 
-					b.getBordeInferiorIzquierdo().getX() <= a.getBordeInferiorDerecho().getX())){
+		//A empieza a la izquierda de B y termina dentro de B
+		//A empieza a la izquierda de B y termina fuera de B
+		//En resumen, A empieza a la izquierda del lateral izquierdo de B y termina a la derecha del lateral izquierdo de B
+		if(a.getPosicionX() <= b.getPosicionX() && (a.getPosicionX() + a.getAncho() > b.getPosicionX())){
 			sePisan = true;
 		}
-		else{
-			if((b.getBordeSuperiorIzquierdo().getX() <= a.getBordeSuperiorIzquierdo().getX() && 
-				b.getBordeSuperiorDerecho().getX() >= a.getBordeSuperiorIzquierdo().getX()) ||
-				(b.getBordeInferiorIzquierdo().getX() <= a.getBordeInferiorIzquierdo().getX() && 
-				b.getBordeInferiorDerecho().getX() >= a.getBordeInferiorIzquierdo().getX())){
-				sePisan = true;
-			}
-			else {
-				if((b.getBordeSuperiorIzquierdo().getX() >= a.getBordeSuperiorIzquierdo().getX() && 
-					b.getBordeSuperiorDerecho().getX() <= a.getBordeSuperiorDerecho().getX()) ||
-					(b.getBordeInferiorIzquierdo().getX() >= a.getBordeInferiorIzquierdo().getX() && 
-					b.getBordeInferiorDerecho().getX() <= a.getBordeInferiorDerecho().getX())){
-					sePisan = true;
-				}
-				else{
-					//arranca y termina en el mismo lugar (linea) como una puerta
-					if(b.getBordeInferiorDerecho().getX() == a.getBordeInferiorDerecho().getX() &&
-							b.getBordeInferiorIzquierdo().getX() == a.getBordeInferiorIzquierdo().getX() ||
-							b.getBordeSuperiorDerecho().getX() == a.getBordeSuperiorDerecho().getX() &&
-							b.getBordeSuperiorIzquierdo().getX() == a.getBordeSuperiorIzquierdo().getX()){
-						sePisan = true;
-					}
-				}
-			}
+		
+		
+		//A empieza a la derecha de B y termina dentro de B
+		//En resumen, A empieza a la derecha del lateral izquierdo de B y termina a la izquierda del lateral derecho de B
+		if(!sePisan && a.getPosicionX() >= b.getPosicionX() && (a.getPosicionX() + a.getAncho()) < (b.getPosicionX() + b.getAncho())){
+			sePisan = true;
 		}
+		
+		if(!sePisan && a.getPosicionX() < (b.getPosicionX() + b.getAncho()) && (a.getPosicionX() + a.getAncho()) >= (b.getPosicionX() + b.getAncho())){
+			sePisan = true;
+		}
+
 		return sePisan;
 	}
 	
