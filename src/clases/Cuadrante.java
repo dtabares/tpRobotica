@@ -9,6 +9,7 @@ public class Cuadrante extends FormaPosicionableEnMapa {
 	private Rectangle rectangulo;
 	private int id;
 	private int idLocal;
+	private boolean linderoAPuerta;
 	
 	public Cuadrante(float posicionX, float posicionY, float ancho, float alto, int numero){
 		this.rectangulo = new Rectangle(posicionX,posicionY,ancho,alto);
@@ -22,6 +23,7 @@ public class Cuadrante extends FormaPosicionableEnMapa {
 		this.posicionY = posicionY;
 		this.calcularPosicionBordes();
 		this.id = numero;
+		this.linderoAPuerta = false;
 	}
 	
 	public void marcarComoDisponible(){
@@ -56,6 +58,14 @@ public class Cuadrante extends FormaPosicionableEnMapa {
 
 	public void setIdLocal(int idLocal) {
 		this.idLocal = idLocal;
+	}
+
+	public boolean esLinderoAPuerta() {
+		return linderoAPuerta;
+	}
+
+	public void setLinderoAPuerta(boolean linderoAPuerta) {
+		this.linderoAPuerta = linderoAPuerta;
 	}
 	
 	
