@@ -64,6 +64,11 @@ public class Validador {
 			if(obs.getTipo().equals(Obstaculos.Recinto)){
 				seSuperponen = validarCuadranteYrecinto(a,obs);
 			}
+			else{
+				if (!sonIgualesYTienenLaMismaPosicion(a, b)){
+					seSuperponen = (sePisanEnX(a, b) && sePisanEnY(a, b));
+				}
+			}
 		}
 		else{
 			if (!sonIgualesYTienenLaMismaPosicion(a, b)){
