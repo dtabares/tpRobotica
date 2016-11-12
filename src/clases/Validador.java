@@ -61,9 +61,20 @@ public class Validador {
 		//Veo el caso del recinto como un especial forzado
 		if(b.getClass() == Obstaculo.class){
 			Obstaculo obs = (Obstaculo) b;
-			if(obs.getTipo().equals(Obstaculos.Recinto)){
-				seSuperponen = validarCuadranteYrecinto(a,obs);
+			if(a.getClass() == Cuadrante.class){
+				Cuadrante c = (Cuadrante) a;
+				if(obs.getTipo().equals(Obstaculos.Recinto)){
+					if(c.esLinderoAPuerta()){
+						seSuperponen = validarCuadranteLinderoAPuertaYrecinto(c,obs);
+						System.out.println("entre");
+					}
+					else{
+						seSuperponen = validarCuadranteYrecinto(c,obs);
+					}
+					
+				}
 			}
+
 			else{
 				if (!sonIgualesYTienenLaMismaPosicion(a, b)){
 					seSuperponen = (sePisanEnX(a, b) && sePisanEnY(a, b));
@@ -94,24 +105,63 @@ public class Validador {
 		float finalYObstaculo = inicialYObstaculo + obs.getAlto();
 		boolean sePisanEnX;
 		boolean sePisanEnY;
-		if(inicialXCuadrante >= inicialXObstaculo && finalXCuadrante < finalXObstaculo ||
-				inicialXCuadrante > inicialXObstaculo && finalXCuadrante <= finalXObstaculo ||
-				inicialXCuadrante == inicialXObstaculo && finalXCuadrante == finalXObstaculo){
+		if(inicialXCuadrante <= inicialXObstaculo && finalXCuadrante > inicialXObstaculo ||
+				inicialXCuadrante < finalXObstaculo && finalXCuadrante >= finalXObstaculo ||
+				inicialXCuadrante > inicialXObstaculo && finalXCuadrante < finalXObstaculo){
 			sePisanEnX = true;
 		}
 		else{
 			sePisanEnX = false;
 		}
 		
-		if(inicialYCuadrante >= inicialYObstaculo && finalYCuadrante < finalYObstaculo ||
-				inicialYCuadrante > inicialYObstaculo && finalYCuadrante <= finalYObstaculo ||
-				inicialYCuadrante == inicialYObstaculo && finalYCuadrante == finalYObstaculo){
+		if(inicialYCuadrante <= inicialYObstaculo && finalYCuadrante > inicialYObstaculo ||
+				inicialYCuadrante < finalYObstaculo && finalYCuadrante >= finalYObstaculo ||
+				inicialYCuadrante > inicialYObstaculo && finalYCuadrante < finalYObstaculo){
 			sePisanEnY = true;
 		}
 		else{
 			sePisanEnY = false;
 		}
 		return (sePisanEnX && sePisanEnY);
+	}
+
+	private static boolean validarCuadranteLinderoAPuertaYrecinto(FormaPosicionableEnMapa a, Obstaculo obs) {
+		
+		if((sePisanEnX(a, obs) && sePisanEnY(a, obs))){
+			return false;
+		}
+		else{
+			return true;
+//			float inicialXCuadrante = a.getPosicionX();
+//			float finalXCuadrante = inicialXCuadrante + a.getAncho();
+//			float inicialYCuadrante = a.getPosicionY();
+//			float finalYCuadrante = inicialYCuadrante + a.getAlto();
+//			float inicialXObstaculo = obs.getPosicionX();
+//			float finalXObstaculo = inicialXObstaculo + obs.getAncho();
+//			float inicialYObstaculo = obs.getPosicionY();
+//			float finalYObstaculo = inicialYObstaculo + obs.getAlto();
+//			boolean sePisanEnX;
+//			boolean sePisanEnY;
+//			if(inicialXCuadrante >= inicialXObstaculo && finalXCuadrante < finalXObstaculo ||
+//					inicialXCuadrante > inicialXObstaculo && finalXCuadrante <= finalXObstaculo ||
+//					inicialXCuadrante == inicialXObstaculo && finalXCuadrante == finalXObstaculo){
+//				sePisanEnX = true;
+//			}
+//			else{
+//				sePisanEnX = false;
+//			}
+//			
+//			if(inicialYCuadrante >= inicialYObstaculo && finalYCuadrante < finalYObstaculo ||
+//					inicialYCuadrante > inicialYObstaculo && finalYCuadrante <= finalYObstaculo ||
+//					inicialYCuadrante == inicialYObstaculo && finalYCuadrante == finalYObstaculo){
+//				sePisanEnY = true;
+//			}
+//			else{
+//				sePisanEnY = false;
+//			}
+//			return (sePisanEnX && sePisanEnY);
+		}
+
 	}
 
 	private static boolean sonIgualesYTienenLaMismaPosicion(FormaPosicionableEnMapa a, FormaPosicionableEnMapa b){
