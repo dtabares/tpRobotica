@@ -13,17 +13,16 @@ public class Trayectoria implements Serializable{
 	private List<Cuadrante> listaDeCuadrantesDeOrigenADestino;
 	private double posicionEnGradosRespectoDelNorteMagnetico;
 	
-
 	public Trayectoria (List<Cuadrante> lista, double grados){
 		this.pasos = new LinkedList<Paso>();
 		this.listaDeCuadrantesDeOrigenADestino = lista;
 		this.posicionEnGradosRespectoDelNorteMagnetico = grados;
 	}
 	
-	private void agregarPaso(double direccion, int cantidadDeBaldozas){
-		this.pasos.add(new Paso(direccion, cantidadDeBaldozas));
-	}
-	
+//	private void agregarPaso(double direccion, int cantidadDeBaldozas){
+//		this.pasos.add(new Paso(direccion, cantidadDeBaldozas));
+//	}
+//	
 	public List<Paso> getListaDePasos(){
 		return this.pasos;
 	}
@@ -86,13 +85,13 @@ public class Trayectoria implements Serializable{
 		else{
 			//En caso de que y == 0 quiere decir que puede se mueve solo en X
 			if (y == 0){
-				//Cuadrante derecho
-				if( x == -1){
-					direccion = 90;
-				}
 				//Cuadrante izquierdo
-				else{
+				if( x == -1){
 					direccion = 270;
+				}
+				//Cuadrante derecho
+				else{
+					direccion = 90;
 				}
 			}
 			// Llegado este caso, se que se mueve en diagonal
@@ -110,13 +109,13 @@ public class Trayectoria implements Serializable{
 				}
 				// Cuadrante inferior
 				else{
-					//Cuadrante derecho
-					if(x==-1){
-						direccion = 135;
-					}
 					//Cuadrante izquierdo
-					else{
+					if(x==-1){
 						direccion = 225;
+					}
+					//Cuadrante derecho
+					else{
+						direccion = 135;
 					}
 				}
 			}
@@ -133,12 +132,13 @@ public class Trayectoria implements Serializable{
 		String textoBaldosa = "baldosa";
 		while(iterador.hasNext()){
 			paso = iterador.next();
-			double dir = paso.getDireccionEnGrados();
+			double dir = paso.getDireccionEnGrados() + posicionEnGradosRespectoDelNorteMagnetico;
 			int baldosas = paso.getNumeroDeBaldosas();
 			if(baldosas > 1){
 				textoBaldosa = "baldosas";
 			}
 			s = "Moverse " + baldosas + " " + textoBaldosa + " en direccion: " + dir ;
+			System.out.println(s);
 			secuencia.add(s);
 		}
 		return secuencia;
