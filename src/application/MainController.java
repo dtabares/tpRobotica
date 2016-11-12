@@ -132,31 +132,35 @@ public class MainController extends BorderPane {
     	
     	if(inRecintosComboBox.getValue()==null || inRecintosComboBox.getValue()== "Nuevo Recinto"){
 	    	if (mapa != null){
-	    		Recinto recinto = new Recinto(Float.valueOf(inPosicionX.getText()),Float.valueOf(inPosicionY.getText()),Float.valueOf(inAncho.getText()),Float.valueOf(inAlto.getText()), nombreRecinto.getText());
-	    		boolean recintoValido = mapa.agregarRecinto(recinto);
-	    		if(recintoValido){
-	    			mapa.getRecintoMapa().agregarObstaculo(new Obstaculo(recinto.getPosicionX(), recinto.getPosicionY(), recinto.getAncho(), recinto.getAlto(), Obstaculos.Recinto));
-	    			inRecintosComboBox.getItems().add(recinto.getNombre());
-	    			inPuertasComboRecintos.getItems().add(recinto.getNombre());
-	    			inObstaculosComboRecintos.getItems().add(recinto.getNombre());
-			    	if(inCheckboxGrilla.isSelected()){
-			    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()),(int)inRecintosComboVertices.getValue());
-			    		grilla.prepararGrillaParaDibujo();
-			    		recinto.setGrilla(grilla);
-			    	}
-	    			mapa.dibujarMapa();
-		    		panelCentral.getChildren().setAll(mapa.getChildren());
-//		    		//test
-//		    		System.out.println("Creando Grila del recinto");
-//		    		Grilla g = recinto.getGrilla();
-//		    		g.prepararGrillaParaDibujo();
-//		    		g.getMatrizDeAdyacencia().imprimirMatriz();
-//		    		System.out.println("Grilla creada");
+	    		if(!inRecintosComboBox.getItems().contains(nombreRecinto.getText())){
+		    		Recinto recinto = new Recinto(Float.valueOf(inPosicionX.getText()),Float.valueOf(inPosicionY.getText()),Float.valueOf(inAncho.getText()),Float.valueOf(inAlto.getText()), nombreRecinto.getText());
+		    		boolean recintoValido = mapa.agregarRecinto(recinto);
+		    		if(recintoValido){
+		    			mapa.getRecintoMapa().agregarObstaculo(new Obstaculo(recinto.getPosicionX(), recinto.getPosicionY(), recinto.getAncho(), recinto.getAlto(), Obstaculos.Recinto));
+		    			inRecintosComboBox.getItems().add(recinto.getNombre());
+		    			inPuertasComboRecintos.getItems().add(recinto.getNombre());
+		    			inObstaculosComboRecintos.getItems().add(recinto.getNombre());
+				    	if(inCheckboxGrilla.isSelected()){
+				    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()),(int)inRecintosComboVertices.getValue());
+				    		grilla.prepararGrillaParaDibujo();
+				    		recinto.setGrilla(grilla);
+				    	}
+		    			mapa.dibujarMapa();
+			    		panelCentral.getChildren().setAll(mapa.getChildren());
+	//		    		//test
+	//		    		System.out.println("Creando Grila del recinto");
+	//		    		Grilla g = recinto.getGrilla();
+	//		    		g.prepararGrillaParaDibujo();
+	//		    		g.getMatrizDeAdyacencia().imprimirMatriz();
+	//		    		System.out.println("Grilla creada");
+		    		}
+		    		else{
+		    			this.mostrarMensajeDeError("Recinto invalido!");
+		    		}
 	    		}
 	    		else{
-	    			this.mostrarMensajeDeError("Recinto invalido");
+	    			this.mostrarMensajeDeError("El nombre de recinto ya existe!");
 	    		}
-	    		
 	        }
 			else{
 				this.mostrarMensajeDeError("No existe el mapa!");
@@ -165,15 +169,10 @@ public class MainController extends BorderPane {
     	else {
     		System.out.println("Modificando Recinto");
     		Recinto recinto = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
-	    	if(inCheckboxGrilla.isSelected()){
-	    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()),(int)inRecintosComboVertices.getValue());
-	    		grilla.prepararGrillaParaDibujo();
-	    		recinto.setGrilla(grilla);
-	    		mapa.regenerarIdsCuadrantesDeTodoElMapa();
-	    	}
-	    	else{
-	    		//Borrar recinto y llamarse a si mismo
-	    	}
+    		mapa.getRecintos().remove(mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue()));
+    		inRecintosComboBox.getItems().remove(inRecintosComboBox.getValue());
+    		inRecintosComboBox.setValue("Nuevo Recinto");
+    		this.agregarRecinto();
 			mapa.dibujarMapa();
     		panelCentral.getChildren().setAll(mapa.getChildren());
     		

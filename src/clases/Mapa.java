@@ -262,8 +262,6 @@ public class Mapa extends AnchorPane implements Serializable {
 			}
 		}
 
-		
-		
 		System.out.println("Matriz de Adyacencia Global:");
 		//matrizDeAdyacenciaGlobal.imprimirMatriz();
 	}
