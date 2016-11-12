@@ -177,8 +177,8 @@ public class Recinto extends FormaPosicionableEnMapa{
 	public boolean coordenadaPerteneceAlRecinto(Coordenada coordenada){
 		boolean pertenece = false;
 		
-		if(coordenada.getX() >= this.getBordeSuperiorIzquierdo().getX() && coordenada.getX() <= this.getBordeInferiorDerecho().getX()
-				&& coordenada.getY() >= this.getBordeInferiorDerecho().getY() && coordenada.getY() <= this.getBordeSuperiorDerecho().getY()){
+		if(coordenada.getX() >= this.getPosicionX() && coordenada.getX() <= (this.getPosicionX() + this.getAncho())
+				&& coordenada.getY() >= this.getPosicionY() && coordenada.getY() <= (this.getPosicionY() + this.getAlto())){
 			pertenece = true;
 		}
 		
