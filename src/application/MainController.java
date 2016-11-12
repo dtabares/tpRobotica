@@ -251,7 +251,7 @@ public class MainController extends BorderPane {
     		recinto = mapa.buscarRecintoPorNombre(inPuertasComboRecintos.getValue());
     		if (recinto != null){
         		System.out.println("Nombre Recinto: " + recinto.getNombre());
-    			Puerta puerta = new Puerta (Float.valueOf(inPuertasPosicionX.getText()),Float.valueOf(inPuertasPosicionY.getText()),(Orientacion)inPuertasComboBox.getValue(),(float)10);
+    			Puerta puerta = new Puerta (Float.valueOf(inPuertasPosicionX.getText()),Float.valueOf(inPuertasPosicionY.getText()),(Orientacion)inPuertasComboBox.getValue(),Float.valueOf(inPuertasAncho.getText()));
     			puertaValida = recinto.agregarPuerta(puerta,mapa);
     			System.out.println("Puerta valida? : " + puertaValida);
 				if(puertaValida){
