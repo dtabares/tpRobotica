@@ -100,31 +100,26 @@ public class MainController extends BorderPane {
 		inObstaculosComboBox.setValue(Obstaculos.Mesa);
 		obstaculos.remove(Obstaculos.Recinto);
 		inObstaculosComboBox.setItems(obstaculos);
-		
 		inRecintosComboBox.getSelectionModel().selectFirst();
 		inRecintosComboVertices.setValue(1);
 		inRecintosComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
-		
 		inPuertasComboBox.setItems(orientaciones);
-
-		
 		inMapaComboVertices.setValue(1);
 		inMapaComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
-		
 		nuevoMapaControlador = new NuevoMapaControlador();
  		nuevoMapaControlador.setListener(new NuevoMapaControladorListener() {	
-    	@Override public void nuevoMapaControladorListenerOK (ActionEvent e) {
-    		System.out.println("Creando nuevo mapa...");
-        	mapa = new Mapa(Float.parseFloat(nuevoMapaControlador.getInAncho()),Float.parseFloat(nuevoMapaControlador.getInAlto()));
-        	mapa.setRecintoMapa(new Recinto(0,0,Float.parseFloat(nuevoMapaControlador.getInAncho()),Float.parseFloat(nuevoMapaControlador.getInAlto()),"Recinto Mapa"));
-        	mapa.setStyle("-fx-background-color: black;");    	
-        	mapa.dibujarMapa();
-        	panelCentral.getChildren().setAll(mapa.getChildren());
-        	nuevoMapaControlador.ocultarFormulario();
-    	}
-    	@Override
-    	public void nuevoMapaControladorListenerCancel(ActionEvent e) {}
-        });
+	    	@Override public void nuevoMapaControladorListenerOK (ActionEvent e) {
+	    		System.out.println("Creando nuevo mapa...");
+	        	mapa = new Mapa(Float.parseFloat(nuevoMapaControlador.getInAncho()),Float.parseFloat(nuevoMapaControlador.getInAlto()));
+	        	mapa.setRecintoMapa(new Recinto(0,0,Float.parseFloat(nuevoMapaControlador.getInAncho()),Float.parseFloat(nuevoMapaControlador.getInAlto()),"Recinto Mapa"));
+	        	mapa.setStyle("-fx-background-color: black;");    	
+	        	mapa.dibujarMapa();
+	        	panelCentral.getChildren().setAll(mapa.getChildren());
+	        	nuevoMapaControlador.ocultarFormulario();
+	    	}
+	    	@Override
+	    	public void nuevoMapaControladorListenerCancel(ActionEvent e) {}
+	        });
 		
     }
     
@@ -147,12 +142,6 @@ public class MainController extends BorderPane {
 				    	}
 		    			mapa.dibujarMapa();
 			    		panelCentral.getChildren().setAll(mapa.getChildren());
-	//		    		//test
-	//		    		System.out.println("Creando Grila del recinto");
-	//		    		Grilla g = recinto.getGrilla();
-	//		    		g.prepararGrillaParaDibujo();
-	//		    		g.getMatrizDeAdyacencia().imprimirMatriz();
-	//		    		System.out.println("Grilla creada");
 		    		}
 		    		else{
 		    			this.mostrarMensajeDeError("Recinto invalido!");
@@ -168,25 +157,27 @@ public class MainController extends BorderPane {
     	}
     	else {
     		System.out.println("Modificando Recinto");
-    		Recinto recinto = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
     		mapa.getRecintos().remove(mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue()));
     		inRecintosComboBox.getItems().remove(inRecintosComboBox.getValue());
     		inRecintosComboBox.setValue("Nuevo Recinto");
     		this.agregarRecinto();
 			mapa.dibujarMapa();
     		panelCentral.getChildren().setAll(mapa.getChildren());
-    		
     	}
+    
     }
     
     private void mostrarMensajeDeError(String mensaje) {
-		JOptionPane.showMessageDialog(frame,mensaje,
+		
+    	JOptionPane.showMessageDialog(frame,mensaje,
 				"Error",
 			    JOptionPane.ERROR_MESSAGE);
-	}
+	
+    }
 
 	@FXML public void agregarObstaculo(){
-    	boolean obstaculoValido;
+    	
+		boolean obstaculoValido;
     	Recinto recinto;
     	if (mapa != null){
     		if(inObstaculosComboBox.getValue()!=null){
@@ -205,7 +196,7 @@ public class MainController extends BorderPane {
     					}
     				}
     				else{
-    					this.mostrarMensajeDeError("El recinto seleccionado es invalido");
+    					this.mostrarMensajeDeError("El recinto seleccionado es invalido!");
     				}
     			}
     			else{
@@ -244,6 +235,7 @@ public class MainController extends BorderPane {
     }
     
     @FXML public void agregarPuerta(){
+    	
     	System.out.println("Entre a agregarPuerta");
     	boolean puertaValida;
     	Recinto recinto; 
@@ -270,9 +262,11 @@ public class MainController extends BorderPane {
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
     	}
+   
     }
 
     @FXML public void borrarMapa(){
+    	
     	if(mapa!=null){
     	mapa.getChildren().removeAll(mapa.getChildren());
     	panelCentral.getChildren().setAll(mapa.getChildren());
@@ -284,12 +278,13 @@ public class MainController extends BorderPane {
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
     	}
+    
     }
     
     @FXML public void buscarCaminoMasCorto(){
+    	
     	if (mapa != null){
     		if(trayectoria != null){ trayectoria.borrarTrayectoria();}
-    		//System.out.println("Entre a buscarCaminoMasCorto");
     		Dijkstra dijkstra = new Dijkstra();
     		List<Integer> listaDeIds;
     		List<Cuadrante> listaDeCuadrantes = new LinkedList<Cuadrante>();
@@ -316,23 +311,15 @@ public class MainController extends BorderPane {
     			}
     			else{
     				mapa.calcularMatrizDeAdyacenciaGlobal();
-    				//System.out.println("Matriz Resultado");
-    				//System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
-    				//mapa.getMatrizDeAdyacenciaGlobal().imprimirMatriz();
-    				//System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
     	    		listaDeIds = dijkstra.obtenerCaminoMasCorto(mapa.getMatrizDeAdyacenciaGlobal().getMatrizDeAdyacenciaEnBooleanos(), cuadranteOrigen.getId(), cuadranteDestino.getId());
-    	    		
     	    		for (Integer id : listaDeIds) {
     					Cuadrante c = mapa.buscarCuadrantePorId(id);
     					listaDeCuadrantes.add(c);
     				}
-    	    		
     	    		trayectoria = new Trayectoria(listaDeCuadrantes,mapa.getPosicionEnGradosRespectoDelNorteMagnetico());
     	    		trayectoria.calcularTrayectoria();
     			}
     		}
-    		
-
     	}
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
@@ -369,6 +356,7 @@ public class MainController extends BorderPane {
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
     	}
+    
     }
     
     public File buscarDirectorio(){
@@ -389,15 +377,18 @@ public class MainController extends BorderPane {
         	archivo = new File(archivo.getAbsolutePath() + ".obj");
         }
 		return archivo;
-	}
+	
+    }
     
     @FXML public void cargarMapa() throws IOException, ClassNotFoundException{
+    	
     	String ubicacion = buscarDirectorio().getAbsolutePath();
     	FileInputStream fis = new FileInputStream(ubicacion);
     	ObjectInputStream ois = new ObjectInputStream(fis);
     	mapa = (Mapa) ois.readObject();
     	mapa.dibujarMapa();
 		panelCentral.getChildren().setAll(mapa.getChildren());
+    
     }
 
 	@FXML public void guardarTrayectorias(){}
