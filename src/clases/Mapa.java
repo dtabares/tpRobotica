@@ -216,6 +216,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		
 		//Itero por cada recinto
 		while(iteradorDeRecintos.hasNext()){
+			encontroElRecinto = false;
 			Recinto recinto = iteradorDeRecintos.next();
 			Iterator<Puerta> iteradorDePuertas = recinto.getPuertas().iterator();
 			//Itero por las puertas de cada recinto
