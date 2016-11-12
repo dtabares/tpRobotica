@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -198,6 +200,8 @@ public class Mapa extends AnchorPane implements Serializable {
 		Coordenada coordenadaDelCuadranteExteriorALaPuerta;
 		Cuadrante cuadranteInterior;
 		Cuadrante cuadranteExterior;
+		Queue<Cuadrante> colaCuadranteInterior = new LinkedList<Cuadrante>();
+		Queue<Cuadrante> colaCuadranteExterior = new LinkedList<Cuadrante>();
 		int idCuadranteInterior;
 		int idCuadranteExterior;
 		boolean encontroElRecinto = false;
@@ -207,10 +211,12 @@ public class Mapa extends AnchorPane implements Serializable {
 			encontroElRecinto = false;
 			Recinto recinto = iteradorDeRecintos.next();
 			Iterator<Puerta> iteradorDePuertas = recinto.getPuertas().iterator();
+			
 			//Itero por las puertas de cada recinto
 			while(iteradorDePuertas.hasNext()){
 				Puerta puerta = iteradorDePuertas.next();
 				cuadranteInterior = recinto.obtenerCuadranteCercanoALaPuerta(puerta);
+				//cuadranteInterior.setLinderoAPuerta(true);
 				//Verifico si el cuadrante dentro del recinto (interior) pegado a la puerta esta disponible
 				//Si no lo esta, ya ni busco en el exterior
 				if(cuadranteInterior.estaDisponible()){
@@ -228,21 +234,36 @@ public class Mapa extends AnchorPane implements Serializable {
 					//pertenecia a un recinto
 					if(encontroElRecinto){
 						cuadranteExterior = recintoEnBusquedaDeCoordenada.getGrilla().buscarCuadrantePorCoordenada(coordenadaDelCuadranteExteriorALaPuerta);
+						colaCuadranteInterior.add(cuadranteInterior);
+						colaCuadranteExterior.add(cuadranteExterior);
 					}
 					//pertenece al espacio global
 					else{
 						cuadranteExterior = this.grilla.buscarCuadrantePorCoordenada(coordenadaDelCuadranteExteriorALaPuerta);
-					}
-					
-					//Si ambos estan disponibles los marco como conexos en la matriz global
-					if(cuadranteExterior.estaDisponible()){
-						idCuadranteInterior = cuadranteInterior.getId();
-						idCuadranteExterior = cuadranteExterior.getId();		
-						this.matrizDeAdyacenciaGlobal.marcarDosNodosComoConexos(idCuadranteInterior, idCuadranteExterior);
+						cuadranteExterior.setLinderoAPuerta(true);
+						colaCuadranteInterior.add(cuadranteInterior);
+						colaCuadranteExterior.add(cuadranteExterior);
 					}
 				}
+				
 			}
 		}
+		
+		//ACA
+		this.recintoMapa.verificarDisponibilidadDeLaGrilla();
+		while(!colaCuadranteInterior.isEmpty()){
+			cuadranteExterior = colaCuadranteExterior.poll();
+			cuadranteInterior = colaCuadranteInterior.poll();
+			//Si ambos estan disponibles los marco como conexos en la matriz global
+			if(cuadranteExterior.estaDisponible()){
+				idCuadranteInterior = cuadranteInterior.getId();
+				idCuadranteExterior = cuadranteExterior.getId();		
+				this.matrizDeAdyacenciaGlobal.marcarDosNodosComoConexos(idCuadranteInterior, idCuadranteExterior);
+			}
+		}
+
+		
+		
 		System.out.println("Matriz de Adyacencia Global:");
 		//matrizDeAdyacenciaGlobal.imprimirMatriz();
 	}
