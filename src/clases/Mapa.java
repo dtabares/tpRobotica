@@ -166,7 +166,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		this.grilla = this.recintoMapa.getGrilla();
 		MatrizDeAdyacencia ma = this.grilla.getMatrizDeAdyacencia();
 		System.out.println("Matriz de adyacencia del mapa:");
-		ma.imprimirMatriz();
+		//ma.imprimirMatriz();
 		boolean[][] matrizDeAdyacenciaDelMapa = ma.getMatrizDeAdyacenciaEnBooleanos();
 		this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelMapa, this.grilla.getIdInicial());
 		System.out.println("Insertando cuadrantes del mapa");
@@ -182,7 +182,7 @@ public class Mapa extends AnchorPane implements Serializable {
 			Grilla grillaDelRecinto = recinto.getGrilla();
 			MatrizDeAdyacencia mar = grillaDelRecinto.getMatrizDeAdyacencia();
 			System.out.println("Matriz de adyacencia del recinto: " + recinto.getNombre());
-			mar.imprimirMatriz();
+			//mar.imprimirMatriz();
 			boolean[][] matrizDeAdyacenciaDelRecinto = mar.getMatrizDeAdyacenciaEnBooleanos();
 			this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelRecinto, grillaDelRecinto.getIdInicial());
 		}
@@ -244,7 +244,7 @@ public class Mapa extends AnchorPane implements Serializable {
 			}
 		}
 		System.out.println("Matriz de Adyacencia Global:");
-		matrizDeAdyacenciaGlobal.imprimirMatriz();
+		//matrizDeAdyacenciaGlobal.imprimirMatriz();
 	}
 	
 	public MatrizDeAdyacencia getMatrizDeAdyacenciaGlobal(){
