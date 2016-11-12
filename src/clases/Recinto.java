@@ -10,7 +10,7 @@ import javafx.scene.shape.Shape;
 
 public class Recinto extends FormaPosicionableEnMapa{
 	
-	private Shape formaRecinto;
+	private transient Shape formaRecinto;
 	private Grilla grilla;
 	Collection <Obstaculo> obstaculos = new HashSet<Obstaculo>();
 	private String nombre;
@@ -183,5 +183,12 @@ public class Recinto extends FormaPosicionableEnMapa{
 		}
 		
 		return pertenece;
+	}
+	
+	public void regenerarFormaRecinto(){
+		setFormaRecinto(new Rectangle(this.posicionX,this.posicionY,this.ancho,this.largo));
+		getFormaRecinto().setStroke(Color.BLACK);
+		getFormaRecinto().setFill(Color.WHITE);
+		getFormaRecinto().setStrokeWidth(2);
 	}
 }

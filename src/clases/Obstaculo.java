@@ -6,7 +6,7 @@ import javafx.scene.shape.Shape;
 
 public class Obstaculo extends FormaPosicionableEnMapa{
 	
-	private Shape obstaculo;
+	private transient Shape obstaculo;
 	private Obstaculos tipo;
 	
 	public Obstaculo(Float x, Float y, Obstaculos tipo){
@@ -71,6 +71,13 @@ public class Obstaculo extends FormaPosicionableEnMapa{
 	
 	public Obstaculos getTipo(){
 		return this.tipo;
+	}
+	
+	public void regenerarObstaculo(){
+		this.obstaculo = new Rectangle(this.posicionX,this.posicionY,this.ancho,this.largo);
+		this.obstaculo.setStroke(Color.BLACK);
+		this.obstaculo.setFill(Color.WHITESMOKE);
+		this.obstaculo.setStrokeWidth(2);
 	}
 
 }

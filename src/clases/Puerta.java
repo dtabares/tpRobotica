@@ -6,7 +6,7 @@ import javafx.scene.shape.Shape;
 
 public class Puerta extends FormaPosicionableEnMapa {
 	
-	private Shape linea;
+	private transient Shape linea;
 	private float posicionFinalX;
 	private float posicionFinalY;
 	private Orientacion orientacion;
@@ -44,6 +44,10 @@ public class Puerta extends FormaPosicionableEnMapa {
 		this.linea.setFill(Color.NAVY);
 		this.linea.setStroke(Color.NAVY);
 		this.linea.setStrokeWidth(5);
+	}
+	
+	public void regenerateLinea(){
+		this.setearLinea(this.posicionFinalX, this.posicionFinalY);
 	}
 
 	public float getPosicionFinalX() {
