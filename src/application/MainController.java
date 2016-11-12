@@ -100,15 +100,13 @@ public class MainController extends BorderPane {
 		inObstaculosComboBox.setValue(Obstaculos.Mesa);
 		obstaculos.remove(Obstaculos.Recinto);
 		inObstaculosComboBox.setItems(obstaculos);
-		inObstaculosComboRecintos.getItems().add("Mapa");
 		
 		inRecintosComboBox.getSelectionModel().selectFirst();
-		inRecintosComboBox.getItems().add("Nuevo Recinto");
 		inRecintosComboVertices.setValue(1);
 		inRecintosComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
 		
 		inPuertasComboBox.setItems(orientaciones);
-		inPuertasComboRecintos.getItems().add("Mapa");
+
 		
 		inMapaComboVertices.setValue(1);
 		inMapaComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
@@ -228,6 +226,9 @@ public class MainController extends BorderPane {
     @FXML public void crearNuevoMapa(){
     	
     	nuevoMapaControlador.mostrarFormulario();
+		inRecintosComboBox.getItems().add("Nuevo Recinto");
+		inObstaculosComboRecintos.getItems().add("Mapa");
+    	inPuertasComboRecintos.getItems().add("Mapa");
     	
     }
     
@@ -277,6 +278,9 @@ public class MainController extends BorderPane {
     	mapa.getChildren().removeAll(mapa.getChildren());
     	panelCentral.getChildren().setAll(mapa.getChildren());
     	mapa = null;
+		inRecintosComboBox.getItems().clear();
+		inObstaculosComboRecintos.getItems().clear();
+    	inPuertasComboRecintos.getItems().clear();
     	}
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
