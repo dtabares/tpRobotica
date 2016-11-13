@@ -153,9 +153,9 @@
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button fx:id="btnRecintoOK" mnemonicParsing="false" onAction="#agregarRecinto" prefHeight="25.0" prefWidth="188.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="16" GridPane.valignment="CENTER">
+                        <Button fx:id="btnRecintoOK" mnemonicParsing="false" onAction="#agregarRecinto" prefHeight="25.0" prefWidth="188.0" text="Guardar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="16" GridPane.valignment="CENTER">
                            <GridPane.margin>
-                              <Insets left="20.0" right="20.0" top="20.0" />
+                              <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </Button>
                         <Label text="Posicion en X" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
@@ -177,7 +177,7 @@
                            </GridPane.margin>
                         </ComboBox>
                         <Line endX="100.0" startX="-100.0" GridPane.rowIndex="15" />
-                        <Button mnemonicParsing="false" text="Borrar" GridPane.rowIndex="16" />
+                        <Button mnemonicParsing="false" onAction="#borrarRecinto" text="Borrar" GridPane.halignment="CENTER" GridPane.rowIndex="16" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </content>
@@ -311,7 +311,7 @@
                         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ComboBox fx:id="inTrayectoriasComboBox" onAction="#cargarTrayectorias" prefWidth="150.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="inTrayectoriasComboBox" onAction="#cargarTrayectoria" prefWidth="150.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                         <TextField fx:id="inTrayectoriasNombre" GridPane.columnSpan="2" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />

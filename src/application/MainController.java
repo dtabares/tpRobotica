@@ -189,6 +189,22 @@ public class MainController extends BorderPane {
 			    JOptionPane.ERROR_MESSAGE);
 	
     }
+    
+    @FXML public void borrarRecinto(){
+    	
+    	if(!inRecintosComboBox.getValue().equals(mapa.getRecintoMapa().getNombre())){
+    	String s = inRecintosComboBox.getValue();
+    	mapa.getRecintos().remove(mapa.buscarRecintoPorNombre(s));
+    	inRecintosComboBox.getItems().remove(s);
+    	inObstaculosComboRecintos.getItems().remove(s);
+    	inPuertasComboRecintos.getItems().remove(s);
+    	mapa.dibujarMapa();
+		panelCentral.getChildren().setAll(mapa.getChildren());
+    	}
+		else{
+			this.mostrarMensajeDeError("No es posible borrar este recinto, para borrar el mapa ir a editar > borrar mapa");
+		}
+    }
 
 	@FXML public void agregarObstaculo(){
     	
@@ -476,57 +492,18 @@ public class MainController extends BorderPane {
     	}
 	}
 	
-	@FXML public void guardarTrayectorias() throws IOException{
+	@FXML public void guardarTrayectoria() throws IOException{
 		
-    	Map<String,String> extensiones = new HashMap<String,String>();	
-    	extensiones.put("Objeto (*.obj)", "*.obj");
-		if(mapa!=null){
-    		String ubicacion = buscarDirectorio(extensiones,"Guardar").getAbsolutePath();
-    		if (ubicacion.contains("obj")){
-    			System.out.println("Guardando trayectorias");
-    			if(ubicacion!=null){	
-	    	    	FileOutputStream fout = new FileOutputStream(ubicacion);
-	    	    	ObjectOutputStream oos = new ObjectOutputStream(fout);
-	    	    	oos.writeObject(this.trayectoria);
-	    	    	oos.close();
-	    	    	fout.close();
-	    	    	this.archivo = new File(archivo.getParent());
-	    	    	System.out.println("Trayectorias guardadas en: " + ubicacion);
-    			}
-    		}
-    		else{
-    			this.mostrarMensajeDeError("Extension Invalida!");
-    		}
-    	}
-    	else{
-    		this.mostrarMensajeDeError("No existe el mapa!");
-    	}
+
 	}
 	
-	@FXML public void cargarTrayectorias() throws IOException, ClassNotFoundException{
+	@FXML public void borrarTrayectoria() throws IOException, ClassNotFoundException{
 		
-    	Map<String,String> extensiones = new HashMap<String,String>();	
-    	extensiones.put("Objeto (*.obj)", "*.obj");
-		if(mapa!=null){
-    		String ubicacion = buscarDirectorio(extensiones,"Cargar").getAbsolutePath();
-    		if(ubicacion.contains("obj")){
-    			FileInputStream fis = new FileInputStream(ubicacion);
-    	    	ObjectInputStream ois = new ObjectInputStream(fis);
-    	    	trayectoria = (Trayectoria) ois.readObject();
-    	    	trayectoria.regenerarFormasTrayectoria();
-    	    	trayectoria.calcularTrayectoria();
-    			ois.close();
-    			fis.close();
-    			this.archivo = new File(archivo.getParent());
-    		}
-    		else{
-    			this.mostrarMensajeDeError("Extension Invalida!");
-    		}
-		}
-    	else{
-    		this.mostrarMensajeDeError("No existe el mapa!");
-    	}
 	
+	}
+	
+	@FXML public void cargarTrayectoria(){
+		
 	}
 	
 	public void cargarComboBoxesEnUI(){
