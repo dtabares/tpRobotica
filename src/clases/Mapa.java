@@ -357,16 +357,22 @@ public class Mapa extends AnchorPane implements Serializable {
 		//Despues itero por cada recinto
 		//Regenerando :
 		//El recinto, la grilla, los obstaculos, las puertas
-		if (recintos!=null){
-			for (Recinto recinto : recintos) {
+		if (this.recintos!=null){
+			for (Recinto recinto : this.recintos) {
+				if(recinto.getGrilla()!=null){
 					recinto.regenerarFormaRecinto();
 					recinto.getGrilla().prepararGrillaParaDibujoDespuesDeCargarMapa();
+				}
+				if(recinto.getObstaculos()!=null){	
 					for (Obstaculo obstaculo : recinto.getObstaculos()) {
-						obstaculo.regenerarObstaculo();
+							obstaculo.regenerarObstaculo();
 					}
+				}
+				if(recinto.getPuertas()!=null){	
 					for (Puerta puerta : recinto.getPuertas()) {
 						puerta.regenerateLinea();
 					}
+				}
 			}
 		}
 	}

@@ -109,6 +109,7 @@ public class MainController extends BorderPane {
 		inObstaculosComboBox.setValue(Obstaculos.Mesa);
 		obstaculos.remove(Obstaculos.Recinto);
 		inObstaculosComboBox.setItems(obstaculos);
+		inRecintosComboBox.getItems().add("Nuevo Recinto");
 		inRecintosComboBox.getSelectionModel().selectFirst();
 		inRecintosComboVertices.setValue(1);
 		inRecintosComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
@@ -173,7 +174,7 @@ public class MainController extends BorderPane {
 			mapa.dibujarMapa();
     		panelCentral.getChildren().setAll(mapa.getChildren());
     	}
-    
+    	this.cargarConfiguracionDeUnRecinto();
     }
     
     private void mostrarMensajeDeError(String mensaje) {
@@ -225,7 +226,6 @@ public class MainController extends BorderPane {
     @FXML public void crearNuevoMapa(){
     	
     	nuevoMapaControlador.mostrarFormulario();
-		inRecintosComboBox.getItems().add("Nuevo Recinto");
 		inObstaculosComboRecintos.getItems().add("Mapa");
     	inPuertasComboRecintos.getItems().add("Mapa");
     	
@@ -532,6 +532,33 @@ public class MainController extends BorderPane {
 				inPuertasComboRecintos.getItems().add(recinto.getNombre());
 				inObstaculosComboRecintos.getItems().add(recinto.getNombre());			
 			}
+		}
+		
+	}
+	
+	@FXML public void cargarConfiguracionDeUnRecinto(){
+	
+		Recinto r = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
+		if(r!=null || !inRecintosComboBox.getValue().equals("Nuevo Recinto")){
+
+			inPosicionX.setText(Float.toString(r.getPosicionX()));
+			inPosicionY.setText(Float.toString(r.getPosicionY()));
+			inAncho.setText(Float.toString(r.getAncho()));
+			inAlto.setText(Float.toString(r.getAlto()));
+			if(r.getGrilla()!=null){
+				inCheckboxGrilla.setSelected(true);
+				inTamanioGrilla.setText(Float.toString(r.getGrilla().getAnchoDeGrilla()));
+				inRecintosComboVertices.setPromptText(Float.toString(r.getGrilla().getVerticeDeGrilla()));
+			}
+		}
+		else{
+			nombreRecinto.clear();
+			inPosicionX.clear();
+			inPosicionY.clear();
+			inAncho.clear();
+			inAlto.clear();
+			inCheckboxGrilla.setSelected(false);
+			inTamanioGrilla.clear();
 		}
 		
 	}

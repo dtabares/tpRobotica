@@ -19,6 +19,8 @@ public class Grilla implements Serializable{
 	private Recinto recinto;
 	private int filas;
 	private int columnas;
+	private float anchoDeGrilla;
+	private int verticeDeGrilla;
 	private Contador contador;
 	
 	//Constructor de la clase Grilla, crea una grilla especificando el tamaño de cada unidad, require conocer el recinto para posicionarse
@@ -29,6 +31,8 @@ public class Grilla implements Serializable{
 		this.posicionY = recinto.getPosicionY();
 		this.longitudNormal = tamanio;
 		this.recinto = recinto;
+		this.anchoDeGrilla=tamanio;
+		this.verticeDeGrilla=vertice;
 		this.filas = (int) Math.ceil( this.recinto.getAlto() / this.longitudNormal);// System.out.println(filas);
 		this.columnas = (int) Math.ceil(this.recinto.getAncho() / this.longitudNormal); //System.out.println(columnas);
 		matrizDeAdyacencia = new MatrizDeAdyacencia(this);
@@ -36,6 +40,14 @@ public class Grilla implements Serializable{
 		this.crearGrilla(vertice);
 	}
 	
+	public int getVerticeDeGrilla() {
+		return verticeDeGrilla;
+	}
+
+	public float getAnchoDeGrilla() {
+		return anchoDeGrilla;
+	}
+
 	private void crearGrilla(int vertice){
 		this.prepararValoresGrilla();
 		int numero = this.contador.getProximoNumeroDeCuadrante();
