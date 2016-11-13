@@ -30,7 +30,8 @@
                   <MenuItem mnemonicParsing="false" onAction="#cargarMapa" text="Cargar mapa" />
                   <MenuItem mnemonicParsing="false" onAction="#guardarTrayectorias" text="Guardar trayectorias" />
                   <MenuItem mnemonicParsing="false" onAction="#cargarTrayectorias" text="Cargar trayectorias" />
-              <MenuItem mnemonicParsing="false" onAction="#cerrarAplicacion" text="Close" />
+                  <MenuItem mnemonicParsing="false" onAction="#guardarTrayectoriasEnTxT" text="Exportar trayectorias a texto" />
+              <MenuItem mnemonicParsing="false" onAction="#cerrarAplicacion" text="Cerrar" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

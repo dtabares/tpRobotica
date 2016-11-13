@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 
 public class Trayectoria implements Serializable{
 	
@@ -142,6 +143,16 @@ public class Trayectoria implements Serializable{
 			secuencia.add(s);
 		}
 		return secuencia;
+	}
+	
+	public void regenerarFormasTrayectoria(){
+		
+			if(this.listaDeCuadrantesDeOrigenADestino != null){
+				for (Cuadrante c : this.listaDeCuadrantesDeOrigenADestino) {
+						c.recrearRectangulo();
+				}
+			}
+		
 	}
 
 }

@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,9 +14,12 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import clases.Coordenada;
@@ -334,15 +338,19 @@ public class MainController extends BorderPane {
     
     @FXML public void guardarMapa() throws IOException{
     	
+    	Map<String,String> extensiones = new HashMap<String,String>();	
+    	extensiones.put("Imagen (*.png)", "*.png");
+    	extensiones.put("Objeto (*.obj)", "*.obj");
     	if(mapa!=null){
-    		String ubicacion = buscarDirectorio().getAbsolutePath();
+    		String ubicacion = buscarDirectorio(extensiones,"Guardar").getAbsolutePath();
     		if(ubicacion.contains("png")){
     			System.out.println("Guardando mapa como imagen");
     		    WritableImage imagen = panelCentral.snapshot(new SnapshotParameters(), null);
     		    File archivo = new File(ubicacion);
     		    try {
     		        ImageIO.write(SwingFXUtils.fromFXImage(imagen, null), "png", archivo);
-    		        System.out.println("Mapa guardado en: " + ubicacion);
+    		        this.archivo = new File(archivo.getParent());
+    		        System.out.println("Imagen del mapa guardada en: " + ubicacion);
     		    } catch (IOException e) {
     		    	System.out.println(e.getMessage());
     		    }
@@ -355,7 +363,8 @@ public class MainController extends BorderPane {
 	    	    	oos.writeObject(mapa);
 	    	    	oos.close();
 	    	    	fout.close();
-    	    	System.out.println("Mapa guardado en: " + ubicacion);
+	    	    	this.archivo = new File(archivo.getParent());
+	    	    	System.out.println("Mapa guardado en: " + ubicacion);
     			}
     		}
     		else{
@@ -368,23 +377,34 @@ public class MainController extends BorderPane {
     
     }
     
-    public File buscarDirectorio(){
+    public File buscarDirectorio(Map<String,String> extensiones, String modo){
 		
     	Stage directorioStage = null;
-        FileChooser fileChooser = new FileChooser();
-        if (archivo!=null){
-        	//fileChooser.setInitialDirectory(archivo.);
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Seleccionar Directorio");
+	    if (archivo!=null){
+	    	fc.setInitialDirectory(archivo);
+	    }
+        for (Map.Entry<String, String> posicionMapa : extensiones.entrySet()) {
+        	fc.getExtensionFilters().add(new FileChooser.ExtensionFilter(posicionMapa.getKey(),posicionMapa.getValue()));
         }
-        fileChooser.setTitle("Guardar Mapa");          
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagen (*.png)", "*.png"));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Objeto (*.obj)", "*.obj"));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Texto (*.txt)", "*.txt"));
-        archivo = fileChooser.showSaveDialog(directorioStage);
-        if(!archivo.getName().contains(".png") && fileChooser.getSelectedExtensionFilter().equals("*.png")) {
+        if(modo.equals("Guardar")){
+        	archivo = fc.showSaveDialog(directorioStage);
+        }
+        else if(modo.equals("Cargar")){
+        	archivo = fc.showOpenDialog(directorioStage);
+        }
+        else{
+        	this.mostrarMensajeDeError("Modo incorrecto!");
+        }
+        if(!archivo.getName().contains(".png") && fc.getSelectedExtensionFilter().equals("*.png")) {
         	archivo = new File(archivo.getAbsolutePath() + ".png");
         }
-        else if(!archivo.getName().contains(".obj") && fileChooser.getSelectedExtensionFilter().equals("*.obj")){
+        else if(!archivo.getName().contains(".obj") && fc.getSelectedExtensionFilter().equals("*.obj")){
         	archivo = new File(archivo.getAbsolutePath() + ".obj");
+        }
+        else if(!archivo.getName().contains(".txt") && fc.getSelectedExtensionFilter().equals("*.txt")){
+        	archivo = new File(archivo.getAbsolutePath() + ".txt");
         }
 		return archivo;
 	
@@ -392,7 +412,9 @@ public class MainController extends BorderPane {
     
     @FXML public void cargarMapa() throws IOException, ClassNotFoundException{
     	
-    	String ubicacion = buscarDirectorio().getAbsolutePath();
+    	Map<String,String> extensiones = new HashMap<String,String>();	
+    	extensiones.put("Objeto (*.obj)", "*.obj");
+    	String ubicacion = buscarDirectorio(extensiones,"Cargar").getAbsolutePath();
     	if(ubicacion.contains("obj")){
 	    	FileInputStream fis = new FileInputStream(ubicacion);
 	    	ObjectInputStream ois = new ObjectInputStream(fis);
@@ -402,6 +424,8 @@ public class MainController extends BorderPane {
 			panelCentral.getChildren().setAll(mapa.getChildren());
 			ois.close();
 			fis.close();
+			cargarComboBoxesEnUI();
+			this.archivo = new File(archivo.getParent());
     	}
 		else{
 			this.mostrarMensajeDeError("Extension Invalida!");
@@ -409,42 +433,111 @@ public class MainController extends BorderPane {
     
     }
 
+	@FXML public void guardarTrayectoriasEnTxT() throws IOException{
+		
+    	Map<String,String> extensiones = new HashMap<String,String>();	
+    	extensiones.put("Archivo de Texto (*.txt)", "*.txt");
+		if(mapa!=null){
+    		if(this.trayectoria!=null){
+				String ubicacion = buscarDirectorio(extensiones,"Guardar").getAbsolutePath();
+	    		if(ubicacion.contains("txt")){
+	        		File archivo = new File(ubicacion);
+	        		FileWriter fw = new FileWriter(archivo , true);
+	        		BufferedWriter bf = new BufferedWriter(fw);
+	        		Iterator<String> i = this.trayectoria.obtenerSecuenciaDePasosComoString().iterator();
+	        		while(i.hasNext()){
+	        			bf.write(i.next());
+	        			bf.newLine();
+	        		}
+	        		bf.close();
+	        		fw.close();
+	        		this.archivo = new File(archivo.getParent());
+	        		System.out.println("Trayectorias guardadas en: " + ubicacion);
+	    		}
+	    		else{
+	    			this.mostrarMensajeDeError("Extension Invalida!");
+	    		}
+    		}
+    		else{
+    			this.mostrarMensajeDeError("No existen trayectorias!");
+    		}
+		}
+    	else{
+    		this.mostrarMensajeDeError("No existe el mapa!");
+    	}
+	}
+	
 	@FXML public void guardarTrayectorias() throws IOException{
 		
+    	Map<String,String> extensiones = new HashMap<String,String>();	
+    	extensiones.put("Objeto (*.obj)", "*.obj");
 		if(mapa!=null){
-    		String ubicacion = buscarDirectorio().getAbsolutePath();
-    		if(ubicacion.contains("txt")){
-        		File archivo = new File(ubicacion);
-        		FileWriter fw = new FileWriter(archivo , true);
-        		BufferedWriter bf = new BufferedWriter(fw);
-        		Iterator<String> i = trayectoria.obtenerSecuenciaDePasosComoString().iterator();
-        		while(i.hasNext()){
-        			bf.write(i.next());
-        			bf.newLine();
-        		}
-        		bf.close();
-        		fw.close();
+    		String ubicacion = buscarDirectorio(extensiones,"Guardar").getAbsolutePath();
+    		if (ubicacion.contains("obj")){
+    			System.out.println("Guardando trayectorias");
+    			if(ubicacion!=null){	
+	    	    	FileOutputStream fout = new FileOutputStream(ubicacion);
+	    	    	ObjectOutputStream oos = new ObjectOutputStream(fout);
+	    	    	oos.writeObject(this.trayectoria);
+	    	    	oos.close();
+	    	    	fout.close();
+	    	    	this.archivo = new File(archivo.getParent());
+	    	    	System.out.println("Trayectorias guardadas en: " + ubicacion);
+    			}
+    		}
+    		else{
+    			this.mostrarMensajeDeError("Extension Invalida!");
+    		}
+    	}
+    	else{
+    		this.mostrarMensajeDeError("No existe el mapa!");
+    	}
+	}
+	
+	@FXML public void cargarTrayectorias() throws IOException, ClassNotFoundException{
+		
+    	Map<String,String> extensiones = new HashMap<String,String>();	
+    	extensiones.put("Objeto (*.obj)", "*.obj");
+		if(mapa!=null){
+    		String ubicacion = buscarDirectorio(extensiones,"Cargar").getAbsolutePath();
+    		if(ubicacion.contains("obj")){
+    			FileInputStream fis = new FileInputStream(ubicacion);
+    	    	ObjectInputStream ois = new ObjectInputStream(fis);
+    	    	trayectoria = (Trayectoria) ois.readObject();
+    	    	trayectoria.regenerarFormasTrayectoria();
+    	    	trayectoria.calcularTrayectoria();
+    			ois.close();
+    			fis.close();
+    			this.archivo = new File(archivo.getParent());
     		}
     		else{
     			this.mostrarMensajeDeError("Extension Invalida!");
     		}
 		}
+    	else{
+    		this.mostrarMensajeDeError("No existe el mapa!");
+    	}
 	
 	}
-	@FXML public void cargarTrayectorias(){
-
-		if(mapa!=null){
-    		String ubicacion = buscarDirectorio().getAbsolutePath();
-    		if(ubicacion.contains("txt")){
-    		}
-    		else{
-    			this.mostrarMensajeDeError("Extension Invalida!");
-    		}
+	
+	public void cargarComboBoxesEnUI(){
+		
+		Collection <Recinto> recintos = new LinkedList<Recinto>();
+		recintos.add(mapa.getRecintoMapa());
+		recintos.addAll(mapa.getRecintos());
+		
+		for (Recinto recinto : recintos) {
+			if(recinto.getGrilla() != null){
+				inRecintosComboBox.getItems().add(recinto.getNombre());
+				inPuertasComboRecintos.getItems().add(recinto.getNombre());
+				inObstaculosComboRecintos.getItems().add(recinto.getNombre());			
+			}
 		}
-	
+		
 	}
 	
-	@FXML public void cerrarAplicacion(){		
+	@FXML public void cerrarAplicacion(){
+		System.exit(0);
 	}
     
 }
