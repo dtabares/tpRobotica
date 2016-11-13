@@ -35,7 +35,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		Collection<Shape> grillasParaSerAgregadas = new LinkedList<Shape>();
 		Collection<Shape> obstaculosParaSerAgregados = new LinkedList<Shape>();
 		Collection<Shape> puertasParaSerAgregadas = new LinkedList<Shape>();
-		Rectangle background = new Rectangle (tamanioX,tamanioY);
+		Rectangle background = new Rectangle (this.tamanioX,this.tamanioY);
 		background.setStroke(Color.BLACK);
 		background.setFill(Color.LIGHTGREY);
 		
@@ -50,25 +50,39 @@ public class Mapa extends AnchorPane implements Serializable {
 					puertasParaSerAgregadas.add(puerta.getLinea());
 				}
 			}
-			for (Obstaculo obstaculo : recinto.getObstaculos()) {
-				obstaculosParaSerAgregados.add(obstaculo.getObstaculo());
+			if(recinto.getObstaculos()!=null){
+				for (Obstaculo obstaculo : recinto.getObstaculos()) {
+					obstaculosParaSerAgregados.add(obstaculo.getObstaculo());
+				}
 			}
 		}
 		
 		//Primero se agrega el fondo
 		formasPosicionablesEnMapa.add(background);
 		//Si existe una grilla se agrega
-		if(grilla!=null){formasPosicionablesEnMapa.addAll(grilla.getColeccionDeRectangulos());}
+		if(grilla!=null){
+			formasPosicionablesEnMapa.addAll(grilla.getColeccionDeRectangulos());
+		}
 		//Luego se agregan los recintos en orden
-		formasPosicionablesEnMapa.addAll(recintosParaSerAgregados);
+		if(recintosParaSerAgregados!=null){
+			formasPosicionablesEnMapa.addAll(recintosParaSerAgregados);
+		}
+		if(grillasParaSerAgregadas!=null){
 		//Luego se agregan las grillas en orden
-		formasPosicionablesEnMapa.addAll(grillasParaSerAgregadas);
+			formasPosicionablesEnMapa.addAll(grillasParaSerAgregadas);
+		}
 		//Luego se agregan las puertas en orden
-		formasPosicionablesEnMapa.addAll(puertasParaSerAgregadas);
+		if(puertasParaSerAgregadas!=null){
+			formasPosicionablesEnMapa.addAll(puertasParaSerAgregadas);
+		}
 		//Finalmente los obstaculos en orden
-		formasPosicionablesEnMapa.addAll(obstaculosParaSerAgregados);
+		if(obstaculosParaSerAgregados!=null){
+			formasPosicionablesEnMapa.addAll(obstaculosParaSerAgregados);
+		}
 		
-		this.getChildren().clear();
+		if(this.getChildren()!=null){
+			this.getChildren().clear();
+		}
 		this.getChildren().addAll(formasPosicionablesEnMapa);
 
 	}
@@ -148,13 +162,18 @@ public class Mapa extends AnchorPane implements Serializable {
 	
 	public void regenerarIdsCuadrantesDeTodoElMapa(){
 		//reseteo el contador
-		this.grilla.getContador().resetearContador();
+		Contador.getContador().resetearContador();
 		//primero regenero los de la grilla del mapa
-		this.grilla.regenerarIdsCuadrantes();
+		if(this.grilla!=null){
+			this.grilla.regenerarIdsCuadrantes();
+		}
 		//luego regenero iterando por cada recinto
 		Iterator<Recinto> iteradorDeRecintos = this.recintos.iterator();
 		while(iteradorDeRecintos.hasNext()){
-			iteradorDeRecintos.next().getGrilla().regenerarIdsCuadrantes();
+			Recinto r = iteradorDeRecintos.next();
+			if(r.getGrilla()!=null){
+				r.getGrilla().regenerarIdsCuadrantes();
+			}
 		}
 	}
 	
@@ -359,8 +378,8 @@ public class Mapa extends AnchorPane implements Serializable {
 		//El recinto, la grilla, los obstaculos, las puertas
 		if (this.recintos!=null){
 			for (Recinto recinto : this.recintos) {
+				recinto.regenerarFormaRecinto();
 				if(recinto.getGrilla()!=null){
-					recinto.regenerarFormaRecinto();
 					recinto.getGrilla().prepararGrillaParaDibujoDespuesDeCargarMapa();
 				}
 				if(recinto.getObstaculos()!=null){	
@@ -370,7 +389,7 @@ public class Mapa extends AnchorPane implements Serializable {
 				}
 				if(recinto.getPuertas()!=null){	
 					for (Puerta puerta : recinto.getPuertas()) {
-						puerta.regenerateLinea();
+						puerta.regenerarLinea();
 					}
 				}
 			}

@@ -103,6 +103,8 @@ public class MainController extends BorderPane {
 	@FXML private TextField inTrayectoriasOrigenPosicionY;
 	@FXML private TextField inTrayectoriasDestinoPosicionX;
 	@FXML private TextField inTrayectoriasDestinoPosicionY;
+	@FXML private ComboBox inTrayectoriasComboBox;
+	@FXML private TextField inTrayectoriasNombre;
 	
 	public void initialize() {
         
@@ -167,10 +169,13 @@ public class MainController extends BorderPane {
     	}
     	else {
     		System.out.println("Modificando Recinto");
-    		mapa.getRecintos().remove(mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue()));
-    		inRecintosComboBox.getItems().remove(inRecintosComboBox.getValue());
-    		inRecintosComboBox.setValue("Nuevo Recinto");
-    		this.agregarRecinto();
+    		Recinto recinto = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
+	    	if(inCheckboxGrilla.isSelected()){
+	    		Grilla grilla = new Grilla (recinto,Float.valueOf(inTamanioGrilla.getText()),(int)inRecintosComboVertices.getValue());
+	    		grilla.prepararGrillaParaDibujo();
+	    		recinto.setGrilla(grilla);
+	    		mapa.regenerarIdsCuadrantesDeTodoElMapa();
+	    	}
 			mapa.dibujarMapa();
     		panelCentral.getChildren().setAll(mapa.getChildren());
     	}
@@ -528,11 +533,9 @@ public class MainController extends BorderPane {
 		recintos.addAll(mapa.getRecintos());
 		
 		for (Recinto recinto : recintos) {
-			if(recinto.getGrilla() != null){
 				inRecintosComboBox.getItems().add(recinto.getNombre());
 				inPuertasComboRecintos.getItems().add(recinto.getNombre());
 				inObstaculosComboRecintos.getItems().add(recinto.getNombre());			
-			}
 		}
 		
 	}

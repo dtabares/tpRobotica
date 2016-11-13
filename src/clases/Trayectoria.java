@@ -36,11 +36,13 @@ public class Trayectoria implements Serializable{
 		while(iterador.hasNext()){
 			if (cuadranteSiguiente == null){
 				cuadranteActual = iterador.next();
-				cuadranteActual.getRectangle().setFill(Color.GREEN);
+				//inicio
+				cuadranteActual.getRectangle().setFill(Color.BLUE);
 			}
 			else{
 				cuadranteActual = cuadranteSiguiente;
-				cuadranteActual.getRectangle().setFill(Color.BLUE);
+				//trayecto
+				cuadranteActual.getRectangle().setFill(Color.BLUEVIOLET);
 			}
 			if(iterador.hasNext()){
 				cuadranteSiguiente = iterador.next();
@@ -52,6 +54,7 @@ public class Trayectoria implements Serializable{
 				Paso paso = new Paso(dir,1);
 				this.pasos.add(paso);
 			}
+			//final
 			cuadranteSiguiente.getRectangle().setFill(Color.GREEN);
 		}
 	}

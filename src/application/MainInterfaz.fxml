@@ -28,8 +28,6 @@
               <MenuItem fx:id="botonNuevoMapa" mnemonicParsing="false" onAction="#crearNuevoMapa" text="Crear mapa" />
                   <MenuItem mnemonicParsing="false" onAction="#guardarMapa" text="Guardar mapa" />
                   <MenuItem mnemonicParsing="false" onAction="#cargarMapa" text="Cargar mapa" />
-                  <MenuItem mnemonicParsing="false" onAction="#guardarTrayectorias" text="Guardar trayectorias" />
-                  <MenuItem mnemonicParsing="false" onAction="#cargarTrayectorias" text="Cargar trayectorias" />
                   <MenuItem mnemonicParsing="false" onAction="#guardarTrayectoriasEnTxT" text="Exportar trayectorias a texto" />
               <MenuItem mnemonicParsing="false" onAction="#cerrarAplicacion" text="Cerrar" />
             </items>
@@ -113,8 +111,10 @@
                         <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <ComboBox fx:id="inRecintosComboBox" onAction="#cargarConfiguracionDeUnRecinto" prefHeight="25.0" prefWidth="217.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
@@ -153,7 +153,7 @@
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button fx:id="btnRecintoOK" mnemonicParsing="false" onAction="#agregarRecinto" prefHeight="25.0" prefWidth="188.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="14" GridPane.valignment="TOP">
+                        <Button fx:id="btnRecintoOK" mnemonicParsing="false" onAction="#agregarRecinto" prefHeight="25.0" prefWidth="188.0" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="16" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" top="20.0" />
                            </GridPane.margin>
@@ -170,12 +170,14 @@
                         </Label>
                         <Label text="Nombre" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                         <Line endX="100.0" startX="-100.0" GridPane.rowIndex="2" />
-                        <Label text="Vertice Inicial" GridPane.halignment="CENTER" GridPane.rowIndex="13" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="inRecintosComboVertices" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                        <Label text="Vertice Inicial" GridPane.halignment="CENTER" GridPane.rowIndex="14" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="inRecintosComboVertices" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="14">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </ComboBox>
+                        <Line endX="100.0" startX="-100.0" GridPane.rowIndex="15" />
+                        <Button mnemonicParsing="false" text="Borrar" GridPane.rowIndex="16" />
                      </children>
                   </GridPane>
                </content>
@@ -288,6 +290,11 @@
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -297,11 +304,20 @@
                         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="inTrayectoriasOrigenPosicionX" GridPane.rowIndex="3">
+                        <ComboBox fx:id="inTrayectoriasComboBox" onAction="#cargarTrayectorias" prefWidth="150.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <TextField fx:id="inTrayectoriasNombre" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="inTrayectoriasOrigenPosicionX" GridPane.rowIndex="8">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -309,28 +325,34 @@
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="inTrayectoriasOrigenPosicionY" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <TextField fx:id="inTrayectoriasOrigenPosicionY" GridPane.columnIndex="1" GridPane.rowIndex="8">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Label text="Posicion X" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Label text="Posicion Y" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" onAction="#buscarCaminoMasCorto" text="OK" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER" />
-                        <Label text="Origen" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                        <Label text="Destino" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                        <Label text="Posicion X" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
-                        <Label text="Posicion Y" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
-                        <TextField fx:id="inTrayectoriasDestinoPosicionX" GridPane.rowIndex="9">
+                        <TextField fx:id="inTrayectoriasDestinoPosicionX" GridPane.rowIndex="14">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="inTrayectoriasDestinoPosicionY" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                        <TextField fx:id="inTrayectoriasDestinoPosicionY" GridPane.columnIndex="1" GridPane.rowIndex="14">
                            <GridPane.margin>
                               <Insets left="20.0" right="20.0" />
                            </GridPane.margin>
                         </TextField>
+                        <Label text="Posicion X" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <Label text="Posicion Y" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#buscarCaminoMasCorto" text="Calcular" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="16" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#borrarTrayectoria" text="Borrar" GridPane.halignment="CENTER" GridPane.rowIndex="18" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#guardarTrayectoria" text="Guardar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="18" GridPane.valignment="CENTER" />
+                        <Label text="Origen" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                        <Label text="Destino" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+                        <Label text="Posicion X" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="CENTER" />
+                        <Label text="Posicion Y" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="CENTER" />
+                        <Label text="Nombre" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                        <Line endX="100.0" startX="-100.0" GridPane.rowIndex="2" />
+                        <Label text="Seleccionar Trayectorias Existentes" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Line endX="100.0" startX="-100.0" GridPane.rowIndex="15" />
                      </children>
                   </GridPane>
                </content>

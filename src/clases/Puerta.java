@@ -46,7 +46,7 @@ public class Puerta extends FormaPosicionableEnMapa {
 		this.linea.setStrokeWidth(5);
 	}
 	
-	public void regenerateLinea(){
+	public void regenerarLinea(){
 		this.setearLinea(this.posicionFinalX, this.posicionFinalY);
 	}
 

@@ -21,7 +21,7 @@ public class Recinto extends FormaPosicionableEnMapa{
 		setFormaRecinto(new Rectangle(x,y,ancho,alto));
 		getFormaRecinto().setStroke(Color.BLACK);
 		getFormaRecinto().setFill(Color.WHITE);
-		getFormaRecinto().setStrokeWidth(2);
+		getFormaRecinto().setStrokeWidth(4);
 		this.posicionX = x;
 		this.posicionY = y;
 		this.ancho = ancho;
