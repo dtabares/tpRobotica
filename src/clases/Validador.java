@@ -75,6 +75,11 @@ public class Validador {
 					}
 					
 				}
+				else{
+					if (!sonIgualesYTienenLaMismaPosicion(a, b)){
+						seSuperponen = (sePisanEnX(a, b) && sePisanEnY(a, b));
+					}
+				}
 			}
 
 			else{
