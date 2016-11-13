@@ -103,7 +103,7 @@ public class MainController extends BorderPane {
 	@FXML private TextField inTrayectoriasOrigenPosicionY;
 	@FXML private TextField inTrayectoriasDestinoPosicionX;
 	@FXML private TextField inTrayectoriasDestinoPosicionY;
-	@FXML private ComboBox inTrayectoriasComboBox;
+	@FXML private ComboBox<String> inTrayectoriasComboBox;
 	@FXML private TextField inTrayectoriasNombre;
 	
 	public void initialize() {
@@ -493,17 +493,40 @@ public class MainController extends BorderPane {
 	}
 	
 	@FXML public void guardarTrayectoria() throws IOException{
-		
+		if(this.trayectoria != null){
+			mapa.agregarTrayectoria(this.trayectoria);
+			this.inTrayectoriasComboBox.getItems().add(inTrayectoriasNombre.getText());
+		}
+		else{
+			this.mostrarMensajeDeError("Debe calcular la trayectoria primero");
+		}
+
 
 	}
 	
 	@FXML public void borrarTrayectoria() throws IOException, ClassNotFoundException{
-		
+		mapa.borrarTrayectoria(inTrayectoriasComboBox.getValue());
+		this.inTrayectoriasComboBox.getItems().remove(inTrayectoriasComboBox.getValue());
 	
 	}
 	
 	@FXML public void cargarTrayectoria(){
-		
+		this.trayectoria = mapa.buscarTrayectoriaPorNombre(inTrayectoriasComboBox.getValue());
+		if(this.trayectoria != null){
+			Float coordenadaInicialX = this.trayectoria.getCoordenadaInicial().getX();
+			Float coordenadaInicialY = this.trayectoria.getCoordenadaInicial().getY();
+			Float coordenadaFinalX = this.trayectoria.getCoordenadaFinal().getX();
+			Float coordenadaFinalY = this.trayectoria.getCoordenadaFinal().getY();
+			inTrayectoriasOrigenPosicionX.setText(coordenadaInicialX.toString()); 
+			inTrayectoriasOrigenPosicionY.setText(coordenadaInicialY.toString());
+			inTrayectoriasDestinoPosicionX.setText(coordenadaFinalX.toString());
+			inTrayectoriasDestinoPosicionY.setText(coordenadaFinalY.toString());
+			inTrayectoriasNombre.setText(this.trayectoria.getNombre());
+		}
+		else{
+			this.mostrarMensajeDeError("No se encontro la trayectoria");
+		}
+
 	}
 	
 	public void cargarComboBoxesEnUI(){

@@ -117,6 +117,23 @@ public class Mapa extends AnchorPane implements Serializable {
 		return resultado;
 	}
 	
+	public void borrarTrayectoria(String nombre){
+		Trayectoria t;
+		boolean encontro = false;
+		int i = 0;
+		Iterator<Trayectoria> iterador = trayectorias.iterator();
+		
+		while(iterador.hasNext() && !encontro){
+			t = iterador.next();
+			if(t.getNombre().equals(nombre)){
+				encontro = true;
+				trayectorias.remove(i);
+			}
+			i++;
+		}
+		
+	}
+	
 	public void agregarTrayectoria(Trayectoria t){
 		trayectorias.add(t);
 	}
