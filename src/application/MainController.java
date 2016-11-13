@@ -283,6 +283,7 @@ public class MainController extends BorderPane {
 		inRecintosComboBox.getItems().clear();
 		inObstaculosComboRecintos.getItems().clear();
     	inPuertasComboRecintos.getItems().clear();
+		inRecintosComboBox.getItems().add("Nuevo Recinto");
     	}
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
@@ -541,6 +542,7 @@ public class MainController extends BorderPane {
 		Recinto r = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
 		if(r!=null || !inRecintosComboBox.getValue().equals("Nuevo Recinto")){
 
+			nombreRecinto.setText(r.getNombre());
 			inPosicionX.setText(Float.toString(r.getPosicionX()));
 			inPosicionY.setText(Float.toString(r.getPosicionY()));
 			inAncho.setText(Float.toString(r.getAncho()));
