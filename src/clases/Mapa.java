@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import javafx.scene.layout.AnchorPane;
@@ -21,11 +22,13 @@ public class Mapa extends AnchorPane implements Serializable {
 	private Recinto recintoMapa;
 	private Collection <Recinto> recintos = new LinkedList<Recinto>();
 	private MatrizDeAdyacencia matrizDeAdyacenciaGlobal;
+	private List<Trayectoria> trayectorias;
 		
 	public Mapa(float tamanioX, float tamanioY) {
 		this.setPrefSize(tamanioX, tamanioY);
 		this.tamanioX = tamanioX;
 		this.tamanioY = tamanioY;
+		this.trayectorias = new LinkedList<Trayectoria>();
 	}
 		
 	public void dibujarMapa(){
@@ -95,6 +98,44 @@ public class Mapa extends AnchorPane implements Serializable {
 		}
 
 		return posicionValida;
+	}
+	
+	public Trayectoria buscarTrayectoriaPorNombre(String nombre){
+		Trayectoria t;
+		Trayectoria resultado = null;
+		boolean encontro = false;
+		Iterator<Trayectoria> iterador = trayectorias.iterator();
+		
+		while(iterador.hasNext() && !encontro){
+			t = iterador.next();
+			if(t.getNombre().equals(nombre)){
+				encontro = true;
+				resultado = t;
+			}
+		}
+		
+		return resultado;
+	}
+	
+	public void borrarTrayectoria(String nombre){
+		Trayectoria t;
+		boolean encontro = false;
+		int i = 0;
+		Iterator<Trayectoria> iterador = trayectorias.iterator();
+		
+		while(iterador.hasNext() && !encontro){
+			t = iterador.next();
+			if(t.getNombre().equals(nombre)){
+				encontro = true;
+				trayectorias.remove(i);
+			}
+			i++;
+		}
+		
+	}
+	
+	public void agregarTrayectoria(Trayectoria t){
+		trayectorias.add(t);
 	}
 	
 	public Recinto buscarRecintoPorNombre(String nombreBuscado) {
