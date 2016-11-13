@@ -332,6 +332,9 @@ public class MainController extends BorderPane {
     					listaDeCuadrantes.add(c);
     				}
     	    		trayectoria = new Trayectoria(listaDeCuadrantes,mapa.getPosicionEnGradosRespectoDelNorteMagnetico());
+    	    		trayectoria.setCoordenadaInicial(origen);
+    	    		trayectoria.setCoordenadaFinal(destino);
+    	    		trayectoria.setNombre(inTrayectoriasNombre.getText());
     	    		trayectoria.calcularTrayectoria();
     			}
     		}

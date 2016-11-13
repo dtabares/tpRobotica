@@ -13,6 +13,9 @@ public class Trayectoria implements Serializable{
 	private List<Paso> pasos;
 	private List<Cuadrante> listaDeCuadrantesDeOrigenADestino;
 	private double posicionEnGradosRespectoDelNorteMagnetico;
+	private Coordenada coordenadaInicial;
+	private Coordenada coordenadaFinal;
+	private String nombre;
 	
 	public Trayectoria (List<Cuadrante> lista, double grados){
 		this.pasos = new LinkedList<Paso>();
@@ -157,5 +160,30 @@ public class Trayectoria implements Serializable{
 			}
 		
 	}
+
+	public Coordenada getCoordenadaInicial() {
+		return coordenadaInicial;
+	}
+
+	public void setCoordenadaInicial(Coordenada coordenadaInicial) {
+		this.coordenadaInicial = coordenadaInicial;
+	}
+
+	public Coordenada getCoordenadaFinal() {
+		return coordenadaFinal;
+	}
+
+	public void setCoordenadaFinal(Coordenada coordenadaFinal) {
+		this.coordenadaFinal = coordenadaFinal;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 
 }
