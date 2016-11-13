@@ -436,5 +436,9 @@ public class Mapa extends AnchorPane implements Serializable {
 			}
 		}
 	}
+	
+	public List<Trayectoria> getTrayectorias() {
+		return trayectorias;
+	}
 
 }

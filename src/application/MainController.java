@@ -116,6 +116,7 @@ public class MainController extends BorderPane {
 		inRecintosComboVertices.setValue(1);
 		inRecintosComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
 		inPuertasComboBox.setItems(orientaciones);
+		inTrayectoriasComboBox.getItems().add("Nueva Trayectoria");
 		inMapaComboVertices.setValue(1);
 		inMapaComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
 		nuevoMapaControlador = new NuevoMapaControlador();
@@ -298,13 +299,15 @@ public class MainController extends BorderPane {
     @FXML public void borrarMapa(){
     	
     	if(mapa!=null){
-    	mapa.getChildren().removeAll(mapa.getChildren());
-    	panelCentral.getChildren().setAll(mapa.getChildren());
-    	mapa = null;
-		inRecintosComboBox.getItems().clear();
-		inObstaculosComboRecintos.getItems().clear();
-    	inPuertasComboRecintos.getItems().clear();
-		inRecintosComboBox.getItems().add("Nuevo Recinto");
+	    	mapa.getChildren().removeAll(mapa.getChildren());
+	    	panelCentral.getChildren().setAll(mapa.getChildren());
+	    	mapa = null;
+			inRecintosComboBox.getItems().clear();
+			inObstaculosComboRecintos.getItems().clear();
+	    	inPuertasComboRecintos.getItems().clear();
+			inRecintosComboBox.getItems().add("Nuevo Recinto");
+			inTrayectoriasComboBox.getItems().clear();
+			inTrayectoriasComboBox.getItems().add("Nueva Trayectoria");
     	}
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
@@ -493,14 +496,21 @@ public class MainController extends BorderPane {
 	}
 	
 	@FXML public void guardarTrayectoria() throws IOException{
-		if(this.trayectoria != null){
-			mapa.agregarTrayectoria(this.trayectoria);
-			this.inTrayectoriasComboBox.getItems().add(inTrayectoriasNombre.getText());
+		
+		if(inTrayectoriasComboBox.getValue().equals("Nueva Trayectoria")){	
+			if(!inTrayectoriasComboBox.getItems().contains(inTrayectoriasComboBox.getValue())){
+				if(this.trayectoria != null){
+					mapa.agregarTrayectoria(this.trayectoria);
+					this.inTrayectoriasComboBox.getItems().add(inTrayectoriasNombre.getText());
+				}
+				else{
+					this.mostrarMensajeDeError("Debe calcular la trayectoria primero");
+				}
+			}
+			else{	
+			System.out.println("El nombre ya existe");
+			}
 		}
-		else{
-			this.mostrarMensajeDeError("Debe calcular la trayectoria primero");
-		}
-
 
 	}
 	
@@ -511,27 +521,30 @@ public class MainController extends BorderPane {
 	}
 	
 	@FXML public void cargarTrayectoria(){
-		this.trayectoria = mapa.buscarTrayectoriaPorNombre(inTrayectoriasComboBox.getValue());
-		if(this.trayectoria != null){
-			Float coordenadaInicialX = this.trayectoria.getCoordenadaInicial().getX();
-			Float coordenadaInicialY = this.trayectoria.getCoordenadaInicial().getY();
-			Float coordenadaFinalX = this.trayectoria.getCoordenadaFinal().getX();
-			Float coordenadaFinalY = this.trayectoria.getCoordenadaFinal().getY();
-			inTrayectoriasOrigenPosicionX.setText(coordenadaInicialX.toString()); 
-			inTrayectoriasOrigenPosicionY.setText(coordenadaInicialY.toString());
-			inTrayectoriasDestinoPosicionX.setText(coordenadaFinalX.toString());
-			inTrayectoriasDestinoPosicionY.setText(coordenadaFinalY.toString());
-			inTrayectoriasNombre.setText(this.trayectoria.getNombre());
-		}
-		else{
-			this.mostrarMensajeDeError("No se encontro la trayectoria");
-		}
 
+		if(!inTrayectoriasComboBox.getValue().equals("Nueva Trayectoria")){
+			this.trayectoria = mapa.buscarTrayectoriaPorNombre(inTrayectoriasComboBox.getValue());
+				if(this.trayectoria != null){
+					Float coordenadaInicialX = this.trayectoria.getCoordenadaInicial().getX();
+					Float coordenadaInicialY = this.trayectoria.getCoordenadaInicial().getY();
+					Float coordenadaFinalX = this.trayectoria.getCoordenadaFinal().getX();
+					Float coordenadaFinalY = this.trayectoria.getCoordenadaFinal().getY();
+					inTrayectoriasOrigenPosicionX.setText(coordenadaInicialX.toString()); 
+					inTrayectoriasOrigenPosicionY.setText(coordenadaInicialY.toString());
+					inTrayectoriasDestinoPosicionX.setText(coordenadaFinalX.toString());
+					inTrayectoriasDestinoPosicionY.setText(coordenadaFinalY.toString());
+					inTrayectoriasNombre.setText(this.trayectoria.getNombre());
+				}
+				else{
+					this.mostrarMensajeDeError("No se encontro la trayectoria");
+				}
+		}
 	}
 	
 	public void cargarComboBoxesEnUI(){
 		
 		Collection <Recinto> recintos = new LinkedList<Recinto>();
+		
 		recintos.add(mapa.getRecintoMapa());
 		recintos.addAll(mapa.getRecintos());
 		
@@ -539,6 +552,10 @@ public class MainController extends BorderPane {
 				inRecintosComboBox.getItems().add(recinto.getNombre());
 				inPuertasComboRecintos.getItems().add(recinto.getNombre());
 				inObstaculosComboRecintos.getItems().add(recinto.getNombre());			
+		}
+		
+		for (Trayectoria trayectoria: mapa.getTrayectorias()){
+			inTrayectoriasComboBox.getItems().add(trayectoria.getNombre());
 		}
 		
 	}
