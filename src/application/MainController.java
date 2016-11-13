@@ -192,12 +192,18 @@ public class MainController extends BorderPane {
     
     @FXML public void borrarRecinto(){
     	
+    	if(!inRecintosComboBox.getValue().equals(mapa.getRecintoMapa().getNombre())){
     	String s = inRecintosComboBox.getValue();
     	mapa.getRecintos().remove(mapa.buscarRecintoPorNombre(s));
     	inRecintosComboBox.getItems().remove(s);
     	inObstaculosComboRecintos.getItems().remove(s);
     	inPuertasComboRecintos.getItems().remove(s);
-    	
+    	mapa.dibujarMapa();
+		panelCentral.getChildren().setAll(mapa.getChildren());
+    	}
+		else{
+			this.mostrarMensajeDeError("No es posible borrar este recinto, para borrar el mapa ir a editar > borrar mapa");
+		}
     }
 
 	@FXML public void agregarObstaculo(){

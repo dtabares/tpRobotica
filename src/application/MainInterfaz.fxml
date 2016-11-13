@@ -177,7 +177,7 @@
                            </GridPane.margin>
                         </ComboBox>
                         <Line endX="100.0" startX="-100.0" GridPane.rowIndex="15" />
-                        <Button fx:id="borrarRecinto" mnemonicParsing="false" text="Borrar" GridPane.halignment="CENTER" GridPane.rowIndex="16" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#borrarRecinto" text="Borrar" GridPane.halignment="CENTER" GridPane.rowIndex="16" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </content>
