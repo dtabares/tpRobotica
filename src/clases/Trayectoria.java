@@ -71,61 +71,58 @@ public class Trayectoria implements Serializable{
 	}
 	
 	private double calcularDireccionEnGrados(Cuadrante actual, Cuadrante siguiente){
+		
 		double direccion = 0;
 		float x = actual.getPosicionX() - siguiente.getPosicionX();
 		float y = actual.getPosicionY() - siguiente.getPosicionY();
-		
-		//En caso de que x == 0 quiere decir que puede se mueve solo en Y
-		if (x == 0){
-			// Cuadrante superior
-			if(y == 1){
-				direccion = 0;
+		//Me muevo a derecha en x
+		if(x<0){
+			//Me muevo hacia abajo en y
+			if(y<0){
+				direccion = 135;
 			}
-			//cuadrante inferior
+			//Me quedo quieto en y
+			else if(y==0){
+				direccion = 90;
+			}
+			//Me muevo hacia arriba en y
 			else{
+				direccion = 45;
+			}
+		}
+		//Me quedo quieto en x
+		else if(x==0){
+			//Me muevo hacia abajo en y
+			if(y<0){
 				direccion = 180;
 			}
-		}
-		else{
-			//En caso de que y == 0 quiere decir que puede se mueve solo en X
-			if (y == 0){
-				//Cuadrante izquierdo
-				if( x == -1){
-					direccion = 270;
-				}
-				//Cuadrante derecho
-				else{
-					direccion = 90;
-				}
+			//Me quedo quieto en y
+			else if(y==0){
+				//No hay movimiento
 			}
-			// Llegado este caso, se que se mueve en diagonal
+			//Me muevo hacia arriba en y
 			else{
-				// Cuadrante superior
-				if(y== 1){
-					//Cuadrante derecho
-					if(x==-1){
-						direccion = 45;
-					}
-					//Cuadrante izquierdo
-					else{
-						direccion = 315;
-					}
-				}
-				// Cuadrante inferior
-				else{
-					//Cuadrante izquierdo
-					if(x==-1){
-						direccion = 225;
-					}
-					//Cuadrante derecho
-					else{
-						direccion = 135;
-					}
-				}
+				direccion = 0;
 			}
 		}
 		
+		//Me muevo a izquierda en x
+		else{
+			//Me muevo hacia abajo en y
+			if(y<0){
+				direccion = 225;
+			}
+			//Me quedo quieto en y
+			else if(y==0){
+				direccion = 270;
+			}
+			//Me muevo hacia arriba en y
+			else{
+				direccion = 315;
+			}
+		}
 		return direccion;
+		
 	}
 	
 	public List<String> obtenerSecuenciaDePasosComoString(){
