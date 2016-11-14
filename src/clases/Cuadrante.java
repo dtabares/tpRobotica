@@ -10,6 +10,7 @@ public class Cuadrante extends FormaPosicionableEnMapa {
 	private int id;
 	private int idLocal;
 	private boolean linderoAPuerta;
+	private Color colorAnterior;
 	
 	public Cuadrante(float posicionX, float posicionY, float ancho, float alto, int numero){
 		this.rectangulo = new Rectangle(posicionX,posicionY,ancho,alto);
@@ -35,6 +36,15 @@ public class Cuadrante extends FormaPosicionableEnMapa {
 		this.disponible = false;
 		this.rectangulo.setFill(Color.RED);
 	}
+	
+	public void recrearRectangulo(){
+		this.rectangulo = new Rectangle(posicionX,posicionY,ancho,this.alto);
+		this.rectangulo.setStroke(Color.BLACK);
+		this.rectangulo.setFill(Color.WHITE);
+		this.rectangulo.setStrokeWidth(1);
+	}
+	
+	//Getters & Setters
 	
 	public boolean estaDisponible(){
 		return this.disponible;
@@ -68,13 +78,12 @@ public class Cuadrante extends FormaPosicionableEnMapa {
 		this.linderoAPuerta = linderoAPuerta;
 	}
 	
-	public void recrearRectangulo(){
-		this.rectangulo = new Rectangle(posicionX,posicionY,ancho,this.alto);
-		this.rectangulo.setStroke(Color.BLACK);
-		this.rectangulo.setFill(Color.WHITE);
-		this.rectangulo.setStrokeWidth(1);
+	public Color getColorAnterior() {
+		return colorAnterior;
+	}
+
+	public void setColorAnterior(Color colorAnterior) {
+		this.colorAnterior = colorAnterior;
 	}
 	
-	
-
 }

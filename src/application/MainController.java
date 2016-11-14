@@ -318,7 +318,7 @@ public class MainController extends BorderPane {
     @FXML public void buscarCaminoMasCorto(){
     	
     	if (mapa != null){
-    		if(trayectoria != null){ trayectoria.borrarTrayectoria();}
+    		if(trayectoria != null){ trayectoria.borrarDibujoDeTrayectoria();}
     		Dijkstra dijkstra = new Dijkstra();
     		List<Integer> listaDeIds;
     		List<Cuadrante> listaDeCuadrantes = new LinkedList<Cuadrante>();

@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 
 public class Trayectoria implements Serializable{
 	
@@ -22,11 +20,7 @@ public class Trayectoria implements Serializable{
 		this.listaDeCuadrantesDeOrigenADestino = lista;
 		this.posicionEnGradosRespectoDelNorteMagnetico = grados;
 	}
-	
-//	private void agregarPaso(double direccion, int cantidadDeBaldozas){
-//		this.pasos.add(new Paso(direccion, cantidadDeBaldozas));
-//	}
-//	
+
 	public List<Paso> getListaDePasos(){
 		return this.pasos;
 	}
@@ -40,11 +34,13 @@ public class Trayectoria implements Serializable{
 			if (cuadranteSiguiente == null){
 				cuadranteActual = iterador.next();
 				//inicio
+				cuadranteActual.setColorAnterior((Color) cuadranteActual.getRectangle().getFill()); //Guarda el color antes de cambiarlo
 				cuadranteActual.getRectangle().setFill(Color.BLUE);
 			}
 			else{
 				cuadranteActual = cuadranteSiguiente;
 				//trayecto
+				System.out.println(cuadranteActual.getRectangle().getFill().toString());
 				cuadranteActual.getRectangle().setFill(Color.BLUEVIOLET);
 			}
 			if(iterador.hasNext()){
@@ -62,13 +58,13 @@ public class Trayectoria implements Serializable{
 		}
 	}
 	
-	public void borrarTrayectoria(){
+	public void borrarDibujoDeTrayectoria(){
 		
 		Iterator<Cuadrante> iterador = this.listaDeCuadrantesDeOrigenADestino.iterator();
 		Cuadrante cuadranteActual;
 		while (iterador.hasNext()){
 			cuadranteActual=iterador.next();
-			cuadranteActual.getRectangle().setFill(Color.WHITE);
+			cuadranteActual.getRectangle().setFill(cuadranteActual.getColorAnterior());
 		}
 		
 	}
@@ -181,6 +177,5 @@ public class Trayectoria implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
 
 }
