@@ -33,7 +33,6 @@ public class Dijkstra {
 		                    cola.add(i);
 		                    visitados.put(i, true);
 		                    previos.put(i, actual);
-		                    
 		                }
 		            }
 		        }
@@ -46,6 +45,12 @@ public class Dijkstra {
 		}
 		direcciones.add(inicio);
 		return invertirLista(direcciones);
+	
+	}
+	
+	public float distanciaEntreDosPuntos(float xi, float yi, float xf, float yf){
+		
+		return (float) Math.sqrt((Math.pow((xf-xi),2))+(Math.pow((yf-yi),2)));
 	
 	}
 	
