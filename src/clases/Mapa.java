@@ -409,7 +409,7 @@ public class Mapa extends AnchorPane implements Serializable {
 	public void regenerarFiguras(){
 		//Primero regenero la grilla del mapa y su recinto
 		if(recintoMapa!=null){
-			this.recintoMapa.regenerarFormaRecinto();
+			this.recintoMapa.regenerarFormaRecintoMapa();
 			if(this.grilla!=null){
 				this.grilla.prepararGrillaParaDibujoDespuesDeCargarMapa();
 			}
