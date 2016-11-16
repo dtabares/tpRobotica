@@ -40,7 +40,7 @@ public class Cuadrante extends FormaPosicionableEnMapa {
 	public void recrearRectangulo(){
 		this.rectangulo = new Rectangle(posicionX,posicionY,ancho,this.alto);
 		this.rectangulo.setStroke(Color.BLACK);
-		this.rectangulo.setFill(Color.WHITE);
+		this.rectangulo.setFill(Color.rgb(255, 255, 255, 0.2));
 		this.rectangulo.setStrokeWidth(1);
 	}
 	
