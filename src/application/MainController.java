@@ -38,13 +38,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Shape;
@@ -67,6 +70,9 @@ public class MainController extends BorderPane {
 	//Listas Observables
 	ObservableList<Obstaculos> obstaculos = FXCollections.observableArrayList(Arrays.asList(Obstaculos.values()));
 	ObservableList<Orientacion> orientaciones = FXCollections.observableArrayList(Arrays.asList(Orientacion.values()));
+	
+	//Items interfaz
+	@FXML private TextField outSalidaPorPantalla;
 	
 	//Items menu Mapa
 	@FXML private CheckBox inMapaCheckboxGrilla;
@@ -120,7 +126,8 @@ public class MainController extends BorderPane {
 		inMapaComboVertices.setValue(1);
 		inMapaComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
 		nuevoMapaControlador = new NuevoMapaControlador();
- 		nuevoMapaControlador.setListener(new NuevoMapaControladorListener() {	
+ 		
+		nuevoMapaControlador.setListener(new NuevoMapaControladorListener() {	
 	    	@Override public void nuevoMapaControladorListenerOK (ActionEvent e) {
 	    		System.out.println("Creando nuevo mapa...");
 	        	mapa = new Mapa(Float.parseFloat(nuevoMapaControlador.getInAncho()),Float.parseFloat(nuevoMapaControlador.getInAlto()));
@@ -129,11 +136,20 @@ public class MainController extends BorderPane {
 	        	mapa.dibujarMapa();
 	        	panelCentral.getChildren().setAll(mapa.getChildren());
 	        	nuevoMapaControlador.ocultarFormulario();
+	        	//Imprime coordenadas por pantalla
+	        	panelCentral.setOnMouseMoved(new EventHandler<MouseEvent>() {
+	        		public void handle(MouseEvent mouseEvent){
+	        			outSalidaPorPantalla.setText("Coordenada X: " + mouseEvent.getX() + " Coordenada Y: " + mouseEvent.getY());
+	        		}
+	    		});
+	        	
 	    	}
 	    	@Override
 	    	public void nuevoMapaControladorListenerCancel(ActionEvent e) {}
 	        });
 		
+		
+ 				
     }
     
     @FXML public void agregarRecinto(){
@@ -346,10 +362,15 @@ public class MainController extends BorderPane {
     			else{
     				mapa.calcularMatrizDeAdyacenciaGlobal();
     	    		listaDeIds = dijkstra.obtenerCaminoMasCorto(mapa.getMatrizDeAdyacenciaGlobal().getMatrizDeAdyacenciaEnBooleanos(), cuadranteOrigen.getId(), cuadranteDestino.getId());
-    	    		for (Integer id : listaDeIds) {
-    					Cuadrante c = mapa.buscarCuadrantePorId(id);
-    					listaDeCuadrantes.add(c);
-    				}
+    	    		if(listaDeIds==null){
+    	    			this.mostrarMensajeDeError("No hay trayectoria posible!");
+    	    		}
+    	    		else{
+	    	    		for (Integer id : listaDeIds) {
+	    					Cuadrante c = mapa.buscarCuadrantePorId(id);
+	    					listaDeCuadrantes.add(c);
+	    				}
+    	    		}
     	    		trayectoria = new Trayectoria(listaDeCuadrantes,mapa.getPosicionEnGradosRespectoDelNorteMagnetico());
     	    		trayectoria.setCoordenadaInicial(origen);
     	    		trayectoria.setCoordenadaFinal(destino);
@@ -587,7 +608,7 @@ public class MainController extends BorderPane {
 		}
 		
 	}
-	
+
 	@FXML public void cerrarAplicacion(){
 		System.exit(0);
 	}

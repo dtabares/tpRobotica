@@ -38,7 +38,8 @@ public class Dijkstra {
 		        }
 		}
 		if (actual!=fin){
-		        System.out.println("No existe el destino!");
+				//Si no encuentra el id del cuadrante destino sale de la funcion retornando null
+		        return null;
 		}
 		for (int i = fin; i!=inicio; i = previos.get(i)){
 		    	direcciones.add(i);

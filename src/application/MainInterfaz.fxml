@@ -366,4 +366,22 @@
             <AnchorPane fx:id="panelCentral" prefHeight="200.0" prefWidth="200.0" />
          </content></ScrollPane>
    </center>
+   <bottom>
+      <GridPane maxHeight="30.0" minHeight="30.0" prefHeight="30.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="222.0" prefWidth="222.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="868.0" minWidth="10.0" prefWidth="802.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="outSalidaPorPantalla" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </TextField>
+         </children>
+      </GridPane>
+   </bottom>
 </BorderPane>
