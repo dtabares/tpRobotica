@@ -123,6 +123,7 @@ public class MainController extends BorderPane {
 		inRecintosComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
 		inPuertasComboBox.setItems(orientaciones);
 		inTrayectoriasComboBox.getItems().add("Nueva Trayectoria");
+		inTrayectoriasComboBox.setValue("Nueva Trayectoria");
 		inMapaComboVertices.setValue(1);
 		inMapaComboVertices.setItems(FXCollections.observableArrayList(1,2,3,4));
 		nuevoMapaControlador = new NuevoMapaControlador();
@@ -334,7 +335,10 @@ public class MainController extends BorderPane {
     @FXML public void buscarCaminoMasCorto(){
     	
     	if (mapa != null){
-    		if(trayectoria != null){ trayectoria.borrarDibujoDeTrayectoria();}
+    		if(trayectoria != null){
+    			trayectoria.borrarDibujoDeTrayectoria();
+    			trayectoria=null;
+    		}
     		Dijkstra dijkstra = new Dijkstra();
     		List<Integer> listaDeIds;
     		List<Cuadrante> listaDeCuadrantes = new LinkedList<Cuadrante>();
@@ -519,25 +523,36 @@ public class MainController extends BorderPane {
 	@FXML public void guardarTrayectoria() throws IOException{
 		
 		if(inTrayectoriasComboBox.getValue().equals("Nueva Trayectoria")){	
-			if(!inTrayectoriasComboBox.getItems().contains(inTrayectoriasComboBox.getValue())){
+			if(!inTrayectoriasComboBox.getItems().contains(inTrayectoriasNombre.getText())){
 				if(this.trayectoria != null){
 					mapa.agregarTrayectoria(this.trayectoria);
 					this.inTrayectoriasComboBox.getItems().add(inTrayectoriasNombre.getText());
+		    		trayectoria.borrarDibujoDeTrayectoria();
+		    		trayectoria=null;
 				}
 				else{
 					this.mostrarMensajeDeError("Debe calcular la trayectoria primero");
 				}
 			}
 			else{	
-			System.out.println("El nombre ya existe");
+				this.mostrarMensajeDeError("El nombre ya existe");
 			}
 		}
 
 	}
 	
 	@FXML public void borrarTrayectoria() throws IOException, ClassNotFoundException{
-		mapa.borrarTrayectoria(inTrayectoriasComboBox.getValue());
-		this.inTrayectoriasComboBox.getItems().remove(inTrayectoriasComboBox.getValue());
+		if(inTrayectoriasComboBox.getValue()!="Nueva Trayectoria"){
+			mapa.borrarTrayectoria(inTrayectoriasComboBox.getValue());
+			this.inTrayectoriasComboBox.getItems().remove(inTrayectoriasComboBox.getValue());
+			if(this.trayectoria != null){
+				trayectoria.borrarDibujoDeTrayectoria();
+				trayectoria=null;
+			}
+		}
+		else{
+			this.mostrarMensajeDeError("Debe elegir una trayectoria!");
+		}
 	
 	}
 	
