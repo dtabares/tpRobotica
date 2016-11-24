@@ -221,7 +221,6 @@ public class Mapa extends AnchorPane implements Serializable {
 	public void calcularMatrizDeAdyacenciaGlobal(){
 		int cantidadTotalDeCuadrantes = this.grilla.getContador().getProximoNumeroDeCuadrante();
 		this.matrizDeAdyacenciaGlobal = new MatrizDeAdyacencia(cantidadTotalDeCuadrantes);
-		
 		//Primero calculo la de adyacencia de la grilla del mapa y la inserto en la global
 		//this.grilla.prepararGrillaParaDibujo();
 		this.recintoMapa.setGrilla(this.grilla);
@@ -233,10 +232,7 @@ public class Mapa extends AnchorPane implements Serializable {
 		boolean[][] matrizDeAdyacenciaDelMapa = ma.getMatrizDeAdyacenciaEnBooleanos();
 		this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelMapa, this.grilla.getIdInicial());
 		System.out.println("Insertando cuadrantes del mapa");
-//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
-//		matrizDeAdyacenciaGlobal.imprimirMatriz();
-//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
-		
+
 		//Luego itero por cada recinto, y genero la de adyacencia de cada recinto, y la inserto en la global
 		Iterator<Recinto> iteradorDeRecintos = this.recintos.iterator();
 		while(iteradorDeRecintos.hasNext()){
@@ -250,10 +246,6 @@ public class Mapa extends AnchorPane implements Serializable {
 			this.insertarMatrizLocalEnGlobal(matrizDeAdyacenciaDelRecinto, grillaDelRecinto.getIdInicial());
 		}
 
-//		System.out.println("Insertando Recintos");
-//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
-//		matrizDeAdyacenciaGlobal.imprimirMatriz();
-//		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
 		//Puertas --> Conectar los grafos
 		iteradorDeRecintos = this.recintos.iterator();
 		Iterator<Recinto> iteradorDeRecintosEnBusquedaDeCoordenada;
@@ -432,6 +424,9 @@ public class Mapa extends AnchorPane implements Serializable {
 					for (Puerta puerta : recinto.getPuertas()) {
 						puerta.regenerarLinea();
 					}
+				}
+				if(recinto.getGrilla()!=null){
+					recinto.getGrilla().prepararGrillaParaDibujoDespuesDeCargarMapa();
 				}
 			}
 		}
