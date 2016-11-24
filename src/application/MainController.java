@@ -288,24 +288,29 @@ public class MainController extends BorderPane {
     	boolean puertaValida;
     	Recinto recinto; 
     	if (mapa != null){
-    		recinto = mapa.buscarRecintoPorNombre(inPuertasComboRecintos.getValue());
-    		if (recinto != null){
-        		System.out.println("Nombre Recinto: " + recinto.getNombre());
-    			Puerta puerta = new Puerta (Float.valueOf(inPuertasPosicionX.getText()),Float.valueOf(inPuertasPosicionY.getText()),(Orientacion)inPuertasComboBox.getValue(),Float.valueOf(inPuertasAncho.getText()));
-    			puertaValida = recinto.agregarPuerta(puerta,mapa);
-    			System.out.println("Puerta valida? : " + puertaValida);
-				if(puertaValida){
-					mapa.dibujarMapa();
-					panelCentral.getChildren().setAll(mapa.getChildren());
-					System.out.println("Puerta agregado!");
-				}
+    		if(!inPuertasComboRecintos.getValue().isEmpty()){
+	    		recinto = mapa.buscarRecintoPorNombre(inPuertasComboRecintos.getValue());
+	    		if (recinto != null){
+	        		System.out.println("Nombre Recinto: " + recinto.getNombre());
+	    			Puerta puerta = new Puerta (Float.valueOf(inPuertasPosicionX.getText()),Float.valueOf(inPuertasPosicionY.getText()),(Orientacion)inPuertasComboBox.getValue(),Float.valueOf(inPuertasAncho.getText()));
+	    			puertaValida = recinto.agregarPuerta(puerta,mapa);
+	    			System.out.println("Puerta valida? : " + puertaValida);
+					if(puertaValida){
+						mapa.dibujarMapa();
+						panelCentral.getChildren().setAll(mapa.getChildren());
+						System.out.println("Puerta agregado!");
+					}
+					else{
+						this.mostrarMensajeDeError("La puerta No se encuentra en una pared valida del recinto");
+					}
+	    		}
 				else{
-					this.mostrarMensajeDeError("La puerta No se encuentra en una pared valida del recinto");
+					this.mostrarMensajeDeError("El recinto seleccionado es invalido");
 				}
     		}
-			else{
-				this.mostrarMensajeDeError("El recinto seleccionado es invalido");
-			}
+    		else{
+    			this.mostrarMensajeDeError("Debe seleccionar un recinto!");
+    		}
     	}
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
@@ -319,12 +324,26 @@ public class MainController extends BorderPane {
 	    	mapa.getChildren().removeAll(mapa.getChildren());
 	    	panelCentral.getChildren().setAll(mapa.getChildren());
 	    	mapa = null;
-			inRecintosComboBox.getItems().clear();
-			inObstaculosComboRecintos.getItems().clear();
-	    	inPuertasComboRecintos.getItems().clear();
-			inRecintosComboBox.getItems().add("Nuevo Recinto");
-			inTrayectoriasComboBox.getItems().clear();
-			inTrayectoriasComboBox.getItems().add("Nueva Trayectoria");
+	    	//Limpia los Recintos del combo box de Recintos
+	    	if(!inRecintosComboBox.getItems().isEmpty()){
+	    		inRecintosComboBox.getItems().clear();
+				inRecintosComboBox.getItems().add("Nuevo Recinto");
+				inRecintosComboBox.setValue("Nuevo Recinto");
+	    	}
+	    	//Limpia los Recintos del combo box de Obstaculos
+			if(!inObstaculosComboRecintos.getItems().isEmpty()){
+				inObstaculosComboRecintos.getItems().clear();
+			}
+			//Limpia los Recintos del combo box de Puertas
+			if(!inPuertasComboRecintos.getItems().isEmpty()){
+				inPuertasComboRecintos.getItems().clear();
+			}
+			//Limpia las Trayectorias del combo box de Trayectorias
+	    	if(!inTrayectoriasComboBox.getItems().isEmpty()){
+	    		inTrayectoriasComboBox.getItems().clear();
+				inTrayectoriasComboBox.getItems().add("Nueva Trayectoria");
+				inTrayectoriasComboBox.setValue("Nueva Trayectoria");
+	    	}			
     	}
     	else{
     		this.mostrarMensajeDeError("No existe el mapa!");
@@ -340,7 +359,7 @@ public class MainController extends BorderPane {
     			trayectoria=null;
     		}
     		Dijkstra dijkstra = new Dijkstra();
-    		List<Integer> listaDeIds;
+    		List<Integer> listaDeIds = new LinkedList<Integer>();
     		List<Cuadrante> listaDeCuadrantes = new LinkedList<Cuadrante>();
     		Coordenada origen = new Coordenada (Float.parseFloat(inTrayectoriasOrigenPosicionX.getText()),Float.parseFloat(inTrayectoriasOrigenPosicionY.getText()));
     		Coordenada destino = new Coordenada (Float.parseFloat(inTrayectoriasDestinoPosicionX.getText()),Float.parseFloat(inTrayectoriasDestinoPosicionY.getText()));
@@ -366,14 +385,15 @@ public class MainController extends BorderPane {
     			else{
     				mapa.calcularMatrizDeAdyacenciaGlobal();
     	    		listaDeIds = dijkstra.obtenerCaminoMasCorto(mapa.getMatrizDeAdyacenciaGlobal().getMatrizDeAdyacenciaEnBooleanos(), cuadranteOrigen.getId(), cuadranteDestino.getId());
-    	    		if(listaDeIds==null){
-    	    			this.mostrarMensajeDeError("No hay trayectoria posible!");
-    	    		}
-    	    		else{
+    	    		if(listaDeIds!=null){
 	    	    		for (Integer id : listaDeIds) {
 	    					Cuadrante c = mapa.buscarCuadrantePorId(id);
 	    					listaDeCuadrantes.add(c);
 	    				}
+    	    		}
+    	    		else{
+
+	    	    		this.mostrarMensajeDeError("No hay trayectoria posible!");
     	    		}
     	    		trayectoria = new Trayectoria(listaDeCuadrantes,mapa.getPosicionEnGradosRespectoDelNorteMagnetico());
     	    		trayectoria.setCoordenadaInicial(origen);
@@ -557,31 +577,32 @@ public class MainController extends BorderPane {
 	}
 	
 	@FXML public void cargarTrayectoria(){
-
-		if(!inTrayectoriasComboBox.getValue().equals("Nueva Trayectoria")){
-			this.trayectoria = mapa.buscarTrayectoriaPorNombre(inTrayectoriasComboBox.getValue());
-				if(this.trayectoria != null){
-					Float coordenadaInicialX = this.trayectoria.getCoordenadaInicial().getX();
-					Float coordenadaInicialY = this.trayectoria.getCoordenadaInicial().getY();
-					Float coordenadaFinalX = this.trayectoria.getCoordenadaFinal().getX();
-					Float coordenadaFinalY = this.trayectoria.getCoordenadaFinal().getY();
-					inTrayectoriasOrigenPosicionX.setText(coordenadaInicialX.toString()); 
-					inTrayectoriasOrigenPosicionY.setText(coordenadaInicialY.toString());
-					inTrayectoriasDestinoPosicionX.setText(coordenadaFinalX.toString());
-					inTrayectoriasDestinoPosicionY.setText(coordenadaFinalY.toString());
-					inTrayectoriasNombre.setText(this.trayectoria.getNombre());
-				}
-				else{
-					this.mostrarMensajeDeError("No se encontro la trayectoria");
-				}
+		
+		if (mapa!=null){
+			if(!inTrayectoriasComboBox.getValue().equals("Nueva Trayectoria")){
+				this.trayectoria = mapa.buscarTrayectoriaPorNombre(inTrayectoriasComboBox.getValue());
+					if(this.trayectoria != null){
+						Float coordenadaInicialX = this.trayectoria.getCoordenadaInicial().getX();
+						Float coordenadaInicialY = this.trayectoria.getCoordenadaInicial().getY();
+						Float coordenadaFinalX = this.trayectoria.getCoordenadaFinal().getX();
+						Float coordenadaFinalY = this.trayectoria.getCoordenadaFinal().getY();
+						inTrayectoriasOrigenPosicionX.setText(coordenadaInicialX.toString()); 
+						inTrayectoriasOrigenPosicionY.setText(coordenadaInicialY.toString());
+						inTrayectoriasDestinoPosicionX.setText(coordenadaFinalX.toString());
+						inTrayectoriasDestinoPosicionY.setText(coordenadaFinalY.toString());
+						inTrayectoriasNombre.setText(this.trayectoria.getNombre());
+					}
+					else{
+						this.mostrarMensajeDeError("No se encontro la trayectoria");
+					}
+			}
 		}
 	}
 	
 	public void cargarComboBoxesEnUI(){
 		
 		Collection <Recinto> recintos = new LinkedList<Recinto>();
-		
-		recintos.add(mapa.getRecintoMapa());
+	
 		recintos.addAll(mapa.getRecintos());
 		
 		for (Recinto recinto : recintos) {
@@ -593,35 +614,37 @@ public class MainController extends BorderPane {
 		for (Trayectoria trayectoria: mapa.getTrayectorias()){
 			inTrayectoriasComboBox.getItems().add(trayectoria.getNombre());
 		}
+		recintos.add(mapa.getRecintoMapa());
 		
 	}
 	
 	@FXML public void cargarConfiguracionDeUnRecinto(){
 	
-		Recinto r = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
-		if(r!=null || !inRecintosComboBox.getValue().equals("Nuevo Recinto")){
-
-			nombreRecinto.setText(r.getNombre());
-			inPosicionX.setText(Float.toString(r.getPosicionX()));
-			inPosicionY.setText(Float.toString(r.getPosicionY()));
-			inAncho.setText(Float.toString(r.getAncho()));
-			inAlto.setText(Float.toString(r.getAlto()));
-			if(r.getGrilla()!=null){
-				inCheckboxGrilla.setSelected(true);
-				inTamanioGrilla.setText(Float.toString(r.getGrilla().getAnchoDeGrilla()));
-				inRecintosComboVertices.setPromptText(Float.toString(r.getGrilla().getVerticeDeGrilla()));
+		if (mapa!=null){
+			Recinto r = mapa.buscarRecintoPorNombre(inRecintosComboBox.getValue());
+			if(r!=null || !inRecintosComboBox.getValue().equals("Nuevo Recinto")){
+				nombreRecinto.setText(r.getNombre());
+				inPosicionX.setText(Float.toString(r.getPosicionX()));
+				inPosicionY.setText(Float.toString(r.getPosicionY()));
+				inAncho.setText(Float.toString(r.getAncho()));
+				inAlto.setText(Float.toString(r.getAlto()));
+				if(r.getGrilla()!=null){
+					inCheckboxGrilla.setSelected(true);
+					inTamanioGrilla.setText(Float.toString(r.getGrilla().getAnchoDeGrilla()));
+					inRecintosComboVertices.setPromptText(Float.toString(r.getGrilla().getVerticeDeGrilla()));
+				}
+				
+			}
+			else{
+				nombreRecinto.clear();
+				inPosicionX.clear();
+				inPosicionY.clear();
+				inAncho.clear();
+				inAlto.clear();
+				inCheckboxGrilla.setSelected(false);
+				inTamanioGrilla.clear();
 			}
 		}
-		else{
-			nombreRecinto.clear();
-			inPosicionX.clear();
-			inPosicionY.clear();
-			inAncho.clear();
-			inAlto.clear();
-			inCheckboxGrilla.setSelected(false);
-			inTamanioGrilla.clear();
-		}
-		
 	}
 
 	@FXML public void cerrarAplicacion(){

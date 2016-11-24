@@ -425,6 +425,9 @@ public class Mapa extends AnchorPane implements Serializable {
 						puerta.regenerarLinea();
 					}
 				}
+				if(recinto.getGrilla()!=null){
+					recinto.getGrilla().prepararGrillaParaDibujoDespuesDeCargarMapa();
+				}
 			}
 		}
 	}

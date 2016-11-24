@@ -37,10 +37,11 @@ public class Dijkstra {
 		            }
 		        }
 		}
-		if (actual!=fin){
-				//Si no encuentra el id del cuadrante destino sale de la funcion retornando null
-		        return null;
-		}
+//		if (!previos.containsValue(fin)){
+//				//Si no encuentra el id del cuadrante destino sale de la funcion retornando null
+//				System.out.println("no encuentro el final");
+//		        return null;
+//		}
 		for (int i = fin; i!=inicio; i = previos.get(i)){
 		    	direcciones.add(i);
 		}
