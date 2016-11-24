@@ -499,6 +499,12 @@ public class MainController extends BorderPane {
 			fis.close();
 			cargarComboBoxesEnUI();
 			this.archivo = new File(archivo.getParent());
+        	//Imprime coordenadas por pantalla
+        	panelCentral.setOnMouseMoved(new EventHandler<MouseEvent>() {
+        		public void handle(MouseEvent mouseEvent){
+        			outSalidaPorPantalla.setText("Coordenada X: " + mouseEvent.getX() + " Coordenada Y: " + mouseEvent.getY());
+        		}
+    		});
     	}
 		else{
 			this.mostrarMensajeDeError("Extension Invalida!");
